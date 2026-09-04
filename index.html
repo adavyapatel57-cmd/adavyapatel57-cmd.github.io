@@ -1,83 +1,343 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Adavya's Study Hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: skyblue;
-            text-align: center;
-        }
+  <title>Adavya's Study Hub</title>
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 50px 20px;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        h1 {
-            font-size: 35px;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
 
-        .card {
-            display: block;
-            background: white;
-            color: black;
-            text-decoration: none;
-            padding: 20px;
-            margin: 18px 0;
-            border-radius: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
 
-        .card:hover {
-            transform: scale(1.03);
-        }
+    .subtitle {
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
 
-        .footer {
-            margin-top: 40px;
-            color: #444;
-        }
-    </style>
+    .links {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-btn {
+      display: block;
+      padding: 17px 20px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.25s;
+      backdrop-filter: blur(10px);
+    }
+
+    .link-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.18);
+    }
+
+    footer {
+      margin-top: 35px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* =========================
+       POPUP
+       ========================= */
+
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.80);
+      padding: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup.show {
+      display: flex;
+    }
+
+    .popup-box {
+      width: 96vw;
+      height: 94vh;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 50px rgba(0,0,0,0.6);
+    }
+
+    .popup-header {
+      height: 52px;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+
+    .popup-title {
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #ef4444;
+      color: white;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #dc2626;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100% - 52px);
+      border: none;
+      display: block;
+    }
+
+    .loading {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #111827;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 25px 12px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+      .popup {
+        padding: 5px;
+      }
+
+      .popup-box {
+        width: 100%;
+        height: 97vh;
+        border-radius: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
+  <h1>Welcome! 👋</h1>
 
-        <h1>Welcome! 👋</h1>
+  <div class="subtitle">
+    📚 Study Links & Resources
+  </div>
 
-        <p>📚 Study Links & Resources</p>
+  <div class="links">
 
-        <a class="card" href="https://nexttoppers.therankforge.site/pages/key-success" target="_blank">
-            🟢 Next Toppers 1
-        </a>
+    <!-- LINK 1 -->
+    <a class="link-btn"
+       href="https://nexttoppers.therankforge.site/pages/key-success">
+      🟢 Next Toppers 1
+    </a>
 
-        <a class="card" href="https://nexthope.pages.dev/nt/" target="_blank">
-            🟢 Next Toppers 2
-        </a>
+    <!-- LINK 2 -->
+    <a class="link-btn"
+       href="https://nexthope.pages.dev/">
+      🟢 Next Toppers 2
+    </a>
 
-        <a class="card" href="https://nexthope.pages.dev/mj/" target="_blank">
-            🔵 Mission Jeet
-        </a>
+    <!-- LINK 3 -->
+    <a class="link-btn"
+       href="https://nexthope.pages.dev/">
+      🔵 Mission Jeet
+    </a>
 
-        <a class="card" href="https://www.pwjarvis.com/"_blank">
-            ⚫ PW 1
-        </a>
+    <!-- LINK 4 -->
+    <a class="link-btn"
+       href="https://www.pwjarvis.com/">
+      ⚫ PW 1
+    </a>
 
-        <a class="card" href="https://pwthor.live/"_blank">
-            ⚫ PW 2
-        </a>
+    <!-- LINK 5 -->
+    <a class="link-btn"
+       href="https://pwthor.live/">
+      ⚫ PW 2
+    </a>
 
-        <div class="footer">
-            Made by Adavya with ❤️
+  </div>
+
+  <footer>
+    Made by Adavya with ❤️
+  </footer>
+
+
+  <!-- =========================
+       POPUP HTML
+       ========================= -->
+
+  <div class="popup" id="popup">
+
+    <div class="popup-box">
+
+      <div class="popup-header">
+
+        <div class="popup-title" id="popupTitle">
+          Loading...
         </div>
+
+        <button class="close-btn" id="closeBtn">
+          ×
+        </button>
+
+      </div>
+
+      <div class="loading" id="loading">
+        Loading...
+      </div>
+
+      <iframe
+        id="popupFrame"
+        src=""
+        allowfullscreen>
+      </iframe>
 
     </div>
 
+  </div>
+
+
+  <script>
+
+    const popup = document.getElementById("popup");
+    const iframe = document.getElementById("popupFrame");
+    const popupTitle = document.getElementById("popupTitle");
+    const loading = document.getElementById("loading");
+    const closeBtn = document.getElementById("closeBtn");
+
+    /*
+      WEBSITE KE SAARE LINKS KO AUTOMATICALLY
+      POPUP ME OPEN KARNA
+    */
+
+    document.querySelectorAll(".link-btn").forEach(link => {
+
+      link.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const url = this.href;
+        const title = this.textContent.trim();
+
+        popupTitle.textContent = title;
+        loading.style.display = "block";
+
+        iframe.src = url;
+
+        popup.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+      });
+
+    });
+
+
+    /*
+      IFRAME LOAD HONE KE BAAD LOADING HATAO
+    */
+
+    iframe.addEventListener("load", function() {
+
+      loading.style.display = "none";
+
+    });
+
+
+    /*
+      CLOSE BUTTON
+    */
+
+    closeBtn.addEventListener("click", closePopup);
+
+
+    function closePopup() {
+
+      popup.classList.remove("show");
+
+      iframe.src = "";
+
+      document.body.style.overflow = "auto";
+
+    }
+
+
+    /*
+      ESC PRESS KARKE CLOSE
+    */
+
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+        closePopup();
+      }
+
+    });
+
+
+    /*
+      POPUP KE BAHAR CLICK KARNE PAR CLOSE
+    */
+
+    popup.addEventListener("click", function(event) {
+
+      if (event.target === popup) {
+        closePopup();
+      }
+
+    });
+
+  </script>
+
 </body>
 </html>
+```
