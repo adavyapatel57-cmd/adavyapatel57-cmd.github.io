@@ -1,343 +1,799 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Adavya's Study Hub</title>
+<title>Adavya's Study Hub</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 40px 20px;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-    }
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  background:
+    radial-gradient(circle at top, #172554, #020617 65%);
+  padding: 35px 18px 50px;
+}
 
-    .subtitle {
-      color: #cbd5e1;
-      margin-bottom: 30px;
-    }
+/* =========================
+   HEADER
+========================= */
 
-    .links {
-      max-width: 600px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+}
 
-    .link-btn {
-      display: block;
-      padding: 17px 20px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: white;
-      text-decoration: none;
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.25s;
-      backdrop-filter: blur(10px);
-    }
+.header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+}
 
-    .link-btn:hover {
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.18);
-    }
+.header p {
+  margin-top: 8px;
+  color: #cbd5e1;
+  font-size: 15px;
+}
 
-    footer {
-      margin-top: 35px;
-      color: #94a3b8;
-      font-size: 14px;
-    }
 
-    /* =========================
-       POPUP
-       ========================= */
+/* =========================
+   CARD GRID
+========================= */
 
-    .popup {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: rgba(0, 0, 0, 0.80);
-      padding: 15px;
-      align-items: center;
-      justify-content: center;
-    }
+.links {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
 
-    .popup.show {
-      display: flex;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
 
-    .popup-box {
-      width: 96vw;
-      height: 94vh;
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 0 50px rgba(0,0,0,0.6);
-    }
 
-    .popup-header {
-      height: 52px;
-      background: #111827;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 14px;
-    }
+/* =========================
+   CARD
+========================= */
 
-    .popup-title {
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-    }
+.link-btn {
+  min-height: 310px;
 
-    .close-btn {
-      width: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 50%;
-      background: #ef4444;
-      color: white;
-      font-size: 23px;
-      cursor: pointer;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    .close-btn:hover {
-      background: #dc2626;
-    }
+  text-decoration: none;
+  color: white;
 
-    iframe {
-      width: 100%;
-      height: calc(100% - 52px);
-      border: none;
-      display: block;
-    }
+  padding: 25px 20px;
 
-    .loading {
-      position: absolute;
-      top: 52%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #111827;
-      font-weight: bold;
-      font-size: 18px;
-    }
+  border-radius: 22px;
 
-    @media (max-width: 600px) {
+  border: 1px solid rgba(255,255,255,0.15);
 
-      body {
-        padding: 25px 12px;
-      }
+  position: relative;
+  overflow: hidden;
 
-      h1 {
-        font-size: 27px;
-      }
+  cursor: pointer;
 
-      .popup {
-        padding: 5px;
-      }
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
 
-      .popup-box {
-        width: 100%;
-        height: 97vh;
-        border-radius: 10px;
-      }
-    }
-  </style>
+
+/* Hover */
+
+.link-btn:hover {
+  transform: translateY(-6px);
+}
+
+
+/* =========================
+   NEXT TOPPERS
+========================= */
+
+.next-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0, 160, 110, 0.95),
+      rgba(0, 75, 55, 0.98)
+    );
+
+  box-shadow:
+    0 10px 35px rgba(0, 180, 120, 0.18);
+}
+
+.next-card:hover {
+  box-shadow:
+    0 15px 45px rgba(0, 220, 150, 0.30);
+}
+
+
+/* =========================
+   PW
+========================= */
+
+.pw-card {
+  background:
+    linear-gradient(
+      145deg,
+      #202020,
+      #090909
+    );
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,0.45);
+}
+
+.pw-card:hover {
+  box-shadow:
+    0 15px 45px rgba(255,255,255,0.12);
+}
+
+
+/* =========================
+   MISSION JEET
+========================= */
+
+.jeet-card {
+  background:
+    linear-gradient(
+      145deg,
+      #e00000,
+      #650000
+    );
+
+  box-shadow:
+    0 10px 35px rgba(255,0,0,0.20);
+}
+
+.jeet-card:hover {
+  box-shadow:
+    0 15px 45px rgba(255,0,0,0.35);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-box {
+  width: 105px;
+  height: 105px;
+
+  background: rgba(255,255,255,0.95);
+
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.30);
+}
+
+.logo-box img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.link-name {
+  font-size: 21px;
+  font-weight: 800;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  margin-bottom: 8px;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,0.35);
+}
+
+.link-desc {
+  font-size: 14px;
+
+  color: #ffffff;
+
+  opacity: 0.92;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   LAUNCH BUTTON
+========================= */
+
+.launch {
+  width: 80%;
+
+  padding: 11px 18px;
+
+  border-radius: 30px;
+
+  border: 1px solid rgba(255,255,255,0.45);
+
+  background: rgba(0,0,0,0.18);
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  text-align: center;
+
+  transition: 0.2s;
+}
+
+.link-btn:hover .launch {
+  background: rgba(255,255,255,0.15);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align: center;
+
+  margin-top: 35px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   POPUP
+========================= */
+
+.popup {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  background: rgba(0,0,0,0.82);
+
+  padding: 12px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.popup.show {
+  display: flex;
+}
+
+.popup-box {
+  width: 96vw;
+  height: 94vh;
+
+  background: white;
+
+  border-radius: 17px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  box-shadow:
+    0 0 60px rgba(0,0,0,0.65);
+}
+
+
+/* Popup header */
+
+.popup-header {
+  height: 52px;
+
+  background: #111827;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 15px;
+}
+
+.popup-title {
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+/* Close */
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 23px;
+
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #dc2626;
+}
+
+
+/* iframe */
+
+iframe {
+  width: 100%;
+  height: calc(100% - 52px);
+
+  border: none;
+
+  display: block;
+}
+
+
+/* Loading */
+
+.loading {
+  position: absolute;
+
+  top: 52%;
+
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: #111827;
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  body {
+    padding: 25px 12px 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .links {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .link-btn {
+    min-height: 290px;
+  }
+
+  .popup {
+    padding: 5px;
+  }
+
+  .popup-box {
+    width: 100%;
+    height: 97vh;
+    border-radius: 10px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <h1>Welcome! 👋</h1>
 
-  <div class="subtitle">
-    📚 Study Links & Resources
-  </div>
+<!-- HEADER -->
 
-  <div class="links">
+<div class="header">
 
-    <!-- LINK 1 -->
-    <a class="link-btn"
-       href="https://nexttoppers.therankforge.site/pages/key-success">
-      🟢 Next Toppers 1
-    </a>
+  <h1>📚 Study Hub</h1>
 
-    <!-- LINK 2 -->
-    <a class="link-btn"
-       href="https://nexthope.pages.dev/">
-      🟢 Next Toppers 2
-    </a>
+  <p>
+    All your study resources in one place
+  </p>
 
-    <!-- LINK 3 -->
-    <a class="link-btn"
-       href="https://nexthope.pages.dev/">
-      🔵 Mission Jeet
-    </a>
-
-    <!-- LINK 4 -->
-    <a class="link-btn"
-       href="https://www.pwjarvis.com/">
-      ⚫ PW 1
-    </a>
-
-    <!-- LINK 5 -->
-    <a class="link-btn"
-       href="https://pwthor.live/">
-      ⚫ PW 2
-    </a>
-
-  </div>
-
-  <footer>
-    Made by Adavya with ❤️
-  </footer>
+</div>
 
 
-  <!-- =========================
-       POPUP HTML
-       ========================= -->
+<!-- =========================
+     CARDS
+========================= -->
 
-  <div class="popup" id="popup">
+<div class="links">
 
-    <div class="popup-box">
 
-      <div class="popup-header">
+  <!-- NEXT TOPPERS 1 -->
 
-        <div class="popup-title" id="popupTitle">
-          Loading...
-        </div>
+  <a
+    class="link-btn next-card"
+    href="https://nexttoppers.therankforge.site/pages/key-success"
+  >
 
-        <button class="close-btn" id="closeBtn">
-          ×
-        </button>
+    <div class="logo-box">
 
-      </div>
-
-      <div class="loading" id="loading">
-        Loading...
-      </div>
-
-      <iframe
-        id="popupFrame"
-        src=""
-        allowfullscreen>
-      </iframe>
+      <img
+        src="nexttoppers.png"
+        alt="Next Toppers"
+      >
 
     </div>
 
+    <div class="link-name">
+      Next Toppers 1
+    </div>
+
+    <div class="link-desc">
+      Study Resources
+    </div>
+
+    <div class="launch">
+      Launch&nbsp; →
+    </div>
+
+  </a>
+
+
+  <!-- NEXT TOPPERS 2 -->
+
+  <a
+    class="link-btn next-card"
+    href="https://nexthope.pages.dev/"
+  >
+
+    <div class="logo-box">
+
+      <img
+        src="nexttoppers.png"
+        alt="Next Toppers"
+      >
+
+    </div>
+
+    <div class="link-name">
+      Next Toppers 2
+    </div>
+
+    <div class="link-desc">
+      Learning Platform
+    </div>
+
+    <div class="launch">
+      Launch&nbsp; →
+    </div>
+
+  </a>
+
+
+  <!-- MISSION JEET -->
+
+  <a
+    class="link-btn jeet-card"
+    href="https://nexthope.pages.dev/"
+  >
+
+    <div class="logo-box">
+
+      <img
+        src="missionjeet.png"
+        alt="Mission Jeet"
+      >
+
+    </div>
+
+    <div class="link-name">
+      Mission Jeet
+    </div>
+
+    <div class="link-desc">
+      Study & Preparation
+    </div>
+
+    <div class="launch">
+      Launch&nbsp; →
+    </div>
+
+  </a>
+
+
+  <!-- PW 1 -->
+
+  <a
+    class="link-btn pw-card"
+    href="https://www.pwjarvis.com/"
+  >
+
+    <div class="logo-box">
+
+      <img
+        src="pw.png"
+        alt="Physics Wallah"
+      >
+
+    </div>
+
+    <div class="link-name">
+      PW 1
+    </div>
+
+    <div class="link-desc">
+      All Premium Batches
+    </div>
+
+    <div class="launch">
+      Launch&nbsp; →
+    </div>
+
+  </a>
+
+
+  <!-- PW 2 -->
+
+  <a
+    class="link-btn pw-card"
+    href="https://pwthor.live/"
+  >
+
+    <div class="logo-box">
+
+      <img
+        src="pw.png"
+        alt="Physics Wallah"
+      >
+
+    </div>
+
+    <div class="link-name">
+      PW 2
+    </div>
+
+    <div class="link-desc">
+      All Premium Batches
+    </div>
+
+    <div class="launch">
+      Launch&nbsp; →
+    </div>
+
+  </a>
+
+
+</div>
+
+
+<footer>
+  Made by Adavya with ❤️
+</footer>
+
+
+
+<!-- =========================
+     POPUP
+========================= -->
+
+<div class="popup" id="popup">
+
+  <div class="popup-box">
+
+    <div class="popup-header">
+
+      <div
+        class="popup-title"
+        id="popupTitle"
+      >
+        Loading...
+      </div>
+
+      <button
+        class="close-btn"
+        id="closeBtn"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="loading"
+      id="loading"
+    >
+      Loading...
+    </div>
+
+
+    <iframe
+      id="popupFrame"
+      src=""
+      allowfullscreen>
+    </iframe>
+
   </div>
 
+</div>
 
-  <script>
 
-    const popup = document.getElementById("popup");
-    const iframe = document.getElementById("popupFrame");
-    const popupTitle = document.getElementById("popupTitle");
-    const loading = document.getElementById("loading");
-    const closeBtn = document.getElementById("closeBtn");
 
-    /*
-      WEBSITE KE SAARE LINKS KO AUTOMATICALLY
-      POPUP ME OPEN KARNA
-    */
+<script>
 
-    document.querySelectorAll(".link-btn").forEach(link => {
+/* =========================
+   POPUP SYSTEM
+========================= */
 
-      link.addEventListener("click", function(event) {
+const popup =
+  document.getElementById("popup");
+
+const iframe =
+  document.getElementById("popupFrame");
+
+const popupTitle =
+  document.getElementById("popupTitle");
+
+const loading =
+  document.getElementById("loading");
+
+const closeBtn =
+  document.getElementById("closeBtn");
+
+
+/* Open popup */
+
+document
+  .querySelectorAll(".link-btn")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      function(event) {
 
         event.preventDefault();
 
         const url = this.href;
-        const title = this.textContent.trim();
 
-        popupTitle.textContent = title;
-        loading.style.display = "block";
+        const title =
+          this.querySelector(".link-name")
+          .textContent;
+
+        popupTitle.textContent =
+          title;
+
+        loading.style.display =
+          "block";
 
         iframe.src = url;
 
         popup.classList.add("show");
 
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow =
+          "hidden";
 
-      });
+      }
+    );
 
-    });
-
-
-    /*
-      IFRAME LOAD HONE KE BAAD LOADING HATAO
-    */
-
-    iframe.addEventListener("load", function() {
-
-      loading.style.display = "none";
-
-    });
+  });
 
 
-    /*
-      CLOSE BUTTON
-    */
+/* Loading finished */
 
-    closeBtn.addEventListener("click", closePopup);
+iframe.addEventListener(
+  "load",
+  function() {
+
+    loading.style.display =
+      "none";
+
+  }
+);
 
 
-    function closePopup() {
+/* Close */
 
-      popup.classList.remove("show");
+closeBtn.addEventListener(
+  "click",
+  closePopup
+);
 
-      iframe.src = "";
 
-      document.body.style.overflow = "auto";
+function closePopup() {
+
+  popup.classList.remove("show");
+
+  iframe.src = "";
+
+  document.body.style.overflow =
+    "auto";
+
+}
+
+
+/* ESC */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "Escape") {
+
+      closePopup();
 
     }
 
-
-    /*
-      ESC PRESS KARKE CLOSE
-    */
-
-    document.addEventListener("keydown", function(event) {
-
-      if (event.key === "Escape") {
-        closePopup();
-      }
-
-    });
+  }
+);
 
 
-    /*
-      POPUP KE BAHAR CLICK KARNE PAR CLOSE
-    */
+/* Outside click */
 
-    popup.addEventListener("click", function(event) {
+popup.addEventListener(
+  "click",
+  function(event) {
 
-      if (event.target === popup) {
-        closePopup();
-      }
+    if (event.target === popup) {
 
-    });
+      closePopup();
 
-  </script>
+    }
+
+  }
+);
+
+</script>
+
 
 </body>
 </html>
-```
