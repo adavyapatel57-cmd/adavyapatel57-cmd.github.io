@@ -7,821 +7,829 @@
 <title>Adavya's Study Hub</title>
 
 <style>
-
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  color: white;
-  background:
-    radial-gradient(circle at top, #172554, #020617 65%);
-  padding: 35px 18px 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: white;
+
+    /* FIXED ENERGETIC BLUE BACKGROUND */
+    background:
+  
+    radial-gradient(circle at 20% 10%, rgba(40, 100, 255, .22), transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(0, 170, 255, .16), transparent 35%),
+    linear-gradient(135deg, #071426, #0a1f3d 50%, #06101f);
+    
+
+    background-attachment: fixed;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-.header {
-  text-align: center;
-  margin-bottom: 35px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 34px;
-  font-weight: 800;
-}
-
-.header p {
-  margin-top: 8px;
-  color: #cbd5e1;
-  font-size: 15px;
-}
-
-
-/* =========================
-   CARD GRID
-========================= */
-
-.links {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.link-btn {
-  min-height: 310px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-decoration: none;
-  color: white;
-
-  padding: 25px 20px;
-
-  border-radius: 22px;
-
-  border: 1px solid rgba(255,255,255,0.15);
-
-  position: relative;
-  overflow: hidden;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-
-/* Hover */
-
-.link-btn:hover {
-  transform: translateY(-6px);
-}
-
-
-/* =========================
-   NEXT TOPPERS
-========================= */
-
-.next-card {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(0, 160, 110, 0.95),
-      rgba(0, 75, 55, 0.98)
-    );
-
-  box-shadow:
-    0 10px 35px rgba(0, 180, 120, 0.18);
-}
-
-.next-card:hover {
-  box-shadow:
-    0 15px 45px rgba(0, 220, 150, 0.30);
-}
-
-
-/* =========================
-   PW
-========================= */
-
-.pw-card {
-  background:
-    linear-gradient(
-      145deg,
-      #202020,
-      #090909
-    );
-
-  box-shadow:
-    0 10px 35px rgba(0,0,0,0.45);
-}
-
-.pw-card:hover {
-  box-shadow:
-    0 15px 45px rgba(255,255,255,0.12);
-}
-
-
-/* =========================
-   MISSION JEET
-========================= */
-
-.jeet-card {
-  background:
-    linear-gradient(
-      145deg,
-      #e00000,
-      #650000
-    );
-
-  box-shadow:
-    0 10px 35px rgba(255,0,0,0.20);
-}
-
-.jeet-card:hover {
-  box-shadow:
-    0 15px 45px rgba(255,0,0,0.35);
-}
-
-
-/* =========================
-   LOGO
-========================= */
-
-.logo-box {
-  width: 105px;
-  height: 105px;
-
-  background: rgba(255,255,255,0.95);
-
-  border-radius: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 12px;
-
-  margin-bottom: 18px;
-
-  box-shadow:
-    0 8px 25px rgba(0,0,0,0.30);
-}
-
-.logo-box img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  display: block;
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-.link-name {
-  font-size: 21px;
-  font-weight: 800;
-
-  color: #ffffff;
-
-  text-align: center;
-
-  margin-bottom: 8px;
-
-  text-shadow:
-    0 2px 5px rgba(0,0,0,0.35);
-}
-
-.link-desc {
-  font-size: 14px;
-
-  color: #ffffff;
-
-  opacity: 0.92;
-
-  text-align: center;
-
-  margin-bottom: 20px;
-}
-
-
-/* =========================
-   LAUNCH BUTTON
-========================= */
-
-.launch {
-  width: 80%;
-
-  padding: 11px 18px;
-
-  border-radius: 30px;
-
-  border: 1px solid rgba(255,255,255,0.45);
-
-  background: rgba(0,0,0,0.18);
-
-  color: white;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  text-align: center;
-
-  transition: 0.2s;
-}
-
-.link-btn:hover .launch {
-  background: rgba(255,255,255,0.15);
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-  text-align: center;
-
-  margin-top: 35px;
-
-  color: #94a3b8;
-
-  font-size: 13px;
-}
-
-
-/* =========================
-   POPUP
-========================= */
-
-.popup {
-  display: none;
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 99999;
-
-  background: rgba(0,0,0,0.82);
-
-  padding: 12px;
-
-  align-items: center;
-  justify-content: center;
-}
-
-.popup.show {
-  display: flex;
-}
-
-.popup-box {
-  width: 96vw;
-  height: 94vh;
-
-  background: white;
-
-  border-radius: 17px;
-
-  overflow: hidden;
-
-  position: relative;
-
-  box-shadow:
-    0 0 60px rgba(0,0,0,0.65);
-}
-
-
-/* Popup header */
-
-.popup-header {
-  height: 52px;
-
-  background: #111827;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding: 0 15px;
-}
-
-.popup-title {
-  color: white;
-
-  font-size: 15px;
-
-  font-weight: 700;
-}
-
-
-/* Close */
-
-.close-btn {
-  width: 36px;
-  height: 36px;
-
-  border: none;
-
-  border-radius: 50%;
-
-  background: #ef4444;
-
-  color: white;
-
-  font-size: 23px;
-
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  background: #dc2626;
-}
-
-
-/* iframe */
-
-iframe {
-  width: 100%;
-  height: calc(100% - 52px);
-
-  border: none;
-
-  display: block;
-}
-
-
-/* Loading */
-
-.loading {
-  position: absolute;
-
-  top: 52%;
-
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  color: #111827;
-
-  font-size: 18px;
-
-  font-weight: bold;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 650px) {
-
-  body {
-    padding: 25px 12px 40px;
-  }
-
-  .header h1 {
-    font-size: 28px;
-  }
-
-  .links {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .link-btn {
-    min-height: 290px;
-  }
-
-  .popup {
-    padding: 5px;
-  }
-
-  .popup-box {
     width: 100%;
-    height: 97vh;
-    border-radius: 10px;
-  }
+    padding: 14px 6%;
 
+    background: rgba(4, 15, 30, .92);
+    border-bottom: 1px solid rgba(255,255,255,.18);
 }
 
+.nav-content {
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 65px 20px 35px;
+}
+
+.welcome {
+    font-size: clamp(42px, 9vw, 78px);
+    font-weight: 900;
+    letter-spacing: 3px;
+
+    text-shadow: 0 8px 25px rgba(0,0,0,.22);
+}
+
+.hero p {
+    margin-top: 12px;
+    font-size: 18px;
+    opacity: .92;
+}
+
+/* SEARCH */
+.search-area {
+    max-width: 750px;
+    margin: 10px auto 35px;
+    padding: 0 20px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px 20px;
+
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 50px;
+
+    outline: none;
+    background: rgba(255,255,255,.16);
+    color: white;
+
+    font-size: 16px;
+}
+
+.search-box::placeholder {
+    color: rgba(255,255,255,.8);
+}
+
+/* FILTERS */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin: 0 auto 35px;
+    padding: 0 20px;
+}
+
+.filter {
+    border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.13);
+    color: white;
+
+    padding: 9px 18px;
+    border-radius: 30px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter.active {
+    background: white;
+    color: #0066ee;
+}
+
+/* GRID */
+.container {
+    width: min(1200px, 92%);
+    margin: auto;
+}
+
+.resource-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+
+    padding-bottom: 50px;
+}
+
+/* CARD */
+.card {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 24px;
+    padding: 20px;
+
+    min-height: 310px;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    box-shadow: 0 15px 35px rgba(0,0,0,.18);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+}
+
+/* REFLECTION */
+.card::before {
+    content: "";
+
+    position: absolute;
+    top: -100%;
+    left: -80%;
+
+    width: 55%;
+    height: 300%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.32),
+        transparent
+    );
+
+    transform: rotate(25deg);
+    transition: left .55s ease;
+
+    pointer-events: none;
+}
+
+.card:hover::before {
+    left: 140%;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 45px rgba(0,0,0,.3);
+}
+
+/* CARD COLORS */
+.next {
+    background: linear-gradient(145deg, #087f23, #16a83b);
+}
+
+.mission {
+    background: linear-gradient(145deg, #a90000, #e52525);
+}
+
+.pw {
+    background: linear-gradient(145deg, #050505, #202020);
+}
+
+.piott {
+    background: linear-gradient(145deg, #5d18c9, #8a38ff);
+}
+
+/* IMAGE */
+.card-image {
+    width: 100%;
+    height: 145px;
+
+    object-fit: contain;
+
+    border-radius: 16px;
+    margin-bottom: 15px;
+
+    background: rgba(255,255,255,.08);
+}
+
+/* CARD CONTENT */
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.card p {
+    font-size: 14px;
+    opacity: .88;
+}
+
+/* LAUNCH BUTTON */
+.launch {
+    display: block;
+
+    margin-top: 18px;
+    width: 100%;
+
+    padding: 13px 18px;
+
+    border-radius: 14px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: white;
+    background: rgba(255,255,255,.16);
+
+    border: 1px solid rgba(255,255,255,.38);
+
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.launch:hover {
+    background: rgba(255,255,255,.28);
+    transform: scale(1.025);
+}
+
+/* IMPORTANT */
+.important {
+    max-width: 900px;
+    margin: 0 auto 45px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.22);
+}
+
+.important h2 {
+    margin-bottom: 7px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+
+    padding: 25px 15px;
+
+    background: rgba(0,35,110,.75);
+
+    font-size: 14px;
+}
+
+/* BACK TO TOP */
+.top-btn {
+    position: fixed;
+
+    right: 20px;
+    bottom: 22px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #0066ee;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+
+    display: none;
+}
+
+/* INSTAGRAM POPUP */
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,20,70,.65);
+}
+
+.instagram-popup {
+    width: min(400px, 100%);
+
+    padding: 30px 25px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background: linear-gradient(145deg, #0878ff, #0047c8);
+
+    border: 1px solid rgba(255,255,255,.35);
+
+    box-shadow: 0 25px 70px rgba(0,0,0,.35);
+
+    animation: popup .35s ease;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: scale(.88);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.insta-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.instagram-popup h2 {
+    margin-bottom: 8px;
+}
+
+.instagram-popup p {
+    opacity: .9;
+    margin-bottom: 20px;
+}
+
+.insta-follow,
+.skip {
+    display: block;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    margin-top: 10px;
+}
+
+.insta-follow {
+    background: white;
+    color: #075bd8;
+}
+
+.skip {
+    color: white;
+    border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.1);
+
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 850px) {
+    .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 13px 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 45px;
+    }
+
+    .welcome {
+        font-size: 48px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .card {
+        min-height: auto;
+    }
+
+    .card-image {
+        height: 160px;
+    }
+}
 </style>
 </head>
 
-
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-content">
 
-<!-- HEADER -->
+        <div class="logo">📚 Study Hub</div>
 
-<div class="header">
-
-  <h1>📚 Study Hub</h1>
-
-  <p>
-    All your study resources in one place
-  </p>
-
-</div>
-
-
-<!-- =========================
-     CARDS
-========================= -->
-
-<div class="links">
-
-
-  <!-- NEXT TOPPERS 1 -->
-
-  <a
-    class="link-btn next-card"
-    href="https://nexttoppers.therankforge.site/pages/key-success"
-  >
-
-    <div class="logo-box">
-
-      <img
-        src="nexttoppers.png"
-        alt="Next Toppers"
-      >
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#resources">Resources</a>
+            <a href="#important">Important</a>
+        </div>
 
     </div>
-
-    <div class="link-name">
-      Next Toppers 1
-    </div>
-
-    <div class="link-desc">
-      Study Resources
-    </div>
-
-    <div class="launch">
-      Launch&nbsp; →
-    </div>
-
-  </a>
+</nav>
 
 
-  <!-- NEXT TOPPERS 2 -->
+<!-- HERO -->
+<section class="hero" id="home">
 
-  <a
-    class="link-btn next-card"
-    href="https://nexthope.pages.dev/nt/"
-  >
+    <div class="welcome">WELCOME ❤️</div>
 
-    <div class="logo-box">
+    <p>Your Personal Study Hub</p>
 
-      <img
-        src="nexttoppers.png"
-        alt="Next Toppers"
-      >
-
-    </div>
-
-    <div class="link-name">
-      Next Toppers 2
-    </div>
-
-    <div class="link-desc">
-      Learning Platform
-    </div>
-
-    <div class="launch">
-      Launch&nbsp; →
-    </div>
-
-  </a>
+</section>
 
 
-  <!-- MISSION JEET -->
+<!-- SEARCH -->
+<div class="search-area">
 
-  <a
-    class="link-btn jeet-card"
-    href="https://nexthope.pages.dev/mj/"
-  >
-
-    <div class="logo-box">
-
-      <img
-        src="missionjeet.png"
-        alt="Mission Jeet"
-      >
-
-    </div>
-
-    <div class="link-name">
-      Mission Jeet
-    </div>
-
-    <div class="link-desc">
-      Study & Preparation
-    </div>
-
-    <div class="launch">
-      Launch&nbsp; →
-    </div>
-
-  </a>
-
-
-  <!-- PW 1 -->
-
-  <a
-    class="link-btn pw-card"
-    href="https://vidcloud.eu.org/#batches"
-  >
-
-    <div class="logo-box">
-
-      <img
-        src="pw.png"
-        alt="Physics Wallah"
-      >
-
-    </div>
-
-    <div class="link-name">
-      PW 1
-    </div>
-
-    <div class="link-desc">
-      All Premium Batches
-    </div>
-
-    <div class="launch">
-      Launch&nbsp; →
-    </div>
-
-  </a>
-
-
-  <!-- PW 2 -->
-
-  <a
-    class="link-btn pw-card"
-    href="https://s2-cdn.studyratna.cc/"
-  >
-
-    <div class="logo-box">
-
-      <img
-        src="pw.png"
-        alt="Physics Wallah"
-      >
-
-    </div>
-
-    <div class="link-name">
-      PW 2
-    </div>
-
-    <div class="link-desc">
-      All Premium Batches
-    </div>
-
-    <div class="launch">
-      Launch&nbsp; →
-    </div>
-
-  </a><!-- PI OTT -->
-
-<a
-  class="link-btn pi-card"
-  href="https://pipro.therankforge.site/"
->
-
-  <div class="logo-box">
-
-    <img
-      src="piott.png"
-      alt="PI OTT"
+    <input
+        type="text"
+        id="search"
+        class="search-box"
+        placeholder="🔎 Search your resources..."
     >
 
-  </div>
+</div>
 
-  <div class="link-name">
-    PI OTT
-  </div>
 
-  <div class="link-desc">
-    Premium Learning Platform
-  </div>
+<!-- FILTERS -->
+<div class="filters">
 
-  <div class="launch">
-    Launch&nbsp; →
-  </div>
+    <button class="filter active" onclick="filterCards('all', this)">
+        All
+    </button>
 
-</a>
+    <button class="filter" onclick="filterCards('next', this)">
+        Next Toppers
+    </button>
 
+    <button class="filter" onclick="filterCards('mission', this)">
+        Mission Jeet
+    </button>
+
+    <button class="filter" onclick="filterCards('pw', this)">
+        PW
+    </button>
+
+    <button class="filter" onclick="filterCards('piott', this)">
+        PI OTT
+    </button>
 
 </div>
 
 
+<!-- RESOURCES -->
+<section class="container" id="resources">
+
+    <div class="resource-grid" id="resourceGrid">
+
+
+        <!-- NEXT TOPPERS 1 -->
+        <div class="card next" data-category="next">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                alt="Next Toppers"
+            >
+
+            <h2>Next Toppers 1</h2>
+
+            <p>Access your Next Toppers study resources.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-NEXT-TOPPERS-1-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- NEXT TOPPERS 2 -->
+        <div class="card next" data-category="next">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                alt="Next Toppers"
+            >
+
+            <h2>Next Toppers 2</h2>
+
+            <p>Explore another Next Toppers resource.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-NEXT-TOPPERS-2-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- MISSION JEET -->
+        <div class="card mission" data-category="mission">
+
+            <img
+                src="mission jeet.png"
+                class="card-image"
+                alt="Mission Jeet"
+            >
+
+            <h2>Mission Jeet</h2>
+
+            <p>Continue your Mission Jeet preparation.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-MISSION-JEET-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- PW 1 -->
+        <div class="card pw" data-category="pw">
+
+            <img
+                src="pw.png"
+                class="card-image"
+                alt="PW"
+            >
+
+            <h2>PW 1</h2>
+
+            <p>Physics Wallah study resources.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-PW-1-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- PW 2 -->
+        <div class="card pw" data-category="pw">
+
+            <img
+                src="pw.png"
+                class="card-image"
+                alt="PW"
+            >
+
+            <h2>PW 2</h2>
+
+            <p>More PW learning resources.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-PW-2-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- PI OTT -->
+        <div class="card piott" data-category="piott">
+
+            <img
+                src="piott.png"
+                class="card-image"
+                alt="PI OTT"
+            >
+
+            <h2>PI OTT</h2>
+
+            <p>Open your PI OTT study resource.</p>
+
+            <a
+                href="YOUR-AUTHORIZED-PI-OTT-LINK"
+                target="_blank"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- IMPORTANT -->
+<section class="important" id="important">
+
+    <h2>⭐ Important Resources</h2>
+
+    <p>
+        Keep your most useful study resources close and start learning faster.
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
 <footer>
-  Made by Adavya with ❤️
+    Made by Adavya with ❤️
 </footer>
 
 
+<!-- BACK TO TOP -->
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    ↑
+</button>
 
-<!-- =========================
-     POPUP
-========================= -->
 
-<div class="popup" id="popup">
+<!-- INSTAGRAM POPUP -->
+<div class="overlay" id="instaPopup">
 
-  <div class="popup-box">
+    <div class="instagram-popup">
 
-    <div class="popup-header">
+        <div class="insta-icon">📸</div>
 
-      <div
-        class="popup-title"
-        id="popupTitle"
-      >
-        Loading...
-      </div>
+        <h2>Follow on Instagram</h2>
 
-      <button
-        class="close-btn"
-        id="closeBtn"
-      >
-        ×
-      </button>
+        <p>@adavya.patel</p>
+
+        <a
+            href="https://www.instagram.com/adavya.patel/"
+            target="_blank"
+            class="insta-follow"
+        >
+            Follow on Instagram
+        </a>
+
+        <button
+            class="skip"
+            onclick="closePopup()"
+        >
+            Skip & Continue →
+        </button>
 
     </div>
-
-
-    <div
-      class="loading"
-      id="loading"
-    >
-      Loading...
-    </div>
-
-
-    <iframe
-      id="popupFrame"
-      src=""
-      allowfullscreen>
-    </iframe>
-
-  </div>
 
 </div>
-
 
 
 <script>
 
-/* =========================
-   POPUP SYSTEM
-========================= */
-
-const popup =
-  document.getElementById("popup");
-
-const iframe =
-  document.getElementById("popupFrame");
-
-const popupTitle =
-  document.getElementById("popupTitle");
-
-const loading =
-  document.getElementById("loading");
-
-const closeBtn =
-  document.getElementById("closeBtn");
-
-
-/* Open popup */
-
-document
-  .querySelectorAll(".link-btn")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      function(event) {
-
-        event.preventDefault();
-
-        const url = this.href;
-
-        const title =
-          this.querySelector(".link-name")
-          .textContent;
-
-        popupTitle.textContent =
-          title;
-
-        loading.style.display =
-          "block";
-
-        iframe.src = url;
-
-        popup.classList.add("show");
-
-        document.body.style.overflow =
-          "hidden";
-
-      }
-    );
-
-  });
-
-
-/* Loading finished */
-
-iframe.addEventListener(
-  "load",
-  function() {
-
-    loading.style.display =
-      "none";
-
-  }
-);
-
-
-/* Close */
-
-closeBtn.addEventListener(
-  "click",
-  closePopup
-);
-
-
+/* INSTAGRAM POPUP */
 function closePopup() {
+    document.getElementById("instaPopup").style.display = "none";
 
-  popup.classList.remove("show");
+    localStorage.setItem("instaPopupSeen", "true");
+}
 
-  iframe.src = "";
+if (localStorage.getItem("instaPopupSeen") === "true") {
+    document.getElementById("instaPopup").style.display = "none";
+}
 
-  document.body.style.overflow =
-    "auto";
+
+/* SEARCH */
+const searchBox = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+
+searchBox.addEventListener("input", function () {
+
+    const query = this.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        card.style.display =
+            text.includes(query) ? "" : "none";
+
+    });
+
+});
+
+
+/* FILTER */
+function filterCards(category, button) {
+
+    document.querySelectorAll(".filter").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    cards.forEach(card => {
+
+        if (category === "all") {
+            card.style.display = "";
+        }
+
+        else if (card.dataset.category === category) {
+            card.style.display = "";
+        }
+
+        else {
+            card.style.display = "none";
+        }
+
+    });
 
 }
 
 
-/* ESC */
+/* BACK TO TOP */
+window.addEventListener("scroll", function () {
 
-document.addEventListener(
-  "keydown",
-  function(event) {
+    const btn = document.getElementById("topBtn");
 
-    if (event.key === "Escape") {
-
-      closePopup();
-
+    if (window.scrollY > 400) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
     }
 
-  }
-);
-
-
-/* Outside click */
-
-popup.addEventListener(
-  "click",
-  function(event) {
-
-    if (event.target === popup) {
-
-      closePopup();
-
-    }
-
-  }
-);
+});
 
 </script>
-
 
 </body>
 </html>
