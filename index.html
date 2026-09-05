@@ -432,6 +432,93 @@ footer {
     cursor: pointer;
 }
 
+
+/* ============================= */
+/* WEBSITE LAUNCH POPUP - ADDED */
+/* ============================= */
+
+.site-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 3000;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,10,30,.82);
+    backdrop-filter: blur(7px);
+}
+
+.site-popup {
+    position: relative;
+
+    width: min(1200px, 96vw);
+    height: min(800px, 90vh);
+
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.55);
+
+    animation: sitePopup .3s ease;
+}
+
+@keyframes sitePopup {
+    from {
+        opacity: 0;
+        transform: scale(.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.site-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 10;
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.78);
+    color: white;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+}
+
+.site-close:hover {
+    background: #e00000;
+}
+
+.site-frame {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+
 /* MOBILE */
 @media (max-width: 850px) {
     .resource-grid {
@@ -472,6 +559,23 @@ footer {
 
     .card-image {
         height: 160px;
+    }
+
+    /* WEBSITE POPUP MOBILE */
+    .site-overlay {
+        padding: 8px;
+    }
+
+    .site-popup {
+        width: 100%;
+        height: 94vh;
+        border-radius: 16px;
+    }
+
+    .site-close {
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
     }
 }
 </style>
@@ -564,8 +668,8 @@ footer {
             <p>Access your Next Toppers study resources.</p>
 
             <a
-                href="https://nexttoppers.therankforge.site/pages/key-success"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexttoppers.therankforge.site/pages/key-success')"
                 class="launch"
             >
                 LAUNCH →
@@ -588,8 +692,8 @@ footer {
             <p>Explore another Next Toppers resource.</p>
 
             <a
-                href="https://nexthope.pages.dev/nt/"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/nt/')"
                 class="launch"
             >
                 LAUNCH →
@@ -612,8 +716,8 @@ footer {
             <p>Continue your Mission Jeet preparation.</p>
 
             <a
-                href="https://nexthope.pages.dev/mj/"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/mj/')"
                 class="launch"
             >
                 LAUNCH →
@@ -636,8 +740,8 @@ footer {
             <p>Physics Wallah study resources.</p>
 
             <a
-                href="https://s2-cdn.studyratna.cc/"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://s2-cdn.studyratna.cc/')"
                 class="launch"
             >
                 LAUNCH →
@@ -660,8 +764,8 @@ footer {
             <p>More PW learning resources.</p>
 
             <a
-                href="https://deltastudy.fun/study-v2/batches"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://deltastudy.fun/study-v2/batches')"
                 class="launch"
             >
                 LAUNCH →
@@ -684,8 +788,8 @@ footer {
             <p>Open your PI OTT study resource.</p>
 
             <a
-                href="https://pipro.deltastudy.fun/"
-                target="_blank"
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://pipro.deltastudy.fun/')"
                 class="launch"
             >
                 LAUNCH →
@@ -748,6 +852,31 @@ footer {
         >
             Skip & Continue →
         </button>
+
+    </div>
+
+</div>
+
+
+<!-- WEBSITE LAUNCH POPUP -->
+<div class="site-overlay" id="siteOverlay">
+
+    <div class="site-popup">
+
+        <button
+            class="site-close"
+            onclick="closeSitePopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <iframe
+            id="siteFrame"
+            class="site-frame"
+            src="about:blank"
+            allowfullscreen>
+        </iframe>
 
     </div>
 
@@ -828,6 +957,32 @@ window.addEventListener("scroll", function () {
     }
 
 });
+
+
+/* ============================= */
+/* WEBSITE LAUNCH POPUP - ADDED */
+/* ============================= */
+
+const siteOverlay = document.getElementById("siteOverlay");
+const siteFrame = document.getElementById("siteFrame");
+
+function openSitePopup(url) {
+
+    siteFrame.src = url;
+
+    siteOverlay.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+}
+
+function closeSitePopup() {
+
+    siteOverlay.style.display = "none";
+
+    siteFrame.src = "about:blank";
+
+    document.body.style.overflow = "";
+}
 
 </script>
 
