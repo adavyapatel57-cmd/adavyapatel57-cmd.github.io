@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -21,29 +21,43 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
     color: white;
+    overflow-x: hidden;
 
-    /* FIXED ENERGETIC BLUE BACKGROUND */
+    /* SAME ENERGETIC BLUE BACKGROUND */
     background:
-  
-    radial-gradient(circle at 20% 10%, rgba(40, 100, 255, .22), transparent 30%),
-    radial-gradient(circle at 80% 30%, rgba(0, 170, 255, .16), transparent 35%),
-    linear-gradient(135deg, #071426, #0a1f3d 50%, #06101f);
-    
+        radial-gradient(circle at 15% 10%, rgba(40, 120, 255, .28), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(0, 210, 255, .18), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(30, 80, 255, .20), transparent 35%),
+        linear-gradient(135deg, #071426, #0a1f3d 50%, #06101f);
 
     background-attachment: fixed;
 }
 
+/* ============================= */
 /* NAVBAR */
+/* ============================= */
+
 .navbar {
     position: sticky;
-    top: 0;
+    top: 10px;
     z-index: 1000;
 
-    width: 100%;
+    width: calc(100% - 24px);
+    margin: 10px auto;
+
     padding: 14px 6%;
 
-    background: rgba(4, 15, 30, .92);
-    border-bottom: 1px solid rgba(255,255,255,.18);
+    background: rgba(4, 15, 30, .72);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 .nav-content {
@@ -58,6 +72,27 @@ body {
 .logo {
     font-size: 21px;
     font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        white,
+        #72dcff,
+        white
+    );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    animation: logoShine 5s linear infinite;
+}
+
+@keyframes logoShine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 .nav-links {
@@ -66,88 +101,251 @@ body {
 }
 
 .nav-links a {
+    position: relative;
+
     color: white;
     text-decoration: none;
+
     font-weight: 600;
     font-size: 14px;
+
+    opacity: .88;
+
+    transition: .25s ease;
 }
 
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+
+    width: 0;
+    height: 2px;
+
+    background: #5edbff;
+
+    box-shadow: 0 0 10px #5edbff;
+
+    transform: translateX(-50%);
+
+    transition: .25s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.nav-links a:hover::after {
+    width: 70%;
+}
+
+/* ============================= */
 /* HERO */
+/* ============================= */
+
 .hero {
+    position: relative;
+
     text-align: center;
-    padding: 65px 20px 35px;
+
+    padding: 75px 20px 40px;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    left: 50%;
+    top: 15px;
+
+    transform: translateX(-50%);
+
+    background: rgba(0,160,255,.12);
+
+    filter: blur(80px);
+
+    border-radius: 50%;
+
+    pointer-events: none;
 }
 
 .welcome {
+    position: relative;
+
     font-size: clamp(42px, 9vw, 78px);
+
     font-weight: 900;
+
     letter-spacing: 3px;
 
-    text-shadow: 0 8px 25px rgba(0,0,0,.22);
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #65d9ff,
+        #ffffff
+    );
+
+    background-size: 220% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    animation: welcomeShine 5s linear infinite;
+
+    filter: drop-shadow(
+        0 0 25px rgba(0,170,255,.22)
+    );
+}
+
+@keyframes welcomeShine {
+    to {
+        background-position: 220% center;
+    }
 }
 
 .hero p {
     margin-top: 12px;
+
     font-size: 18px;
-    opacity: .92;
+
+    color: rgba(255,255,255,.72);
+
+    letter-spacing: .7px;
 }
 
+/* ============================= */
 /* SEARCH */
+/* ============================= */
+
 .search-area {
+    position: relative;
+    z-index: 5;
+
     max-width: 750px;
+
     margin: 10px auto 35px;
+
     padding: 0 20px;
 }
 
 .search-box {
     width: 100%;
-    padding: 15px 20px;
 
-    border: 1px solid rgba(255,255,255,.35);
+    padding: 16px 21px;
+
+    border: 1px solid rgba(255,255,255,.18);
+
     border-radius: 50px;
 
     outline: none;
-    background: rgba(255,255,255,.16);
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
     color: white;
 
     font-size: 16px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transition: .3s ease;
+}
+
+.search-box:hover {
+    border-color: rgba(100,210,255,.35);
+}
+
+.search-box:focus {
+    border-color: rgba(90,215,255,.65);
+
+    background: rgba(255,255,255,.11);
+
+    box-shadow:
+        0 0 0 4px rgba(0,170,255,.08),
+        0 15px 40px rgba(0,0,0,.25),
+        0 0 30px rgba(0,160,255,.12);
 }
 
 .search-box::placeholder {
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.72);
 }
 
+/* ============================= */
 /* FILTERS */
+/* ============================= */
+
 .filters {
     display: flex;
+
     justify-content: center;
+
     flex-wrap: wrap;
+
     gap: 10px;
 
     margin: 0 auto 35px;
+
     padding: 0 20px;
 }
 
 .filter {
-    border: 1px solid rgba(255,255,255,.3);
-    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: rgba(255,255,255,.07);
+
     color: white;
 
     padding: 9px 18px;
+
     border-radius: 30px;
 
     cursor: pointer;
+
     font-weight: 600;
+
+    backdrop-filter: blur(14px);
+
+    transition: .25s ease;
+}
+
+.filter:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255,255,255,.13);
+
+    border-color: rgba(100,215,255,.4);
+
+    box-shadow: 0 8px 25px rgba(0,130,255,.15);
 }
 
 .filter.active {
     background: white;
+
     color: #0066ee;
+
+    box-shadow:
+        0 8px 25px rgba(0,130,255,.2);
 }
 
+/* ============================= */
 /* GRID */
+/* ============================= */
+
 .container {
     width: min(1200px, 92%);
+
     margin: auto;
 }
 
@@ -161,30 +359,74 @@ body {
     padding-bottom: 50px;
 }
 
+/* ============================= */
 /* CARD */
+/* ============================= */
+
 .card {
     position: relative;
+
     overflow: hidden;
 
-    border-radius: 24px;
+    border-radius: 25px;
+
     padding: 20px;
 
     min-height: 310px;
 
-    border: 1px solid rgba(255,255,255,.25);
+    border: 1px solid rgba(255,255,255,.15);
 
-    box-shadow: 0 15px 35px rgba(0,0,0,.18);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.10);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     transition:
-        transform .22s ease,
-        box-shadow .22s ease;
+        transform .35s cubic-bezier(.2,.8,.2,1),
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+/* TOP GLOW */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    right: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.10);
+
+    filter: blur(30px);
+
+    transition: .4s ease;
+
+    pointer-events: none;
+}
+
+.card:hover::after {
+    width: 250px;
+    height: 250px;
+
+    background: rgba(255,255,255,.15);
 }
 
 /* REFLECTION */
+
 .card::before {
     content: "";
 
     position: absolute;
+
     top: -100%;
     left: -80%;
 
@@ -194,12 +436,13 @@ body {
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255,255,255,.32),
+        rgba(255,255,255,.30),
         transparent
     );
 
     transform: rotate(25deg);
-    transition: left .55s ease;
+
+    transition: left .65s ease;
 
     pointer-events: none;
 }
@@ -209,56 +452,129 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 20px 45px rgba(0,0,0,.3);
+    transform: translateY(-10px) scale(1.012);
+
+    border-color: rgba(255,255,255,.30);
+
+    box-shadow:
+        0 30px 65px rgba(0,0,0,.35),
+        0 0 30px rgba(0,150,255,.10),
+        inset 0 1px 0 rgba(255,255,255,.12);
 }
 
+/* ============================= */
 /* CARD COLORS */
+/* ============================= */
+
 .next {
-    background: linear-gradient(145deg, #087f23, #16a83b);
+    background:
+        linear-gradient(
+            145deg,
+            #087f23,
+            #16a83b
+        );
 }
 
 .mission {
-    background: linear-gradient(145deg, #a90000, #e52525);
+    background:
+        linear-gradient(
+            145deg,
+            #a90000,
+            #e52525
+        );
 }
 
 .pw {
-    background: linear-gradient(145deg, #050505, #202020);
+    background:
+        linear-gradient(
+            145deg,
+            #050505,
+            #202020
+        );
 }
 
 .piott {
-    background: linear-gradient(145deg, #5d18c9, #8a38ff);
+    background:
+        linear-gradient(
+            145deg,
+            #5d18c9,
+            #8a38ff
+        );
 }
 
+/* ============================= */
 /* IMAGE */
+/* ============================= */
+
 .card-image {
+    position: relative;
+
     width: 100%;
+
     height: 145px;
 
     object-fit: contain;
 
-    border-radius: 16px;
+    border-radius: 17px;
+
     margin-bottom: 15px;
 
-    background: rgba(255,255,255,.08);
+    background: rgba(255,255,255,.07);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transition: .35s ease;
 }
 
+.card:hover .card-image {
+    transform: scale(1.025);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.25),
+        0 0 22px rgba(255,255,255,.08);
+}
+
+/* ============================= */
 /* CARD CONTENT */
+/* ============================= */
+
 .card h2 {
+    position: relative;
+
     font-size: 21px;
+
     margin-bottom: 7px;
+
+    font-weight: 800;
 }
 
 .card p {
+    position: relative;
+
     font-size: 14px;
-    opacity: .88;
+
+    opacity: .86;
+
+    line-height: 1.55;
 }
 
+/* ============================= */
 /* LAUNCH BUTTON */
+/* ============================= */
+
 .launch {
+    position: relative;
+
+    overflow: hidden;
+
     display: block;
 
     margin-top: 18px;
+
     width: 100%;
 
     padding: 13px 18px;
@@ -266,66 +582,167 @@ body {
     border-radius: 14px;
 
     text-align: center;
+
     text-decoration: none;
 
     color: white;
-    background: rgba(255,255,255,.16);
 
-    border: 1px solid rgba(255,255,255,.38);
+    background: rgba(255,255,255,.13);
+
+    border: 1px solid rgba(255,255,255,.25);
 
     font-weight: 800;
+
     letter-spacing: 1.5px;
 
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.10),
+        0 7px 20px rgba(0,0,0,.12);
+
     transition:
-        background .2s ease,
-        transform .2s ease;
+        background .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.launch::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: .55s ease;
+}
+
+.launch:hover::before {
+    left: 140%;
 }
 
 .launch:hover {
-    background: rgba(255,255,255,.28);
-    transform: scale(1.025);
+    background: rgba(255,255,255,.24);
+
+    transform: translateY(-3px) scale(1.015);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.22),
+        0 0 20px rgba(255,255,255,.08);
 }
 
+/* ============================= */
 /* IMPORTANT */
+/* ============================= */
+
 .important {
+    position: relative;
+
     max-width: 900px;
+
     margin: 0 auto 45px;
 
-    padding: 20px;
+    padding: 25px;
 
     text-align: center;
 
-    border-radius: 20px;
+    border-radius: 24px;
 
-    background: rgba(255,255,255,.13);
-    border: 1px solid rgba(255,255,255,.22);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.045)
+        );
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    overflow: hidden;
+}
+
+.important::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: -100px;
+    top: -120px;
+
+    background: rgba(0,180,255,.14);
+
+    filter: blur(50px);
+
+    border-radius: 50%;
 }
 
 .important h2 {
+    position: relative;
+
     margin-bottom: 7px;
 }
 
+.important p {
+    position: relative;
+
+    color: rgba(255,255,255,.70);
+
+    line-height: 1.6;
+}
 
 /* ============================= */
-/* VIDEO PLAYER - ADDED */
+/* VIDEO PLAYER */
 /* ============================= */
 
 .video-section {
+    position: relative;
+
     width: min(1000px, 92%);
+
     margin: 40px auto;
 
-    padding: 20px;
+    padding: 22px;
 
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.22);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.04)
+        );
 
-    border-radius: 24px;
+    backdrop-filter: blur(20px);
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    border: 1px solid rgba(255,255,255,.14);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 .video-section h2 {
     text-align: center;
+
     margin-bottom: 18px;
 }
 
@@ -339,6 +756,11 @@ body {
     overflow: hidden;
 
     background: #000;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.35);
 }
 
 .video-container iframe {
@@ -348,58 +770,101 @@ body {
     border: none;
 }
 
-
+/* ============================= */
 /* FOOTER */
+/* ============================= */
+
 footer {
     text-align: center;
 
-    padding: 25px 15px;
+    padding: 28px 15px;
 
-    background: rgba(0,35,110,.75);
+    background: rgba(0,25,80,.72);
+
+    backdrop-filter: blur(18px);
+
+    border-top: 1px solid rgba(255,255,255,.10);
+
+    color: rgba(255,255,255,.78);
 
     font-size: 14px;
+
+    box-shadow:
+        0 -15px 40px rgba(0,0,0,.15);
 }
 
+/* ============================= */
 /* BACK TO TOP */
+/* ============================= */
+
 .top-btn {
     position: fixed;
 
     right: 20px;
     bottom: 22px;
 
-    width: 45px;
-    height: 45px;
+    width: 47px;
+    height: 47px;
 
-    border: none;
+    border: 1px solid rgba(255,255,255,.20);
+
     border-radius: 50%;
 
-    background: white;
-    color: #0066ee;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,150,255,.35),
+            rgba(255,255,255,.10)
+        );
+
+    backdrop-filter: blur(15px);
+
+    color: white;
 
     font-size: 20px;
     font-weight: bold;
 
     cursor: pointer;
 
-    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.30),
+        0 0 22px rgba(0,150,255,.12);
 
     display: none;
+
+    transition: .25s ease;
 }
 
+.top-btn:hover {
+    transform: translateY(-5px) scale(1.07);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        0 0 30px rgba(0,180,255,.20);
+}
+
+/* ============================= */
 /* INSTAGRAM POPUP */
+/* ============================= */
+
 .overlay {
     position: fixed;
+
     inset: 0;
 
     z-index: 2000;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     padding: 20px;
 
-    background: rgba(0,20,70,.65);
+    background: rgba(0,15,50,.72);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .instagram-popup {
@@ -411,11 +876,18 @@ footer {
 
     border-radius: 28px;
 
-    background: linear-gradient(145deg, #0878ff, #0047c8);
+    background:
+        linear-gradient(
+            145deg,
+            #0878ff,
+            #0047c8
+        );
 
-    border: 1px solid rgba(255,255,255,.35);
+    border: 1px solid rgba(255,255,255,.28);
 
-    box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.50),
+        0 0 40px rgba(0,130,255,.18);
 
     animation: popup .35s ease;
 }
@@ -423,18 +895,23 @@ footer {
 @keyframes popup {
     from {
         opacity: 0;
-        transform: scale(.88);
+        transform: scale(.88) translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 }
 
 .insta-icon {
     font-size: 48px;
+
     margin-bottom: 10px;
+
+    filter: drop-shadow(
+        0 5px 15px rgba(0,0,0,.2)
+    );
 }
 
 .instagram-popup h2 {
@@ -443,6 +920,7 @@ footer {
 
 .instagram-popup p {
     opacity: .9;
+
     margin-bottom: 20px;
 }
 
@@ -461,55 +939,81 @@ footer {
     font-weight: 800;
 
     margin-top: 10px;
+
+    transition: .25s ease;
 }
 
 .insta-follow {
     background: white;
+
     color: #075bd8;
+}
+
+.insta-follow:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.20);
 }
 
 .skip {
     color: white;
-    border: 1px solid rgba(255,255,255,.3);
-    background: rgba(255,255,255,.1);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    background: rgba(255,255,255,.10);
 
     cursor: pointer;
 }
 
+.skip:hover {
+    background: rgba(255,255,255,.18);
+
+    transform: translateY(-2px);
+}
 
 /* ============================= */
-/* WEBSITE LAUNCH POPUP - ADDED */
+/* WEBSITE LAUNCH POPUP */
 /* ============================= */
 
 .site-overlay {
     position: fixed;
+
     inset: 0;
 
     z-index: 3000;
 
     display: none;
+
     justify-content: center;
     align-items: center;
 
     padding: 20px;
 
-    background: rgba(0,10,30,.82);
-    backdrop-filter: blur(7px);
+    background: rgba(0,7,25,.84);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
 .site-popup {
     position: relative;
 
     width: min(1200px, 96vw);
+
     height: min(800px, 90vh);
 
     background: white;
 
-    border-radius: 22px;
+    border-radius: 24px;
 
     overflow: hidden;
 
-    box-shadow: 0 25px 80px rgba(0,0,0,.55);
+    border: 1px solid rgba(255,255,255,.20);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65),
+        0 0 50px rgba(0,130,255,.12);
 
     animation: sitePopup .3s ease;
 }
@@ -537,10 +1041,12 @@ footer {
     width: 44px;
     height: 44px;
 
-    border: none;
+    border: 1px solid rgba(255,255,255,.20);
+
     border-radius: 50%;
 
     background: rgba(0,0,0,.78);
+
     color: white;
 
     font-size: 23px;
@@ -548,11 +1054,16 @@ footer {
 
     cursor: pointer;
 
-    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.35);
+
+    transition: .25s ease;
 }
 
 .site-close:hover {
     background: #e00000;
+
+    transform: rotate(90deg) scale(1.06);
 }
 
 .site-frame {
@@ -562,18 +1073,31 @@ footer {
     border: none;
 }
 
+/* ============================= */
+/* TABLET */
+/* ============================= */
 
-/* MOBILE */
 @media (max-width: 850px) {
+
     .resource-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
 @media (max-width: 600px) {
 
     .navbar {
+        top: 7px;
+
+        width: calc(100% - 14px);
+
         padding: 13px 18px;
+
+        border-radius: 17px;
     }
 
     .nav-links {
@@ -581,56 +1105,115 @@ footer {
     }
 
     .hero {
-        padding-top: 45px;
+        padding-top: 52px;
     }
 
     .welcome {
         font-size: 48px;
+
+        letter-spacing: 1px;
     }
 
     .hero p {
         font-size: 16px;
     }
 
+    .search-area {
+        margin-bottom: 28px;
+    }
+
+    .search-box {
+        padding: 15px 18px;
+    }
+
+    .filters {
+        gap: 8px;
+    }
+
+    .filter {
+        padding: 8px 14px;
+
+        font-size: 13px;
+    }
+
     .resource-grid {
         grid-template-columns: 1fr;
+
         gap: 18px;
     }
 
     .card {
         min-height: auto;
+
+        border-radius: 23px;
+
+        padding: 18px;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
     }
 
     .card-image {
         height: 160px;
     }
 
-    /* VIDEO PLAYER MOBILE */
+    .important {
+        width: 92%;
+
+        padding: 22px;
+
+        border-radius: 22px;
+    }
+
     .video-section {
         width: 92%;
+
         padding: 15px;
-        border-radius: 20px;
+
+        border-radius: 21px;
     }
 
     .video-container {
         border-radius: 14px;
     }
 
-    /* WEBSITE POPUP MOBILE */
     .site-overlay {
         padding: 8px;
     }
 
     .site-popup {
         width: 100%;
+
         height: 94vh;
+
         border-radius: 16px;
     }
 
     .site-close {
         width: 40px;
         height: 40px;
+
         font-size: 21px;
+    }
+
+    .top-btn {
+        right: 15px;
+        bottom: 17px;
+    }
+}
+
+/* ============================= */
+/* REDUCED MOTION */
+/* ============================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
     }
 }
 </style>
@@ -715,371 +1298,4 @@ footer {
             <img
                 src="nexttoppers.png"
                 class="card-image"
-                alt="Next Toppers"
-            >
-
-            <h2>Next Toppers 1</h2>
-
-            <p>Access your Next Toppers study resources.</p>
-
-            <a
-                href="https://nexttoppers.therankforge.site/pages/key-success"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-
-
-        <!-- NEXT TOPPERS 2 -->
-        <div class="card next" data-category="next">
-
-            <img
-                src="nexttoppers.png"
-                class="card-image"
-                alt="Next Toppers"
-            >
-
-            <h2>Next Toppers 2</h2>
-
-            <p>Explore another Next Toppers resource.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openSitePopup('https://nexthope.pages.dev/nt/')"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-<!-- NEXT TOPPERS 3 -->
-<div class="card next" data-category="next">
-
-    <img
-        src="nexttoppers.png"
-        class="card-image"
-        alt="Next Toppers"
-    >
-
-    <h2>Next Toppers 3</h2>
-
-    <p>Explore Next Toppers study resources.</p>
-
-    <a
-        href="javascript:void(0)"
-        onclick="openSitePopup('https://studypanda.live/nexttoppers')"
-        class="launch"
-    >
-        LAUNCH →
-    </a>
-
-</div>
-
-        <!-- MISSION JEET -->
-        <div class="card mission" data-category="mission">
-
-            <img
-                src="mission jeet.png"
-                class="card-image"
-                alt="Mission Jeet"
-            >
-
-            <h2>Mission Jeet</h2>
-
-            <p>Continue your Mission Jeet preparation.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openSitePopup('https://nexthope.pages.dev/mj/')"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-
-
-        <!-- PW 1 -->
-        <div class="card pw" data-category="pw">
-
-            <img
-                src="pw.png"
-                class="card-image"
-                alt="PW"
-            >
-
-            <h2>PW 1</h2>
-
-            <p>Physics Wallah study resources.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openSitePopup('https://s2-cdn.studyratna.cc/')"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-
-
-        <!-- PW 2 -->
-        <div class="card pw" data-category="pw">
-
-            <img
-                src="pw.png"
-                class="card-image"
-                alt="PW"
-            >
-
-            <h2>PW 2</h2>
-
-            <p>More PW learning resources.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openSitePopup('https://deltastudy.fun/study-v2/batches')"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-
-
-        <!-- PI OTT -->
-        <div class="card piott" data-category="piott">
-
-            <img
-                src="piott.png"
-                class="card-image"
-                alt="PI OTT"
-            >
-
-            <h2>PI OTT</h2>
-
-            <p>Open your PI OTT study resource.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openSitePopup('https://pipro.deltastudy.fun/')"
-                class="launch"
-            >
-                LAUNCH →
-            </a>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- IMPORTANT -->
-<section class="important" id="important">
-
-    <h2>⭐ Important Resources</h2>
-
-    <p>
-        Keep your most useful study resources close and start learning faster.
-    </p>
-
-</section>
-
-
-<!-- VIDEO PLAYER - ADDED -->
-<section class="video-section">
-
-    <h2>🎬 Study Video</h2>
-
-    <div class="video-container">
-
-        <iframe
-            src="https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-    Made by Adavya with ❤️
-</footer>
-
-
-<!-- BACK TO TOP -->
-<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-    ↑
-</button>
-
-
-<!-- INSTAGRAM POPUP -->
-<div class="overlay" id="instaPopup">
-
-    <div class="instagram-popup">
-
-        <div class="insta-icon">📸</div>
-
-        <h2>Follow on Instagram</h2>
-
-        <p>@adavya.patel</p>
-
-        <a
-            href="https://www.instagram.com/adavya.patel/"
-            target="_blank"
-            class="insta-follow"
-        >
-            Follow on Instagram
-        </a>
-
-        <button
-            class="skip"
-            onclick="closePopup()"
-        >
-            Skip & Continue →
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- WEBSITE LAUNCH POPUP -->
-<div class="site-overlay" id="siteOverlay">
-
-    <div class="site-popup">
-
-        <button
-            class="site-close"
-            onclick="closeSitePopup()"
-            aria-label="Close"
-        >
-            ✕
-        </button>
-
-        <iframe
-            id="siteFrame"
-            class="site-frame"
-            src="about:blank"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
-</div>
-
-
-<script>
-
-/* INSTAGRAM POPUP */
-function closePopup() {
-    document.getElementById("instaPopup").style.display = "none";
-
-    localStorage.setItem("instaPopupSeen", "true");
-}
-
-if (localStorage.getItem("instaPopupSeen") === "true") {
-    document.getElementById("instaPopup").style.display = "none";
-}
-
-
-/* SEARCH */
-const searchBox = document.getElementById("search");
-const cards = document.querySelectorAll(".card");
-
-searchBox.addEventListener("input", function () {
-
-    const query = this.value.toLowerCase().trim();
-
-    cards.forEach(card => {
-
-        const text = card.innerText.toLowerCase();
-
-        card.style.display =
-            text.includes(query) ? "" : "none";
-
-    });
-
-});
-
-
-/* FILTER */
-function filterCards(category, button) {
-
-    document.querySelectorAll(".filter").forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-    cards.forEach(card => {
-
-        if (category === "all") {
-            card.style.display = "";
-        }
-
-        else if (card.dataset.category === category) {
-            card.style.display = "";
-        }
-
-        else {
-            card.style.display = "none";
-        }
-
-    });
-
-}
-
-
-/* BACK TO TOP */
-window.addEventListener("scroll", function () {
-
-    const btn = document.getElementById("topBtn");
-
-    if (window.scrollY > 400) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
-    }
-
-});
-
-
-/* ============================= */
-/* WEBSITE LAUNCH POPUP - ADDED */
-/* ============================= */
-
-const siteOverlay = document.getElementById("siteOverlay");
-const siteFrame = document.getElementById("siteFrame");
-
-function openSitePopup(url) {
-
-    siteFrame.src = url;
-
-    siteOverlay.style.display = "flex";
-
-    document.body.style.overflow = "hidden";
-}
-
-function closeSitePopup() {
-
-    siteOverlay.style.display = "none";
-
-    siteFrame.src = "about:blank";
-
-    document.body.style.overflow = "";
-}
-
-</script>
-
-</body>
-</html>
+                alt="
