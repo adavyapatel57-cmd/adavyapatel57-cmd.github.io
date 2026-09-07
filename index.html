@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -305,6 +305,50 @@ body {
     margin-bottom: 7px;
 }
 
+
+/* ============================= */
+/* VIDEO PLAYER - ADDED */
+/* ============================= */
+
+.video-section {
+    width: min(1000px, 92%);
+    margin: 40px auto;
+
+    padding: 20px;
+
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.22);
+
+    border-radius: 24px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.video-section h2 {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.video-container {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+
 /* FOOTER */
 footer {
     text-align: center;
@@ -561,6 +605,17 @@ footer {
         height: 160px;
     }
 
+    /* VIDEO PLAYER MOBILE */
+    .video-section {
+        width: 92%;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .video-container {
+        border-radius: 14px;
+    }
+
     /* WEBSITE POPUP MOBILE */
     .site-overlay {
         padding: 8px;
@@ -811,6 +866,24 @@ footer {
     <p>
         Keep your most useful study resources close and start learning faster.
     </p>
+
+</section>
+
+
+<!-- VIDEO PLAYER - ADDED -->
+<section class="video-section">
+
+    <h2>🎬 Study Video</h2>
+
+    <div class="video-container">
+
+        <iframe
+            src="https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview"
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
+
+    </div>
 
 </section>
 
