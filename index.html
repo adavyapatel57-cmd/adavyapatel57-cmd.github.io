@@ -7,6 +7,11 @@
 <title>Adavya's Study Hub</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -23,41 +28,61 @@ body {
     color: white;
     overflow-x: hidden;
 
-    /* SAME ENERGETIC BLUE BACKGROUND */
     background:
-        radial-gradient(circle at 15% 10%, rgba(40, 120, 255, .28), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(0, 210, 255, .18), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(30, 80, 255, .20), transparent 35%),
-        linear-gradient(135deg, #071426, #0a1f3d 50%, #06101f);
+        radial-gradient(circle at 15% 10%, rgba(0,119,255,.25), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(0,204,255,.18), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(30,70,255,.13), transparent 35%),
+        linear-gradient(135deg, #030b18, #071a35 48%, #020914);
 
     background-attachment: fixed;
 }
 
-/* ============================= */
-/* NAVBAR */
-/* ============================= */
+/* =========================================================
+   DECORATIVE GLOW
+========================================================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .18;
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::before {
+    background: #008cff;
+    top: 10%;
+    left: -150px;
+}
+
+body::after {
+    background: #0055ff;
+    bottom: 5%;
+    right: -150px;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 .navbar {
     position: sticky;
-    top: 10px;
+    top: 0;
     z-index: 1000;
 
-    width: calc(100% - 24px);
-    margin: 10px auto;
-
+    width: 100%;
     padding: 14px 6%;
 
-    background: rgba(4, 15, 30, .72);
+    background: rgba(3,12,27,.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 20px;
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.10);
 }
 
 .nav-content {
@@ -71,281 +96,198 @@ body {
 
 .logo {
     font-size: 21px;
-    font-weight: 800;
+    font-weight: 900;
+    letter-spacing: .4px;
 
-    background: linear-gradient(
-        90deg,
-        white,
-        #72dcff,
-        white
-    );
-
-    background-size: 200% auto;
-
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    animation: logoShine 5s linear infinite;
-}
-
-@keyframes logoShine {
-    to {
-        background-position: 200% center;
-    }
+    text-shadow: 0 0 18px rgba(0,153,255,.55);
 }
 
 .nav-links {
     display: flex;
-    gap: 22px;
+    gap: 26px;
 }
 
 .nav-links a {
     position: relative;
 
-    color: white;
+    color: rgba(255,255,255,.82);
     text-decoration: none;
 
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
-
-    opacity: .88;
 
     transition: .25s ease;
 }
 
 .nav-links a::after {
     content: "";
-
     position: absolute;
+
     left: 50%;
     bottom: -7px;
 
     width: 0;
     height: 2px;
 
-    background: #5edbff;
-
-    box-shadow: 0 0 10px #5edbff;
-
-    transform: translateX(-50%);
+    background: #42a5ff;
+    box-shadow: 0 0 10px #168cff;
 
     transition: .25s ease;
 }
 
 .nav-links a:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+    color: white;
 }
 
 .nav-links a:hover::after {
-    width: 70%;
+    left: 0;
+    width: 100%;
 }
 
-/* ============================= */
-/* HERO */
-/* ============================= */
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero {
-    position: relative;
-
     text-align: center;
-
-    padding: 75px 20px 40px;
-}
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    left: 50%;
-    top: 15px;
-
-    transform: translateX(-50%);
-
-    background: rgba(0,160,255,.12);
-
-    filter: blur(80px);
-
-    border-radius: 50%;
-
-    pointer-events: none;
+    padding: 85px 20px 45px;
 }
 
 .welcome {
-    position: relative;
-
-    font-size: clamp(42px, 9vw, 78px);
-
-    font-weight: 900;
-
-    letter-spacing: 3px;
+    font-size: clamp(46px, 9vw, 82px);
+    font-weight: 950;
+    letter-spacing: 4px;
 
     background: linear-gradient(
         90deg,
         #ffffff,
-        #65d9ff,
+        #75c8ff,
         #ffffff
     );
-
-    background-size: 220% auto;
 
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 
-    animation: welcomeShine 5s linear infinite;
+    text-shadow: 0 0 35px rgba(0,132,255,.28);
 
-    filter: drop-shadow(
-        0 0 25px rgba(0,170,255,.22)
-    );
+    animation: heroGlow 3s ease-in-out infinite alternate;
 }
 
-@keyframes welcomeShine {
+@keyframes heroGlow {
+    from {
+        filter: drop-shadow(0 0 5px rgba(0,132,255,.15));
+    }
+
     to {
-        background-position: 220% center;
+        filter: drop-shadow(0 0 22px rgba(0,132,255,.35));
     }
 }
 
 .hero p {
-    margin-top: 12px;
-
-    font-size: 18px;
+    margin-top: 15px;
 
     color: rgba(255,255,255,.72);
-
-    letter-spacing: .7px;
+    font-size: 17px;
+    letter-spacing: .5px;
 }
 
-/* ============================= */
-/* SEARCH */
-/* ============================= */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 .search-area {
-    position: relative;
-    z-index: 5;
-
-    max-width: 750px;
-
-    margin: 10px auto 35px;
-
-    padding: 0 20px;
+    width: min(760px, 92%);
+    margin: 0 auto 30px;
 }
 
 .search-box {
     width: 100%;
 
-    padding: 16px 21px;
+    padding: 17px 22px;
 
-    border: 1px solid rgba(255,255,255,.18);
-
-    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 18px;
 
     outline: none;
 
-    background: rgba(255,255,255,.08);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(255,255,255,.075);
+    backdrop-filter: blur(16px);
 
     color: white;
-
     font-size: 16px;
 
     box-shadow:
-        0 12px 35px rgba(0,0,0,.20),
+        0 12px 40px rgba(0,0,0,.20),
         inset 0 1px 0 rgba(255,255,255,.08);
 
-    transition: .3s ease;
-}
-
-.search-box:hover {
-    border-color: rgba(100,210,255,.35);
-}
-
-.search-box:focus {
-    border-color: rgba(90,215,255,.65);
-
-    background: rgba(255,255,255,.11);
-
-    box-shadow:
-        0 0 0 4px rgba(0,170,255,.08),
-        0 15px 40px rgba(0,0,0,.25),
-        0 0 30px rgba(0,160,255,.12);
+    transition: .25s ease;
 }
 
 .search-box::placeholder {
-    color: rgba(255,255,255,.72);
+    color: rgba(255,255,255,.55);
 }
 
-/* ============================= */
-/* FILTERS */
-/* ============================= */
+.search-box:focus {
+    border-color: rgba(50,160,255,.65);
+
+    box-shadow:
+        0 0 0 4px rgba(0,132,255,.10),
+        0 12px 45px rgba(0,90,255,.18);
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
 
 .filters {
     display: flex;
-
     justify-content: center;
-
     flex-wrap: wrap;
+    gap: 9px;
 
-    gap: 10px;
-
-    margin: 0 auto 35px;
-
-    padding: 0 20px;
+    width: min(1000px, 94%);
+    margin: 0 auto 42px;
 }
 
 .filter {
-    border: 1px solid rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.13);
 
-    background: rgba(255,255,255,.07);
+    background: rgba(255,255,255,.065);
+    color: rgba(255,255,255,.8);
 
-    color: white;
-
-    padding: 9px 18px;
-
-    border-radius: 30px;
+    padding: 10px 18px;
+    border-radius: 999px;
 
     cursor: pointer;
+    font-weight: 700;
 
-    font-weight: 600;
-
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(12px);
 
     transition: .25s ease;
 }
 
 .filter:hover {
-    transform: translateY(-3px);
-
-    background: rgba(255,255,255,.13);
-
-    border-color: rgba(100,215,255,.4);
-
-    box-shadow: 0 8px 25px rgba(0,130,255,.15);
+    transform: translateY(-2px);
+    border-color: rgba(70,170,255,.45);
+    color: white;
 }
 
 .filter.active {
-    background: white;
+    background: linear-gradient(135deg, #ffffff, #ccecff);
+    color: #075bd8;
 
-    color: #0066ee;
+    border-color: white;
 
-    box-shadow:
-        0 8px 25px rgba(0,130,255,.2);
+    box-shadow: 0 8px 25px rgba(0,119,255,.22);
 }
 
-/* ============================= */
-/* GRID */
-/* ============================= */
+/* =========================================================
+   GRID
+========================================================= */
 
 .container {
     width: min(1200px, 92%);
-
     margin: auto;
 }
 
@@ -354,267 +296,75 @@ body {
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 24px;
+    gap: 22px;
 
-    padding-bottom: 50px;
+    padding-bottom: 55px;
 }
 
-/* ============================= */
-/* CARD */
-/* ============================= */
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card {
     position: relative;
-
     overflow: hidden;
 
-    border-radius: 25px;
+    min-height: 325px;
 
     padding: 20px;
 
-    min-height: 310px;
+    border-radius: 26px;
 
-    border: 1px solid rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.16);
 
     box-shadow:
-        0 20px 45px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.10);
-
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+        0 18px 45px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.12);
 
     transition:
-        transform .35s cubic-bezier(.2,.8,.2,1),
-        box-shadow .35s ease,
-        border-color .35s ease;
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
-
-/* TOP GLOW */
 
 .card::after {
     content: "";
 
     position: absolute;
+    inset: 0;
 
-    width: 180px;
-    height: 180px;
-
-    top: -100px;
-    right: -70px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.10);
-
-    filter: blur(30px);
-
-    transition: .4s ease;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.12),
+            transparent 35%
+        );
 
     pointer-events: none;
 }
 
-.card:hover::after {
-    width: 250px;
-    height: 250px;
+.card:hover {
+    transform: translateY(-9px);
 
-    background: rgba(255,255,255,.15);
+    border-color: rgba(255,255,255,.30);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.38),
+        0 0 25px rgba(0,130,255,.10);
 }
 
-/* REFLECTION */
+/* SHINE */
 
 .card::before {
     content: "";
 
     position: absolute;
 
-    top: -100%;
+    top: -120%;
     left: -80%;
 
-    width: 55%;
+    width: 50%;
     height: 300%;
-
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.30),
-        transparent
-    );
-
-    transform: rotate(25deg);
-
-    transition: left .65s ease;
-
-    pointer-events: none;
-}
-
-.card:hover::before {
-    left: 140%;
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.012);
-
-    border-color: rgba(255,255,255,.30);
-
-    box-shadow:
-        0 30px 65px rgba(0,0,0,.35),
-        0 0 30px rgba(0,150,255,.10),
-        inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-/* ============================= */
-/* CARD COLORS */
-/* ============================= */
-
-.next {
-    background:
-        linear-gradient(
-            145deg,
-            #087f23,
-            #16a83b
-        );
-}
-
-.mission {
-    background:
-        linear-gradient(
-            145deg,
-            #a90000,
-            #e52525
-        );
-}
-
-.pw {
-    background:
-        linear-gradient(
-            145deg,
-            #050505,
-            #202020
-        );
-}
-
-.piott {
-    background:
-        linear-gradient(
-            145deg,
-            #5d18c9,
-            #8a38ff
-        );
-}
-
-/* ============================= */
-/* IMAGE */
-/* ============================= */
-
-.card-image {
-    position: relative;
-
-    width: 100%;
-
-    height: 145px;
-
-    object-fit: contain;
-
-    border-radius: 17px;
-
-    margin-bottom: 15px;
-
-    background: rgba(255,255,255,.07);
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.20),
-        inset 0 1px 0 rgba(255,255,255,.08);
-
-    transition: .35s ease;
-}
-
-.card:hover .card-image {
-    transform: scale(1.025);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.25),
-        0 0 22px rgba(255,255,255,.08);
-}
-
-/* ============================= */
-/* CARD CONTENT */
-/* ============================= */
-
-.card h2 {
-    position: relative;
-
-    font-size: 21px;
-
-    margin-bottom: 7px;
-
-    font-weight: 800;
-}
-
-.card p {
-    position: relative;
-
-    font-size: 14px;
-
-    opacity: .86;
-
-    line-height: 1.55;
-}
-
-/* ============================= */
-/* LAUNCH BUTTON */
-/* ============================= */
-
-.launch {
-    position: relative;
-
-    overflow: hidden;
-
-    display: block;
-
-    margin-top: 18px;
-
-    width: 100%;
-
-    padding: 13px 18px;
-
-    border-radius: 14px;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    color: white;
-
-    background: rgba(255,255,255,.13);
-
-    border: 1px solid rgba(255,255,255,.25);
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.10),
-        0 7px 20px rgba(0,0,0,.12);
-
-    transition:
-        background .25s ease,
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.launch::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: -120%;
-
-    width: 80%;
-    height: 100%;
 
     background: linear-gradient(
         90deg,
@@ -623,126 +373,210 @@ body {
         transparent
     );
 
-    transform: skewX(-20deg);
+    transform: rotate(25deg);
 
-    transition: .55s ease;
+    transition: left .7s ease;
+
+    pointer-events: none;
+
+    z-index: 2;
 }
 
-.launch:hover::before {
-    left: 140%;
+.card:hover::before {
+    left: 145%;
+}
+
+/* =========================================================
+   CARD COLORS
+========================================================= */
+
+.next {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,126,40,.96),
+            rgba(8,176,63,.82)
+        );
+}
+
+.mission {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(164,0,0,.97),
+            rgba(235,30,30,.82)
+        );
+}
+
+.pw {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,5,7,.98),
+            rgba(34,34,39,.92)
+        );
+}
+
+.piott {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(86,20,190,.97),
+            rgba(137,52,255,.84)
+        );
+}
+
+/* =========================================================
+   CARD IMAGE
+========================================================= */
+
+.card-image {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    height: 145px;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    margin-bottom: 16px;
+
+    padding: 8px;
+
+    background: rgba(0,0,0,.13);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    transition: transform .3s ease;
+}
+
+.card:hover .card-image {
+    transform: scale(1.035);
+}
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
+
+.card h2,
+.card p,
+.card .launch {
+    position: relative;
+    z-index: 4;
+}
+
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.83);
+}
+
+/* =========================================================
+   LAUNCH BUTTON
+========================================================= */
+
+.launch {
+    display: block;
+
+    margin-top: 18px;
+    width: 100%;
+
+    padding: 13px 18px;
+
+    border-radius: 15px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: white;
+
+    background: rgba(255,255,255,.105);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    font-weight: 900;
+    letter-spacing: 1.4px;
+
+    backdrop-filter: blur(8px);
+
+    transition: .25s ease;
 }
 
 .launch:hover {
-    background: rgba(255,255,255,.24);
+    background: rgba(255,255,255,.23);
 
-    transform: translateY(-3px) scale(1.015);
+    transform: translateY(-2px);
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.22),
-        0 0 20px rgba(255,255,255,.08);
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
 }
 
-/* ============================= */
-/* IMPORTANT */
-/* ============================= */
+/* =========================================================
+   IMPORTANT
+========================================================= */
 
 .important {
-    position: relative;
-
-    max-width: 900px;
-
+    width: min(900px, 92%);
     margin: 0 auto 45px;
 
-    padding: 25px;
+    padding: 28px 22px;
 
     text-align: center;
 
     border-radius: 24px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.10),
-            rgba(255,255,255,.045)
-        );
+    background: rgba(255,255,255,.065);
 
-    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.13);
 
-    border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(18px);
 
     box-shadow:
-        0 20px 55px rgba(0,0,0,.25),
+        0 20px 55px rgba(0,0,0,.22),
         inset 0 1px 0 rgba(255,255,255,.08);
-
-    overflow: hidden;
-}
-
-.important::before {
-    content: "";
-
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    left: -100px;
-    top: -120px;
-
-    background: rgba(0,180,255,.14);
-
-    filter: blur(50px);
-
-    border-radius: 50%;
 }
 
 .important h2 {
-    position: relative;
-
-    margin-bottom: 7px;
+    margin-bottom: 8px;
+    font-size: 22px;
 }
 
 .important p {
-    position: relative;
-
-    color: rgba(255,255,255,.70);
-
-    line-height: 1.6;
+    color: rgba(255,255,255,.68);
+    line-height: 1.5;
 }
 
-/* ============================= */
-/* VIDEO PLAYER */
-/* ============================= */
+/* =========================================================
+   VIDEO
+========================================================= */
 
 .video-section {
-    position: relative;
-
     width: min(1000px, 92%);
-
     margin: 40px auto;
 
     padding: 22px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.10),
-            rgba(255,255,255,.04)
-        );
-
-    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,.065);
 
     border: 1px solid rgba(255,255,255,.14);
 
     border-radius: 26px;
 
+    backdrop-filter: blur(18px);
+
     box-shadow:
-        0 25px 65px rgba(0,0,0,.28),
+        0 20px 60px rgba(0,0,0,.28),
         inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 .video-section h2 {
     text-align: center;
-
     margin-bottom: 18px;
 }
 
@@ -751,7 +585,7 @@ body {
 
     aspect-ratio: 16 / 9;
 
-    border-radius: 18px;
+    border-radius: 19px;
 
     overflow: hidden;
 
@@ -759,8 +593,7 @@ body {
 
     border: 1px solid rgba(255,255,255,.12);
 
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.35);
+    box-shadow: 0 15px 35px rgba(0,0,0,.35);
 }
 
 .video-container iframe {
@@ -770,32 +603,29 @@ body {
     border: none;
 }
 
-/* ============================= */
-/* FOOTER */
-/* ============================= */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer {
+    margin-top: 30px;
+
     text-align: center;
 
     padding: 28px 15px;
 
-    background: rgba(0,25,80,.72);
-
-    backdrop-filter: blur(18px);
+    background: rgba(2,15,38,.72);
 
     border-top: 1px solid rgba(255,255,255,.10);
 
-    color: rgba(255,255,255,.78);
+    color: rgba(255,255,255,.70);
 
     font-size: 14px;
-
-    box-shadow:
-        0 -15px 40px rgba(0,0,0,.15);
 }
 
-/* ============================= */
-/* BACK TO TOP */
-/* ============================= */
+/* =========================================================
+   BACK TO TOP
+========================================================= */
 
 .top-btn {
     position: fixed;
@@ -806,29 +636,18 @@ footer {
     width: 47px;
     height: 47px;
 
-    border: 1px solid rgba(255,255,255,.20);
-
+    border: 1px solid rgba(255,255,255,.25);
     border-radius: 50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(0,150,255,.35),
-            rgba(255,255,255,.10)
-        );
-
-    backdrop-filter: blur(15px);
-
-    color: white;
+    background: rgba(255,255,255,.90);
+    color: #0066ee;
 
     font-size: 20px;
     font-weight: bold;
 
     cursor: pointer;
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.30),
-        0 0 22px rgba(0,150,255,.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,.30);
 
     display: none;
 
@@ -836,58 +655,52 @@ footer {
 }
 
 .top-btn:hover {
-    transform: translateY(-5px) scale(1.07);
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.35),
-        0 0 30px rgba(0,180,255,.20);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,100,255,.25);
 }
 
-/* ============================= */
-/* INSTAGRAM POPUP */
-/* ============================= */
+/* =========================================================
+   INSTAGRAM POPUP
+========================================================= */
 
 .overlay {
     position: fixed;
-
     inset: 0;
 
     z-index: 2000;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
     padding: 20px;
 
-    background: rgba(0,15,50,.72);
+    background: rgba(0,12,35,.72);
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(9px);
 }
 
 .instagram-popup {
     width: min(400px, 100%);
 
-    padding: 30px 25px;
+    padding: 32px 25px;
 
     text-align: center;
 
-    border-radius: 28px;
+    border-radius: 30px;
 
     background:
         linear-gradient(
             145deg,
-            #0878ff,
-            #0047c8
+            rgba(15,125,255,.96),
+            rgba(0,61,185,.96)
         );
 
-    border: 1px solid rgba(255,255,255,.28);
+    border: 1px solid rgba(255,255,255,.25);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.50),
-        0 0 40px rgba(0,130,255,.18);
+        0 30px 80px rgba(0,0,0,.45),
+        0 0 35px rgba(0,111,255,.18);
 
     animation: popup .35s ease;
 }
@@ -906,12 +719,7 @@ footer {
 
 .insta-icon {
     font-size: 48px;
-
     margin-bottom: 10px;
-
-    filter: drop-shadow(
-        0 5px 15px rgba(0,0,0,.2)
-    );
 }
 
 .instagram-popup h2 {
@@ -920,7 +728,6 @@ footer {
 
 .instagram-popup p {
     opacity: .9;
-
     margin-bottom: 20px;
 }
 
@@ -932,7 +739,7 @@ footer {
 
     padding: 13px;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
     text-decoration: none;
 
@@ -940,67 +747,51 @@ footer {
 
     margin-top: 10px;
 
-    transition: .25s ease;
+    transition: .2s ease;
 }
 
 .insta-follow {
     background: white;
-
     color: #075bd8;
 }
 
 .insta-follow:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.20);
 }
 
 .skip {
     color: white;
-
     border: 1px solid rgba(255,255,255,.25);
-
     background: rgba(255,255,255,.10);
 
     cursor: pointer;
 }
 
-.skip:hover {
-    background: rgba(255,255,255,.18);
-
-    transform: translateY(-2px);
-}
-
-/* ============================= */
-/* WEBSITE LAUNCH POPUP */
-/* ============================= */
+/* =========================================================
+   WEBSITE LAUNCH POPUP
+========================================================= */
 
 .site-overlay {
     position: fixed;
-
     inset: 0;
 
     z-index: 3000;
 
     display: none;
-
     justify-content: center;
     align-items: center;
 
     padding: 20px;
 
-    background: rgba(0,7,25,.84);
+    background: rgba(0,5,20,.86);
 
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(10px);
 }
 
 .site-popup {
     position: relative;
 
     width: min(1200px, 96vw);
-
     height: min(800px, 90vh);
 
     background: white;
@@ -1009,11 +800,9 @@ footer {
 
     overflow: hidden;
 
-    border: 1px solid rgba(255,255,255,.20);
-
     box-shadow:
-        0 35px 100px rgba(0,0,0,.65),
-        0 0 50px rgba(0,130,255,.12);
+        0 30px 100px rgba(0,0,0,.60),
+        0 0 40px rgba(0,110,255,.15);
 
     animation: sitePopup .3s ease;
 }
@@ -1041,12 +830,10 @@ footer {
     width: 44px;
     height: 44px;
 
-    border: 1px solid rgba(255,255,255,.20);
-
+    border: none;
     border-radius: 50%;
 
-    background: rgba(0,0,0,.78);
-
+    background: rgba(0,0,0,.80);
     color: white;
 
     font-size: 23px;
@@ -1054,16 +841,14 @@ footer {
 
     cursor: pointer;
 
-    box-shadow:
-        0 7px 20px rgba(0,0,0,.35);
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
 
-    transition: .25s ease;
+    transition: .2s ease;
 }
 
 .site-close:hover {
     background: #e00000;
-
-    transform: rotate(90deg) scale(1.06);
+    transform: rotate(5deg);
 }
 
 .site-frame {
@@ -1073,31 +858,22 @@ footer {
     border: none;
 }
 
-/* ============================= */
-/* TABLET */
-/* ============================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 850px) {
 
     .resource-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-}
 
-/* ============================= */
-/* MOBILE */
-/* ============================= */
+}
 
 @media (max-width: 600px) {
 
     .navbar {
-        top: 7px;
-
-        width: calc(100% - 14px);
-
         padding: 13px 18px;
-
-        border-radius: 17px;
     }
 
     .nav-links {
@@ -1105,21 +881,20 @@ footer {
     }
 
     .hero {
-        padding-top: 52px;
+        padding: 60px 15px 35px;
     }
 
     .welcome {
-        font-size: 48px;
-
-        letter-spacing: 1px;
+        font-size: 47px;
+        letter-spacing: 2px;
     }
 
     .hero p {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .search-area {
-        margin-bottom: 28px;
+        width: 92%;
     }
 
     .search-box {
@@ -1131,27 +906,18 @@ footer {
     }
 
     .filter {
-        padding: 8px 14px;
-
+        padding: 9px 14px;
         font-size: 13px;
     }
 
     .resource-grid {
         grid-template-columns: 1fr;
-
         gap: 18px;
     }
 
     .card {
         min-height: auto;
-
-        border-radius: 23px;
-
-        padding: 18px;
-    }
-
-    .card:hover {
-        transform: translateY(-6px);
+        border-radius: 24px;
     }
 
     .card-image {
@@ -1159,23 +925,17 @@ footer {
     }
 
     .important {
-        width: 92%;
-
-        padding: 22px;
-
-        border-radius: 22px;
+        padding: 24px 18px;
     }
 
     .video-section {
         width: 92%;
-
         padding: 15px;
-
-        border-radius: 21px;
+        border-radius: 22px;
     }
 
     .video-container {
-        border-radius: 14px;
+        border-radius: 15px;
     }
 
     .site-overlay {
@@ -1184,70 +944,76 @@ footer {
 
     .site-popup {
         width: 100%;
-
         height: 94vh;
-
-        border-radius: 16px;
+        border-radius: 17px;
     }
 
     .site-close {
         width: 40px;
         height: 40px;
-
         font-size: 21px;
     }
 
     .top-btn {
-        right: 15px;
+        right: 16px;
         bottom: 17px;
     }
+
 }
 
-/* ============================= */
-/* REDUCED MOTION */
-/* ============================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-    }
-}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
 <nav class="navbar">
+
     <div class="nav-content">
 
-        <div class="logo">📚 Study Hub</div>
+        <div class="logo">
+            📚 Study Hub
+        </div>
 
         <div class="nav-links">
+
             <a href="#home">Home</a>
+
             <a href="#resources">Resources</a>
+
             <a href="#important">Important</a>
+
         </div>
 
     </div>
+
 </nav>
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <section class="hero" id="home">
 
-    <div class="welcome">WELCOME ❤️</div>
+    <div class="welcome">
+        WELCOME ❤️
+    </div>
 
-    <p>Your Personal Study Hub</p>
+    <p>
+        Your Personal Study Hub
+    </p>
 
 </section>
 
 
-<!-- SEARCH -->
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
 <div class="search-area">
 
     <input
@@ -1260,42 +1026,137 @@ footer {
 </div>
 
 
-<!-- FILTERS -->
+<!-- =====================================================
+     FILTERS
+===================================================== -->
+
 <div class="filters">
 
-    <button class="filter active" onclick="filterCards('all', this)">
+    <button
+        class="filter active"
+        onclick="filterCards('all', this)">
         All
     </button>
 
-    <button class="filter" onclick="filterCards('next', this)">
+    <button
+        class="filter"
+        onclick="filterCards('next', this)">
         Next Toppers
     </button>
 
-    <button class="filter" onclick="filterCards('mission', this)">
+    <button
+        class="filter"
+        onclick="filterCards('mission', this)">
         Mission Jeet
     </button>
 
-    <button class="filter" onclick="filterCards('pw', this)">
+    <button
+        class="filter"
+        onclick="filterCards('pw', this)">
         PW
     </button>
 
-    <button class="filter" onclick="filterCards('piott', this)">
+    <button
+        class="filter"
+        onclick="filterCards('piott', this)">
         PI OTT
     </button>
 
 </div>
 
 
-<!-- RESOURCES -->
+<!-- =====================================================
+     RESOURCES
+===================================================== -->
+
 <section class="container" id="resources">
 
     <div class="resource-grid" id="resourceGrid">
 
 
         <!-- NEXT TOPPERS 1 -->
+
         <div class="card next" data-category="next">
 
             <img
                 src="nexttoppers.png"
                 class="card-image"
-                alt="
+                alt="Next Toppers"
+            >
+
+            <h2>
+                Next Toppers 1
+            </h2>
+
+            <p>
+                Access your Next Toppers study resources.
+            </p>
+
+            <a
+                href="https://nexttoppers.therankforge.site/pages/key-success"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="launch">
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- NEXT TOPPERS 2 -->
+
+        <div class="card next" data-category="next">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                alt="Next Toppers"
+            >
+
+            <h2>
+                Next Toppers 2
+            </h2>
+
+            <p>
+                Explore another Next Toppers resource.
+            </p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/nt/')"
+                class="launch">
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- NEXT TOPPERS 3 -->
+
+        <div class="card next" data-category="next">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                alt="Next Toppers"
+            >
+
+            <h2>
+                Next Toppers 3
+            </h2>
+
+            <p>
+                Explore Next Toppers study resources.
+            </p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://studypanda.live/nexttoppers')"
+                class="launch">
+                LAUNCH →
+            </a>
+
+        </div>
+
+
+        <!-- MISSION JEET -->
