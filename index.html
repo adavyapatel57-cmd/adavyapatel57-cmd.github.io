@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -374,6 +374,16 @@ body {
             145deg,
             #5111b5,
             #963fff
+        );
+}
+
+/* LATENT EXCLUSIVE CARD */
+.latent {
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #343434
         );
 }
 
@@ -1001,6 +1011,29 @@ footer {
     <div class="resource-grid" id="resourceGrid">
 
 
+
+        <!-- LATENT EXCLUSIVE -->
+        <div class="card latent" data-category="latent">
+
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
+                📁
+            </div>
+
+            <h2>Latent Exclusive</h2>
+
+            <p>Exclusive study video resource.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openLatentPopup()"
+                class="launch"
+            >
+                OPEN →
+            </a>
+
+        </div>
+
+
         <!-- NEXT TOPPERS 1 -->
         <div class="card next" data-category="next">
 
@@ -1184,23 +1217,6 @@ footer {
 </section>
 
 
-<!-- VIDEO PLAYER - ADDED -->
-<section class="video-section">
-
-    <h2>🎬 Study Video</h2>
-
-    <div class="video-container">
-
-        <iframe
-            src="https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
-</section>
-
 
 <!-- FOOTER -->
 <footer>
@@ -1242,6 +1258,33 @@ footer {
 
     </div>
 
+</div>
+
+
+
+<!-- LATENT EXCLUSIVE POPUP -->
+<div class="site-overlay" id="latentOverlay">
+    <div class="site-popup">
+        <button
+            class="site-close"
+            onclick="closeLatentPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <div style="height:100%; display:flex; flex-direction:column; background:#fff;">
+            <div style="padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                🎬 Latent Netflix Episode 6
+            </div>
+            <iframe
+                class="site-frame"
+                src="https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview"
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 </div>
 
 
@@ -1346,6 +1389,19 @@ window.addEventListener("scroll", function () {
 });
 
 
+/* LATENT EXCLUSIVE POPUP */
+const latentOverlay = document.getElementById("latentOverlay");
+
+function openLatentPopup() {
+    latentOverlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+
+function closeLatentPopup() {
+    latentOverlay.style.display = "none";
+    document.body.style.overflow = "";
+}
+
 /* ============================= */
 /* WEBSITE LAUNCH POPUP - ADDED */
 /* ============================= */
@@ -1374,4 +1430,4 @@ function closeSitePopup() {
 </script>
 
 </body>
-</html>
+</html>  
