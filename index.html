@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1034,6 +1034,28 @@ footer {
         </div>
 
 
+        <!-- EXCLUSIVE MOVIES -->
+        <div class="card latent" data-category="movies">
+
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
+                🎬
+            </div>
+
+            <h2>Exclusive Movies🐱‍🏍</h2>
+
+            <p>Your exclusive movie collection.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openMoviesPopup()"
+                class="launch"
+            >
+                OPEN →
+            </a>
+
+        </div>
+
+
         <!-- NEXT TOPPERS 1 -->
         <div class="card next" data-category="next">
 
@@ -1322,6 +1344,65 @@ footer {
 </div>
 
 
+<!-- EXCLUSIVE MOVIES FOLDER POPUP -->
+<div class="site-overlay" id="moviesOverlay" style="display:none;">
+    <div class="site-popup">
+        <button
+            class="site-close"
+            onclick="closeMoviesPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <div id="moviesFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
+            <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                🎬 Mirzapur The Movie(2026)s
+            </div>
+
+            <div style="padding:22px; overflow:auto;">
+                <!-- MOVIE 1 -->
+                <button
+                    type="button"
+                    onclick="openMovieVideo('🎬 Mirzapur The Movie(2026)', 'https://drive.google.com/file/d/15cS2mNaTob409Z6WXx2xa4UyBkmPccDy/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Mirzapur The Movie(2026)</strong>
+                        <small style="opacity:.65;">Movie</small>
+                    </span>
+                </button>
+
+                <!-- FUTURE MOVIES: Copy the MOVIE 1 button above and change its title + Google Drive preview link. -->
+            </div>
+        </div>
+
+        <!-- MOVIE VIEW -->
+        <div id="movieVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
+            <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                <button
+                    type="button"
+                    onclick="backToMoviesFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
+                <span id="movieVideoTitle">🎬 Mirzapur The Movie(2026)</span>
+            </div>
+
+            <iframe
+                id="movieVideoFrame"
+                class="site-frame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+
 <!-- WEBSITE LAUNCH POPUP -->
 <div class="site-overlay" id="siteOverlay">
 
@@ -1458,6 +1539,40 @@ function closeLatentPopup() {
 }
 
 /* ============================= */
+/* EXCLUSIVE MOVIES FOLDER */
+const moviesOverlay = document.getElementById("moviesOverlay");
+const moviesFolderView = document.getElementById("moviesFolderView");
+const movieVideoView = document.getElementById("movieVideoView");
+const movieVideoFrame = document.getElementById("movieVideoFrame");
+const movieVideoTitle = document.getElementById("movieVideoTitle");
+
+function openMoviesPopup() {
+    moviesOverlay.style.display = "flex";
+    moviesFolderView.style.display = "flex";
+    movieVideoView.style.display = "none";
+    movieVideoFrame.src = "";
+    document.body.style.overflow = "hidden";
+}
+
+function openMovieVideo(title, url) {
+    movieVideoTitle.textContent = title;
+    movieVideoFrame.src = url;
+    moviesFolderView.style.display = "none";
+    movieVideoView.style.display = "flex";
+}
+
+function backToMoviesFolder() {
+    movieVideoFrame.src = "";
+    movieVideoView.style.display = "none";
+    moviesFolderView.style.display = "flex";
+}
+
+function closeMoviesPopup() {
+    movieVideoFrame.src = "";
+    moviesOverlay.style.display = "none";
+    document.body.style.overflow = "";
+}
+
 /* WEBSITE LAUNCH POPUP - ADDED */
 /* ============================= */
 
