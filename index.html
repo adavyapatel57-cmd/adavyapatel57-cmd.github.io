@@ -1262,7 +1262,7 @@ footer {
 
 
 
-<!-- LATENT EXCLUSIVE POPUP -->
+<!-- LATENT EXCLUSIVE FOLDER POPUP -->
 <div class="site-overlay" id="latentOverlay">
     <div class="site-popup">
         <button
@@ -1273,13 +1273,47 @@ footer {
             ✕
         </button>
 
-        <div style="height:100%; display:flex; flex-direction:column; background:#fff;">
-            <div style="padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
-                🎬 Latent Netflix Episode 6
+        <!-- FOLDER VIEW -->
+        <div id="latentFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
+            <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                📁 Latent Exclusive
             </div>
+
+            <div style="padding:22px; overflow:auto;">
+                <!-- FILE 1 -->
+                <button
+                    type="button"
+                    onclick="openLatentVideo('🎬 Latent Netflix Episode 6', 'https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Latent Netflix Episode 6</strong>
+                        <small style="opacity:.65;">Video</small>
+                    </span>
+                </button>
+
+                <!-- FUTURE FILES: Copy the FILE 1 button above and change its title + Google Drive preview link. -->
+            </div>
+        </div>
+
+        <!-- VIDEO VIEW -->
+        <div id="latentVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
+            <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                <button
+                    type="button"
+                    onclick="backToLatentFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
+                <span id="latentVideoTitle">🎬 Latent Netflix Episode 6</span>
+            </div>
+
             <iframe
+                id="latentVideoFrame"
                 class="site-frame"
-                src="https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview"
+                src=""
                 allow="autoplay"
                 allowfullscreen>
             </iframe>
@@ -1389,15 +1423,36 @@ window.addEventListener("scroll", function () {
 });
 
 
-/* LATENT EXCLUSIVE POPUP */
+/* LATENT EXCLUSIVE FOLDER */
 const latentOverlay = document.getElementById("latentOverlay");
+const latentFolderView = document.getElementById("latentFolderView");
+const latentVideoView = document.getElementById("latentVideoView");
+const latentVideoFrame = document.getElementById("latentVideoFrame");
+const latentVideoTitle = document.getElementById("latentVideoTitle");
 
 function openLatentPopup() {
     latentOverlay.style.display = "flex";
+    latentFolderView.style.display = "flex";
+    latentVideoView.style.display = "none";
+    latentVideoFrame.src = "";
     document.body.style.overflow = "hidden";
 }
 
+function openLatentVideo(title, url) {
+    latentVideoTitle.textContent = title;
+    latentVideoFrame.src = url;
+    latentFolderView.style.display = "none";
+    latentVideoView.style.display = "flex";
+}
+
+function backToLatentFolder() {
+    latentVideoFrame.src = "";
+    latentVideoView.style.display = "none";
+    latentFolderView.style.display = "flex";
+}
+
 function closeLatentPopup() {
+    latentVideoFrame.src = "";
     latentOverlay.style.display = "none";
     document.body.style.overflow = "";
 }
@@ -1430,4 +1485,4 @@ function closeSitePopup() {
 </script>
 
 </body>
-</html>  
+</html>
