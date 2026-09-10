@@ -26,8 +26,10 @@ body {
     background:
         radial-gradient(circle at 15% 10%, rgba(0, 140, 255, .35), transparent 28%),
         radial-gradient(circle at 85% 25%, rgba(0, 90, 255, .28), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(0, 180, 255, .18), transparent 35%),
         linear-gradient(135deg, #020817, #061a3a 45%, #03122b 100%);
 
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 
@@ -43,9 +45,9 @@ body {
     width: 100%;
     padding: 15px 6%;
 
-    background: rgba(2, 12, 30, .88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(2, 12, 30, .78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     border-bottom: 1px solid rgba(255,255,255,.12);
     box-shadow: 0 8px 30px rgba(0,0,0,.18);
@@ -110,22 +112,18 @@ body {
     background-clip: text;
     color: transparent;
 
-    text-shadow:
-        0 10px 35px rgba(0,120,255,.22),
-        0 0 25px rgba(0,150,255,.25);
+    text-shadow: 0 10px 35px rgba(0,120,255,.22);
 
-    animation: welcomeGlow 1.4s ease-out;
+    animation: welcomeGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes welcomeGlow {
     from {
-        opacity: 0;
-        transform: translateY(8px);
+        filter: drop-shadow(0 0 5px rgba(0,150,255,.15));
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
+        filter: drop-shadow(0 0 20px rgba(0,150,255,.35));
     }
 }
 
@@ -154,9 +152,9 @@ body {
 
     outline: none;
 
-    background: rgba(255,255,255,.10);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 
     color: white;
     font-size: 16px;
@@ -199,8 +197,8 @@ body {
 .filter {
     border: 1px solid rgba(255,255,255,.16);
 
-    background: rgba(255,255,255,.08);
-    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(12px);
 
     color: rgba(255,255,255,.88);
 
@@ -284,15 +282,16 @@ body {
     content: "";
 
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 
-    top: -100px;
-    right: -80px;
+    top: -90px;
+    right: -70px;
 
     border-radius: 50%;
 
-    background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%);
+    background: rgba(255,255,255,.12);
+    filter: blur(5px);
 
     pointer-events: none;
 }
@@ -305,7 +304,7 @@ body {
     position: absolute;
 
     top: -120%;
-    left: -35%;
+    left: -100%;
 
     width: 65%;
     height: 350%;
@@ -317,27 +316,25 @@ body {
         transparent
     );
 
-    transform: rotate(25deg) translateX(-160%);
+    transform: rotate(25deg);
 
-    transition: transform .65s ease;
+    transition: left .65s ease;
 
     pointer-events: none;
-    will-change: transform;
 }
 
 .card:hover::before {
-    transform: rotate(25deg) translateX(160%);
+    left: 145%;
 }
 
 .card:hover {
     transform: translateY(-9px);
 
     box-shadow:
-        0 18px 34px rgba(0,0,0,.32),
-        0 0 18px rgba(0,130,255,.10);
+        0 25px 55px rgba(0,0,0,.35),
+        0 0 25px rgba(0,130,255,.10);
 
     border-color: rgba(255,255,255,.28);
-    will-change: transform;
 }
 
 /* =========================
@@ -488,15 +485,15 @@ body {
 
     border-radius: 24px;
 
-    background: rgba(255,255,255,.09);
+    background: rgba(255,255,255,.075);
 
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     border: 1px solid rgba(255,255,255,.14);
 
     box-shadow:
-        0 18px 35px rgba(0,0,0,.20),
+        0 18px 45px rgba(0,0,0,.20),
         inset 0 1px 0 rgba(255,255,255,.08);
 }
 
@@ -520,10 +517,10 @@ body {
 
     padding: 22px;
 
-    background: rgba(255,255,255,.09);
+    background: rgba(255,255,255,.075);
 
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     border: 1px solid rgba(255,255,255,.14);
 
@@ -938,6 +935,60 @@ footer {
         font-size: 21px;
     }
 }
+    .photo-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.photo-popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.photo-popup-box {
+    position: relative;
+    width: min(90%, 700px);
+    transform: translateX(-120vw);
+    transition: transform 0.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+.photo-popup.show .photo-popup-box {
+    transform: translateX(0);
+}
+
+.photo-popup-box img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+}
+
+.photo-popup-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+}
 </style>
 </head>
 
@@ -1065,8 +1116,6 @@ footer {
             <img
                 src="nexttoppers.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="Next Toppers"
             >
 
@@ -1091,8 +1140,6 @@ footer {
             <img
                 src="nexttoppers.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="Next Toppers"
             >
 
@@ -1117,8 +1164,6 @@ footer {
             <img
                 src="mission jeet.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="Mission Jeet"
             >
 
@@ -1143,8 +1188,6 @@ footer {
             <img
                 src="pw.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="PW"
             >
 
@@ -1154,7 +1197,7 @@ footer {
 
             <a
                 href="javascript:void(0)"
-                onclick="openSitePopup('https://thescholarverse.site/study/pw/batches')"
+                onclick="openSitePopup('')"
                 class="launch"
             >
                 LAUNCH →
@@ -1169,8 +1212,6 @@ footer {
             <img
                 src="pw.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="PW"
             >
 
@@ -1195,8 +1236,6 @@ footer {
             <img
                 src="piott.png"
                 class="card-image"
-                loading="lazy"
-                decoding="async"
                 alt="PI OTT"
             >
 
@@ -1450,6 +1489,12 @@ footer {
 /* INSTAGRAM POPUP */
 function closePopup() {
     document.getElementById("instaPopup").style.display = "none";
+
+    localStorage.setItem("instaPopupSeen", "true");
+}
+
+if (localStorage.getItem("instaPopupSeen") === "true") {
+    document.getElementById("instaPopup").style.display = "none";
 }
 
 
@@ -1502,20 +1547,17 @@ function filterCards(category, button) {
 
 
 /* BACK TO TOP */
-const topBtn = document.getElementById("topBtn");
-let scrollTicking = false;
-
 window.addEventListener("scroll", function () {
 
-    if (!scrollTicking) {
-        requestAnimationFrame(function () {
-            topBtn.style.display = window.scrollY > 400 ? "block" : "none";
-            scrollTicking = false;
-        });
-        scrollTicking = true;
+    const btn = document.getElementById("topBtn");
+
+    if (window.scrollY > 400) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
     }
 
-}, { passive: true });
+});
 
 
 /* LATENT EXCLUSIVE FOLDER */
@@ -1610,7 +1652,43 @@ function closeSitePopup() {
 
     document.body.style.overflow = "";
 }
+function openPhotoPopup() {
+    document.getElementById("photoPopup").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closePhotoPopup() {
+    document.getElementById("photoPopup").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        openPhotoPopup();
+    }, 500);
+});
 </script>
+<!-- WELCOME PHOTO POPUP -->
+<div class="photo-popup" id="photoPopup">
+
+    <div class="photo-popup-box">
+
+        <button
+            class="photo-popup-close"
+            onclick="closePhotoPopup()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <img
+            src="aeroplane.png"
+            alt="Welcome"
+        >
+
+    </div>
+
+</div>
 </body>
 </html>
 
