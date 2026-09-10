@@ -888,24 +888,17 @@ footer {
 </button>
 <!-- INSTAGRAM POPUP -->
 <div class="overlay" id="instaPopup">
-    <div class="instagram-popup">
-        <div class="insta-icon">📸</div>
-        <h2>Follow on Instagram</h2>
-        <p>@adavya.patel</p>
-        <a
-            href="https://www.instagram.com/adavya.patel/"
-            target="_blank"
-            class="insta-follow"
-        >
-            Follow on Instagram
-        </a>
-        <button
-            class="skip"
-            onclick="closePopup()"
-        >
-            Skip & Continue →
-        </button>
-    </div>
+    <div class="instagram-popup">
+        <div class="insta-icon">📸</div>
+        <h2>Follow on Instagram</h2>
+        <p>@adavya.patel</p>
+        <a href="https://www.instagram.com/adavya.patel/" target="_blank" class="insta-follow">
+            Follow on Instagram
+        </a>
+        <button type="button" class="skip" onclick="closePopup()">
+            Skip & Continue →
+        </button>
+    </div>
 </div>
 <!-- LATENT EXCLUSIVE FOLDER POPUP -->
 <div class="site-overlay" id="latentOverlay">
@@ -1056,7 +1049,11 @@ footer {
 <script>
 /* INSTAGRAM POPUP */
 function closePopup() {
-    document.getElementById("instaPopup").style.display = "none";
+    const popup = document.getElementById("instaPopup");
+    if (popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = "";   // scroll unlock
+    }
 }
 /* SEARCH */
 const searchBox = document.getElementById("search");
