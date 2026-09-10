@@ -3,770 +3,1510 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Adavya's Study Hub</title>
+
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
     color: #fff;
+
+    /* PREMIUM ENERGETIC BLUE */
     background:
-        radial-gradient(ellipse at 20% 0%, rgba(0, 140, 255, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(80, 40, 255, 0.18) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 100%, rgba(0, 80, 200, 0.15) 0%, transparent 50%),
-        linear-gradient(160deg, #020617 0%, #0a1628 40%, #06101f 100%);
+        radial-gradient(circle at 15% 10%, rgba(0, 140, 255, .35), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(0, 90, 255, .28), transparent 30%),
+        linear-gradient(135deg, #020817, #061a3a 45%, #03122b 100%);
+
     overflow-x: hidden;
-    line-height: 1.5;
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
+
     width: 100%;
-    padding: 16px 6%;
-    background: rgba(2, 10, 25, 0.75);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    padding: 15px 6%;
+
+    background: rgba(2, 12, 30, .88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 8px 30px rgba(0,0,0,.18);
 }
+
 .nav-content {
     max-width: 1200px;
     margin: auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .logo {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    background: linear-gradient(90deg, #fff, #7dd3fc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.nav-links {
-    display: flex;
-    gap: 28px;
-}
-.nav-links a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.25s ease;
-    position: relative;
-}
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #38bdf8;
-    border-radius: 2px;
-    transition: width 0.25s ease;
-}
-.nav-links a:hover {
-    color: #fff;
-}
-.nav-links a:hover::after {
-    width: 100%;
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: .4px;
 }
 
-/* HERO */
+.nav-links {
+    display: flex;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: rgba(255,255,255,.88);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: .2s ease;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   HERO
+========================= */
+
 .hero {
     text-align: center;
-    padding: 90px 20px 30px;
+    padding: 78px 20px 38px;
 }
+
 .welcome {
-    font-size: clamp(48px, 10vw, 86px);
-    font-weight: 900;
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 50%, #ffffff 100%);
-    background-size: 200% auto;
+    font-size: clamp(45px, 9vw, 82px);
+    font-weight: 950;
+    letter-spacing: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #66bfff,
+        #ffffff
+    );
+
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: welcomeGlow 1.6s ease-out, shine 6s linear infinite;
-    text-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+
+    text-shadow:
+        0 10px 35px rgba(0,120,255,.22),
+        0 0 25px rgba(0,150,255,.25);
+
+    animation: welcomeGlow 1.4s ease-out;
 }
+
 @keyframes welcomeGlow {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-@keyframes shine {
-    to { background-position: 200% center; }
-}
+
 .hero p {
     margin-top: 14px;
     font-size: 17px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 500;
+    opacity: .82;
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
+
 .search-area {
-    max-width: 720px;
-    margin: 18px auto 28px;
+    max-width: 780px;
+    margin: 15px auto 32px;
     padding: 0 20px;
 }
+
 .search-box {
     width: 100%;
-    padding: 16px 24px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 20px;
+    padding: 17px 22px;
+
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px;
+
     outline: none;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+
+    background: rgba(255,255,255,.10);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
     color: white;
     font-size: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
-    transition: all 0.3s ease;
-}
-.search-box:focus {
-    border-color: rgba(56, 189, 248, 0.5);
-    background: rgba(255,255,255,0.09);
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0,0,0,0.3);
-}
-.search-box::placeholder {
-    color: rgba(255,255,255,0.45);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transition: .25s ease;
 }
 
-/* FILTERS */
+.search-box:focus {
+    border-color: rgba(70,170,255,.65);
+
+    background: rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 0 4px rgba(0,130,255,.10),
+        0 15px 40px rgba(0,0,0,.25);
+}
+
+.search-box::placeholder {
+    color: rgba(255,255,255,.65);
+}
+
+/* =========================
+   FILTERS
+========================= */
+
 .filters {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 0 auto 42px;
+
+    margin: 0 auto 38px;
     padding: 0 20px;
 }
+
 .filter {
-    border: 1px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(8px);
-    color: rgba(255,255,255,0.8);
-    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,.16);
+
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(5px);
+
+    color: rgba(255,255,255,.88);
+
+    padding: 10px 18px;
     border-radius: 50px;
+
     cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.25s ease;
-}
-.filter:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.2);
-}
-.filter.active {
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-    color: #0c4a6e;
-    border-color: transparent;
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+
     font-weight: 700;
+    font-size: 13px;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
-/* CONTAINER + GRID */
+.filter:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.13);
+}
+
+.filter.active {
+    background: #fff;
+    color: #075bd8;
+
+    box-shadow: 0 8px 25px rgba(0,100,255,.22);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
 .container {
     width: min(1200px, 92%);
     margin: auto;
 }
+
+/* =========================
+   GRID
+========================= */
+
 .resource-grid {
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    padding-bottom: 60px;
+
+    gap: 24px;
+
+    padding-bottom: 55px;
 }
 
-/* CARDS */
+/* =========================
+   CARDS
+========================= */
+
 .card {
     position: relative;
     overflow: hidden;
-    border-radius: 28px;
-    padding: 22px;
-    min-height: 320px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+
+    border-radius: 26px;
+    padding: 20px;
+
+    min-height: 315px;
+
+    border: 1px solid rgba(255,255,255,.16);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.10);
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
 }
+
+/* CARD LIGHT EFFECT */
+
 .card::after {
     content: "";
+
     position: absolute;
-    width: 220px;
-    height: 220px;
-    top: -110px;
-    right: -90px;
+    width: 200px;
+    height: 200px;
+
+    top: -100px;
+    right: -80px;
+
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 70%);
+
+    background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%);
+
     pointer-events: none;
 }
+
+/* REFLECTION */
+
 .card::before {
     content: "";
+
     position: absolute;
-    top: -140%;
-    left: -40%;
-    width: 70%;
-    height: 380%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-    transform: rotate(25deg) translateX(-180%);
-    transition: transform 0.7s ease;
+
+    top: -120%;
+    left: -35%;
+
+    width: 65%;
+    height: 350%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+    );
+
+    transform: rotate(25deg) translateX(-160%);
+
+    transition: transform .65s ease;
+
     pointer-events: none;
+    will-change: transform;
 }
+
 .card:hover::before {
-    transform: rotate(25deg) translateX(180%);
+    transform: rotate(25deg) translateX(160%);
 }
+
 .card:hover {
-    transform: translateY(-10px) scale(1.015);
-    box-shadow: 0 28px 60px rgba(0,0,0,0.4), 0 0 30px rgba(56, 189, 248, 0.1);
-    border-color: rgba(255,255,255,0.22);
+    transform: translateY(-9px);
+
+    box-shadow:
+        0 18px 34px rgba(0,0,0,.32),
+        0 0 18px rgba(0,130,255,.10);
+
+    border-color: rgba(255,255,255,.28);
+    will-change: transform;
 }
-.next { background: linear-gradient(145deg, rgba(0, 90, 30, 0.97), rgba(5, 160, 60, 0.9)); }
-.mission { background: linear-gradient(145deg, rgba(120, 0, 0, 0.97), rgba(220, 30, 30, 0.9)); }
-.pw { background: linear-gradient(145deg, #0a0a0a, #1f1f1f); }
-.piott { background: linear-gradient(145deg, #4c1d95, #7e22ce); }
-.latent { background: linear-gradient(145deg, #121212, #2a2a2a); }
+
+/* =========================
+   CARD COLORS
+========================= */
+
+.next {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,100,35,.96),
+            rgba(5,175,65,.88)
+        );
+}
+
+.mission {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(135,0,0,.96),
+            rgba(235,35,35,.88)
+        );
+}
+
+.pw {
+    background:
+        linear-gradient(
+            145deg,
+            #020202,
+            #242424
+        );
+}
+
+.piott {
+    background:
+        linear-gradient(
+            145deg,
+            #5111b5,
+            #963fff
+        );
+}
+
+/* LATENT EXCLUSIVE CARD */
+.latent {
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #343434
+        );
+}
+
+/* =========================
+   CARD IMAGE
+========================= */
 
 .card-image {
     width: 100%;
-    height: 148px;
+    height: 145px;
+
     object-fit: contain;
+
     border-radius: 18px;
-    margin-bottom: 18px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.35s ease;
+    margin-bottom: 16px;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    transition: transform .3s ease;
 }
+
 .card:hover .card-image {
-    transform: scale(1.03);
+    transform: scale(1.025);
 }
+
+/* =========================
+   CARD CONTENT
+========================= */
+
 .card h2 {
     font-size: 21px;
-    margin-bottom: 8px;
-    font-weight: 800;
+    margin-bottom: 7px;
+
+    font-weight: 850;
 }
+
 .card p {
     font-size: 14px;
-    line-height: 1.55;
-    opacity: 0.82;
+    line-height: 1.5;
+
+    opacity: .84;
 }
+
+/* =========================
+   LAUNCH BUTTON
+========================= */
+
 .launch {
     display: block;
-    margin-top: 20px;
+
+    margin-top: 18px;
     width: 100%;
-    padding: 14px 18px;
-    border-radius: 16px;
+
+    padding: 13px 18px;
+
+    border-radius: 15px;
+
     text-align: center;
     text-decoration: none;
+
     color: white;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    font-size: 13px;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    font-weight: 850;
+    letter-spacing: 1.4px;
+
     backdrop-filter: blur(8px);
-    transition: all 0.25s ease;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
+
 .launch:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,.22);
+
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+
+    box-shadow: 0 8px 22px rgba(0,0,0,.18);
 }
 
-/* IMPORTANT */
+/* =========================
+   IMPORTANT SECTION
+========================= */
+
 .important {
-    max-width: 880px;
-    margin: 0 auto 55px;
-    padding: 32px 28px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+
+    padding: 27px 22px;
+
     text-align: center;
-    border-radius: 28px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
-}
-.important h2 {
-    margin-bottom: 10px;
-    font-size: 23px;
-    font-weight: 800;
-}
-.important p {
-    opacity: 0.75;
-    line-height: 1.6;
-    font-size: 15px;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.09);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-/* FOOTER */
+.important h2 {
+    margin-bottom: 9px;
+    font-size: 22px;
+}
+
+.important p {
+    opacity: .78;
+    line-height: 1.5;
+}
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+.video-section {
+    width: min(1000px, 92%);
+    margin: 40px auto;
+
+    padding: 22px;
+
+    background: rgba(255,255,255,.09);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.video-section h2 {
+    text-align: center;
+    margin-bottom: 19px;
+}
+
+.video-container {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: #000;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
     text-align: center;
-    padding: 32px 15px;
-    background: rgba(1, 12, 30, 0.7);
-    border-top: 1px solid rgba(255,255,255,0.06);
+
+    padding: 28px 15px;
+
+    background: rgba(1,18,55,.82);
+
+    border-top: 1px solid rgba(255,255,255,.10);
+
     font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 500;
+
+    color: rgba(255,255,255,.82);
 }
 
-/* BACK TO TOP */
+/* =========================
+   BACK TO TOP
+========================= */
+
 .top-btn {
     position: fixed;
+
     right: 22px;
     bottom: 22px;
-    width: 50px;
-    height: 50px;
-    border: none;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255,255,255,.25);
     border-radius: 50%;
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-    color: #0c4a6e;
+
+    background: rgba(255,255,255,.92);
+    color: #075bd8;
+
     font-size: 20px;
-    font-weight: 800;
+    font-weight: bold;
+
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+
     display: none;
+
     z-index: 1500;
-    transition: all 0.25s ease;
-}
-.top-btn:hover {
-    transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 14px 36px rgba(56, 189, 248, 0.5);
+
+    transition: .2s ease;
 }
 
-/* INSTAGRAM POPUP */
+.top-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+}
+
+/* =========================
+   INSTAGRAM POPUP
+========================= */
+
 .overlay {
     position: fixed;
     inset: 0;
+
     z-index: 2000;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     padding: 20px;
-    background: rgba(0, 8, 25, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+
+    background: rgba(0,12,35,.72);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
+
 .instagram-popup {
     width: min(400px, 100%);
-    padding: 36px 28px;
+
+    padding: 32px 25px;
+
     text-align: center;
-    border-radius: 32px;
-    background: linear-gradient(145deg, #0284c7, #0369a1);
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    animation: popup 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0878ff,
+            #003cae
+        );
+
+    border: 1px solid rgba(255,255,255,.22);
+
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+
+    animation: popup .35s ease;
 }
+
 @keyframes popup {
-    from { opacity: 0; transform: scale(0.9) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(.88) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
+
 .insta-icon {
-    font-size: 52px;
-    margin-bottom: 12px;
+    font-size: 48px;
+    margin-bottom: 10px;
 }
+
 .instagram-popup h2 {
     margin-bottom: 8px;
-    font-size: 24px;
-    font-weight: 800;
 }
+
 .instagram-popup p {
-    opacity: 0.9;
-    margin-bottom: 24px;
-    font-size: 16px;
+    opacity: .88;
+    margin-bottom: 20px;
 }
+
 .insta-follow,
 .skip {
     display: block;
+
     width: 100%;
-    padding: 14px;
-    border-radius: 16px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
     text-decoration: none;
-    font-weight: 700;
-    margin-top: 12px;
-    transition: all 0.25s ease;
-    font-size: 15px;
-    cursor: pointer;
-    border: none;
-}
-.insta-follow {
-    background: white;
-    color: #0369a1;
-}
-.insta-follow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-.skip {
-    color: white;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.1);
-}
-.skip:hover {
-    background: rgba(255,255,255,0.18);
+
+    font-weight: 850;
+
+    margin-top: 10px;
+
+    transition: .2s ease;
 }
 
-/* SITE / FOLDER POPUPS */
+.insta-follow {
+    background: white;
+    color: #075bd8;
+}
+
+.insta-follow:hover {
+    transform: translateY(-2px);
+}
+
+.skip {
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    background: rgba(255,255,255,.10);
+
+    cursor: pointer;
+}
+
+.skip:hover {
+    background: rgba(255,255,255,.18);
+}
+
+/* =========================
+   WEBSITE LAUNCH POPUP
+========================= */
+
 .site-overlay {
     position: fixed;
     inset: 0;
+
     z-index: 3000;
+
     display: none;
+
     justify-content: center;
     align-items: center;
-    padding: 16px;
-    background: rgba(0, 6, 20, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+
+    padding: 20px;
+
+    background: rgba(0,8,25,.84);
+
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
 }
+
 .site-popup {
     position: relative;
+
     width: min(1200px, 96vw);
-    height: min(820px, 92vh);
-    background: #fff;
-    border-radius: 28px;
+    height: min(800px, 90vh);
+
+    background: white;
+
+    border-radius: 24px;
+
     overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
-    animation: sitePopup 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+    box-shadow: 0 30px 90px rgba(0,0,0,.6);
+
+    animation: sitePopup .3s ease;
 }
+
 @keyframes sitePopup {
-    from { opacity: 0; transform: scale(0.94) translateY(18px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(.92) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
+
 .site-close {
     position: absolute;
-    top: 14px;
-    right: 14px;
+
+    top: 12px;
+    right: 12px;
+
     z-index: 10;
+
     width: 44px;
     height: 44px;
+
     border: none;
     border-radius: 50%;
-    background: rgba(0,0,0,0.8);
+
+    background: rgba(0,0,0,.78);
     color: white;
-    font-size: 22px;
-    font-weight: 700;
+
+    font-size: 23px;
+    font-weight: bold;
+
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    transition: all 0.25s ease;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+
+    transition: .2s ease;
 }
+
 .site-close:hover {
-    background: #ef4444;
-    transform: rotate(90deg) scale(1.05);
+    background: #e00000;
+    transform: rotate(4deg) scale(1.05);
 }
+
 .site-frame {
     width: 100%;
     height: 100%;
+
     border: none;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-    .resource-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+/* =========================
+   MOBILE / TABLET
+========================= */
+
+@media (max-width: 850px) {
+
+    .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
 }
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
-    .navbar { padding: 14px 18px; }
-    .nav-links { display: none; }
-    .hero { padding: 60px 18px 28px; }
-    .welcome { font-size: 46px; letter-spacing: 1.5px; }
-    .hero p { font-size: 15px; }
-    .search-box { padding: 15px 20px; border-radius: 18px; }
-    .filters { gap: 8px; margin-bottom: 32px; }
-    .filter { padding: 9px 16px; font-size: 12px; }
-    .resource-grid { grid-template-columns: 1fr; gap: 18px; }
-    .card { min-height: auto; padding: 20px; border-radius: 24px; }
-    .card-image { height: 160px; }
-    .important { width: 92%; padding: 26px 20px; border-radius: 24px; }
-    .top-btn { right: 16px; bottom: 18px; width: 46px; height: 46px; }
-    .site-overlay { padding: 8px; }
-    .site-popup { width: 100%; height: 94vh; border-radius: 20px; }
-    .site-close { width: 40px; height: 40px; font-size: 20px; }
+
+    .navbar {
+        padding: 13px 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 55px 18px 32px;
+    }
+
+    .welcome {
+        font-size: 48px;
+        letter-spacing: 2px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .search-area {
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        padding: 15px 18px;
+        border-radius: 16px;
+    }
+
+    .filters {
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .filter {
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .card {
+        min-height: auto;
+        padding: 18px;
+        border-radius: 23px;
+    }
+
+    .card-image {
+        height: 160px;
+        border-radius: 17px;
+    }
+
+    .important {
+        width: 92%;
+        padding: 23px 18px;
+        border-radius: 21px;
+    }
+
+    .video-section {
+        width: 92%;
+        padding: 15px;
+        border-radius: 21px;
+    }
+
+    .video-container {
+        border-radius: 15px;
+    }
+
+    .top-btn {
+        right: 17px;
+        bottom: 18px;
+        width: 45px;
+        height: 45px;
+    }
+
+    /* WEBSITE POPUP MOBILE */
+
+    .site-overlay {
+        padding: 7px;
+    }
+
+    .site-popup {
+        width: 100%;
+        height: 94vh;
+        border-radius: 17px;
+    }
+
+    .site-close {
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
+    }
 }
 </style>
 </head>
+
 <body>
 
 <!-- NAVBAR -->
 <nav class="navbar">
     <div class="nav-content">
+
         <div class="logo">📚 Study Hub</div>
+
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#resources">Resources</a>
             <a href="#important">Important</a>
         </div>
+
     </div>
 </nav>
 
+
 <!-- HERO -->
 <section class="hero" id="home">
+
     <div class="welcome">WELCOME ❤️</div>
+
     <p>Your Personal Study Hub</p>
+
 </section>
+
 
 <!-- SEARCH -->
 <div class="search-area">
-    <input type="text" id="search" class="search-box" placeholder="🔎 Search your resources...">
+
+    <input
+        type="text"
+        id="search"
+        class="search-box"
+        placeholder="🔎 Search your resources..."
+    >
+
 </div>
+
 
 <!-- FILTERS -->
 <div class="filters">
-    <button class="filter active" onclick="filterCards('all', this)">All</button>
-    <button class="filter" onclick="filterCards('next', this)">Next Toppers</button>
-    <button class="filter" onclick="filterCards('mission', this)">Mission Jeet</button>
-    <button class="filter" onclick="filterCards('pw', this)">PW</button>
-    <button class="filter" onclick="filterCards('piott', this)">PI OTT</button>
+
+    <button class="filter active" onclick="filterCards('all', this)">
+        All
+    </button>
+
+    <button class="filter" onclick="filterCards('next', this)">
+        Next Toppers
+    </button>
+
+    <button class="filter" onclick="filterCards('mission', this)">
+        Mission Jeet
+    </button>
+
+    <button class="filter" onclick="filterCards('pw', this)">
+        PW
+    </button>
+
+    <button class="filter" onclick="filterCards('piott', this)">
+        PI OTT
+    </button>
+
 </div>
+
 
 <!-- RESOURCES -->
 <section class="container" id="resources">
+
     <div class="resource-grid" id="resourceGrid">
+
+
 
         <!-- LATENT EXCLUSIVE -->
         <div class="card latent" data-category="latent">
-            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">📁</div>
+
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
+                📁
+            </div>
+
             <h2>Latent Exclusive</h2>
+
             <p>Exclusive study video resource.</p>
-            <a href="javascript:void(0)" onclick="openLatentPopup()" class="launch">OPEN →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openLatentPopup()"
+                class="launch"
+            >
+                OPEN →
+            </a>
+
         </div>
+
 
         <!-- EXCLUSIVE MOVIES -->
         <div class="card latent" data-category="movies">
-            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">🎬</div>
+
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
+                🎬
+            </div>
+
             <h2>Exclusive Movies🐱‍🏍</h2>
+
             <p>Your exclusive movie collection.</p>
-            <a href="javascript:void(0)" onclick="openMoviesPopup()" class="launch">OPEN →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openMoviesPopup()"
+                class="launch"
+            >
+                OPEN →
+            </a>
+
         </div>
+
 
         <!-- NEXT TOPPERS 1 -->
         <div class="card next" data-category="next">
-            <img src="nexttoppers.png" class="card-image" loading="lazy" decoding="async" alt="Next Toppers">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Next Toppers"
+            >
+
             <h2>Next Toppers 1</h2>
+
             <p>Access your Next Toppers study resources.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('https://nexttoppers.therankforge.site/pages/key-success')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexttoppers.therankforge.site/pages/key-success')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
+
 
         <!-- NEXT TOPPERS 2 -->
         <div class="card next" data-category="next">
-            <img src="nexttoppers.png" class="card-image" loading="lazy" decoding="async" alt="Next Toppers">
+
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Next Toppers"
+            >
+
             <h2>Next Toppers 2</h2>
+
             <p>Explore another Next Toppers resource.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('https://nexthope.pages.dev/nt/')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/nt/')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
+
 
         <!-- MISSION JEET -->
         <div class="card mission" data-category="mission">
-            <img src="mission jeet.png" class="card-image" loading="lazy" decoding="async" alt="Mission Jeet">
+
+            <img
+                src="mission jeet.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Mission Jeet"
+            >
+
             <h2>Mission Jeet</h2>
+
             <p>Continue your Mission Jeet preparation.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('https://nexthope.pages.dev/mj/')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/mj/')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
+
 
         <!-- PW 1 -->
         <div class="card pw" data-category="pw">
-            <img src="pw.png" class="card-image" loading="lazy" decoding="async" alt="PW">
+
+            <img
+                src="pw.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PW"
+            >
+
             <h2>PW 1</h2>
+
             <p>Physics Wallah study resources.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('https://thescholarverse.site/study/pw/batches')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://thescholarverse.site/study/pw/batches')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
+
 
         <!-- PW 2 -->
         <div class="card pw" data-category="pw">
-            <img src="pw.png" class="card-image" loading="lazy" decoding="async" alt="PW">
+
+            <img
+                src="pw.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PW"
+            >
+
             <h2>PW 2</h2>
+
             <p>More PW learning resources.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
+
 
         <!-- PI OTT -->
         <div class="card piott" data-category="piott">
-            <img src="piott.png" class="card-image" loading="lazy" decoding="async" alt="PI OTT">
+
+            <img
+                src="piott.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PI OTT"
+            >
+
             <h2>PI OTT</h2>
+
             <p>Open your PI OTT study resource.</p>
-            <a href="javascript:void(0)" onclick="openSitePopup('')" class="launch">LAUNCH →</a>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
+
         </div>
 
+
     </div>
+
 </section>
+
 
 <!-- IMPORTANT -->
 <section class="important" id="important">
+
     <h2>⭐ Important Resources</h2>
-    <p>Keep your most useful study resources close and start learning faster.</p>
+
+    <p>
+        Keep your most useful study resources close and start learning faster.
+    </p>
+
 </section>
+
+
 
 <!-- FOOTER -->
 <footer>
     Made by Adavya with ♥
 </footer>
 
+
 <!-- BACK TO TOP -->
-<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    ↑
+</button>
+
 
 <!-- INSTAGRAM POPUP -->
 <div class="overlay" id="instaPopup">
+
     <div class="instagram-popup">
+
         <div class="insta-icon">📸</div>
+
         <h2>Follow on Instagram</h2>
+
         <p>@adavya.patel</p>
-        <a href="https://www.instagram.com/adavya.patel/" target="_blank" class="insta-follow">Follow on Instagram</a>
-        <button type="button" class="skip" id="skipBtn">Skip & Continue →</button>
+
+        <a
+            href="https://www.instagram.com/adavya.patel/"
+            target="_blank"
+            class="insta-follow"
+        >
+            Follow on Instagram
+        </a>
+
+        <button
+            class="skip"
+            onclick="closePopup()"
+        >
+            Skip & Continue →
+        </button>
+
     </div>
+
 </div>
+
+
 
 <!-- LATENT EXCLUSIVE FOLDER POPUP -->
 <div class="site-overlay" id="latentOverlay">
     <div class="site-popup">
-        <button class="site-close" onclick="closeLatentPopup()" aria-label="Close">✕</button>
+        <button
+            class="site-close"
+            onclick="closeLatentPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <!-- FOLDER VIEW -->
         <div id="latentFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
             <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
                 📁 Latent Exclusive
             </div>
+
             <div style="padding:22px; overflow:auto;">
-                <button type="button" onclick="openLatentVideo('🎬 Latent Netflix Episode 6', 'https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview')" style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;">
+                <!-- FILE 1 -->
+                <button
+                    type="button"
+                    onclick="openLatentVideo('🎬 Latent Netflix Episode 6', 'https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
                     <span style="font-size:34px;">🎬</span>
                     <span style="display:flex; flex-direction:column; gap:4px;">
                         <strong>Latent Netflix Episode 6</strong>
                         <small style="opacity:.65;">Video</small>
                     </span>
                 </button>
+
+                <!-- FUTURE FILES: Copy the FILE 1 button above and change its title + Google Drive preview link. -->
             </div>
         </div>
+
+        <!-- VIDEO VIEW -->
         <div id="latentVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
             <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
-                <button type="button" onclick="backToLatentFolder()" style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;">← Back</button>
+                <button
+                    type="button"
+                    onclick="backToLatentFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
                 <span id="latentVideoTitle">🎬 Latent Netflix Episode 6</span>
             </div>
-            <iframe id="latentVideoFrame" class="site-frame" src="" allow="autoplay" allowfullscreen></iframe>
+
+            <iframe
+                id="latentVideoFrame"
+                class="site-frame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 </div>
 
+
 <!-- EXCLUSIVE MOVIES FOLDER POPUP -->
 <div class="site-overlay" id="moviesOverlay" style="display:none;">
     <div class="site-popup">
-        <button class="site-close" onclick="closeMoviesPopup()" aria-label="Close">✕</button>
+        <button
+            class="site-close"
+            onclick="closeMoviesPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
         <div id="moviesFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
             <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
                 🎬 Mirzapur The Movie(2026)s
             </div>
+
             <div style="padding:22px; overflow:auto;">
-                <button type="button" onclick="openMovieVideo('🎬 Mirzapur The Movie(2026)', 'https://drive.google.com/file/d/15cS2mNaTob409Z6WXx2xa4UyBkmPccDy/preview')" style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;">
+                <!-- MOVIE 1 -->
+                <button
+                    type="button"
+                    onclick="openMovieVideo('🎬 Mirzapur The Movie(2026)', 'https://drive.google.com/file/d/15cS2mNaTob409Z6WXx2xa4UyBkmPccDy/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
                     <span style="font-size:34px;">🎬</span>
                     <span style="display:flex; flex-direction:column; gap:4px;">
                         <strong>Mirzapur The Movie(2026)</strong>
                         <small style="opacity:.65;">Movie</small>
                     </span>
                 </button>
-                <button type="button" onclick="openMovieVideo('🎬 TOXiC (2026)', 'https://drive.google.com/file/d/1W1-ivjBOSOzf3skgGk3c36Waiw4cfmQE/preview')" style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;">
-                    <span style="font-size:34px;">🎬</span>
-                    <span style="display:flex; flex-direction:column; gap:4px;">
-                        <strong>TOXiC (2026)</strong>
-                        <small style="opacity:0.65;">Movie</small>
-                    </span>
-                </button>
-                <button type="button" onclick="openMovieVideo('🎬 Brand New Day Spiderman (2026)', 'https://drive.google.com/file/d/1xc9RW-w5JxXohb0GkSCtKhmEEJUrHt8W/preview')" style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;">
-                    <span style="font-size:34px;">🎬</span>
-                    <span style="display:flex; flex-direction:column; gap:4px;">
-                        <strong>Brand New Day Spiderman (2026)</strong>
-                        <small style="opacity:0.65;">Movie</small>
-                    </span>
-                </button>
+<!-- MOVIE 2 -->
+<button
+    type="button"
+    onclick="openMovieVideo('🎬 TOXiC (2026)', 'https://drive.google.com/file/d/1W1-ivjBOSOzf3skgGk3c36Waiw4cfmQE/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
+>
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>TOXiC (2026)</strong>
+        <small style="opacity:0.65;">Movie</small>
+    </span>
+</button>
+                <button
+                type="button"
+    onclick="openMovieVideo('🎬 Brand New Day Spiderman (2026)', 'https://drive.google.com/file/d/1xc9RW-w5JxXohb0GkSCtKhmEEJUrHt8W/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
+>
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>Brand New Day Spiderman (2026)</strong>
+        <small style="opacity:0.65;">Movie</small>
+    </span>
+</button>
+                <!-- FUTURE MOVIES: Copy the MOVIE 1 button above and change its title + Google Drive preview link. -->
             </div>
         </div>
+
+        <!-- MOVIE VIEW -->
         <div id="movieVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
             <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
-                <button type="button" onclick="backToMoviesFolder()" style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;">← Back</button>
+                <button
+                    type="button"
+                    onclick="backToMoviesFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
                 <span id="movieVideoTitle">🎬 Mirzapur The Movie(2026)</span>
             </div>
-            <iframe id="movieVideoFrame" class="site-frame" src="" allow="autoplay" allowfullscreen></iframe>
+
+            <iframe
+                id="movieVideoFrame"
+                class="site-frame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 </div>
+
 
 <!-- WEBSITE LAUNCH POPUP -->
 <div class="site-overlay" id="siteOverlay">
+
     <div class="site-popup">
-        <button class="site-close" onclick="closeSitePopup()" aria-label="Close">✕</button>
-        <iframe id="siteFrame" class="site-frame" src="about:blank" allowfullscreen></iframe>
+
+        <button
+            class="site-close"
+            onclick="closeSitePopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <iframe
+            id="siteFrame"
+            class="site-frame"
+            src="about:blank"
+            allowfullscreen>
+        </iframe>
+
     </div>
+
 </div>
 
+
 <script>
-// ======================
-// INSTAGRAM POPUP - FIXED
-// ======================
-const instaPopup = document.getElementById("instaPopup");
-const skipBtn = document.getElementById("skipBtn");
 
-function closeInstaPopup() {
-    if (instaPopup) {
-        instaPopup.style.display = "none";
-        document.body.style.overflow = "";
-    }
+/* INSTAGRAM POPUP */
+function closePopup() {
+    document.getElementById("instaPopup").style.display = "none";
 }
 
-// Skip button click
-if (skipBtn) {
-    skipBtn.addEventListener("click", function() {
-        closeInstaPopup();
-    });
-}
 
-// Optional: Click outside popup to close
-if (instaPopup) {
-    instaPopup.addEventListener("click", function(e) {
-        if (e.target === instaPopup) {
-            closeInstaPopup();
-        }
-    });
-}
-
-// ======================
-// SEARCH
-// ======================
+/* SEARCH */
 const searchBox = document.getElementById("search");
 const cards = document.querySelectorAll(".card");
 
 searchBox.addEventListener("input", function () {
+
     const query = this.value.toLowerCase().trim();
+
     cards.forEach(card => {
+
         const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(query) ? "" : "none";
+
+        card.style.display =
+            text.includes(query) ? "" : "none";
+
     });
+
 });
 
-// ======================
-// FILTER
-// ======================
+
+/* FILTER */
 function filterCards(category, button) {
-    document.querySelectorAll(".filter").forEach(btn => btn.classList.remove("active"));
+
+    document.querySelectorAll(".filter").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
     button.classList.add("active");
+
     cards.forEach(card => {
-        if (category === "all" || card.dataset.category === category) {
+
+        if (category === "all") {
             card.style.display = "";
-        } else {
+        }
+
+        else if (card.dataset.category === category) {
+            card.style.display = "";
+        }
+
+        else {
             card.style.display = "none";
         }
+
     });
+
 }
 
-// ======================
-// BACK TO TOP
-// ======================
+
+/* BACK TO TOP */
 const topBtn = document.getElementById("topBtn");
 let scrollTicking = false;
+
 window.addEventListener("scroll", function () {
+
     if (!scrollTicking) {
         requestAnimationFrame(function () {
             topBtn.style.display = window.scrollY > 400 ? "block" : "none";
@@ -774,11 +1514,11 @@ window.addEventListener("scroll", function () {
         });
         scrollTicking = true;
     }
+
 }, { passive: true });
 
-// ======================
-// LATENT EXCLUSIVE
-// ======================
+
+/* LATENT EXCLUSIVE FOLDER */
 const latentOverlay = document.getElementById("latentOverlay");
 const latentFolderView = document.getElementById("latentFolderView");
 const latentVideoView = document.getElementById("latentVideoView");
@@ -792,26 +1532,28 @@ function openLatentPopup() {
     latentVideoFrame.src = "";
     document.body.style.overflow = "hidden";
 }
+
 function openLatentVideo(title, url) {
     latentVideoTitle.textContent = title;
     latentVideoFrame.src = url;
     latentFolderView.style.display = "none";
     latentVideoView.style.display = "flex";
 }
+
 function backToLatentFolder() {
     latentVideoFrame.src = "";
     latentVideoView.style.display = "none";
     latentFolderView.style.display = "flex";
 }
+
 function closeLatentPopup() {
     latentVideoFrame.src = "";
     latentOverlay.style.display = "none";
     document.body.style.overflow = "";
 }
 
-// ======================
-// EXCLUSIVE MOVIES
-// ======================
+/* ============================= */
+/* EXCLUSIVE MOVIES FOLDER */
 const moviesOverlay = document.getElementById("moviesOverlay");
 const moviesFolderView = document.getElementById("moviesFolderView");
 const movieVideoView = document.getElementById("movieVideoView");
@@ -825,37 +1567,47 @@ function openMoviesPopup() {
     movieVideoFrame.src = "";
     document.body.style.overflow = "hidden";
 }
+
 function openMovieVideo(title, url) {
     movieVideoTitle.textContent = title;
     movieVideoFrame.src = url;
     moviesFolderView.style.display = "none";
     movieVideoView.style.display = "flex";
 }
+
 function backToMoviesFolder() {
     movieVideoFrame.src = "";
     movieVideoView.style.display = "none";
     moviesFolderView.style.display = "flex";
 }
+
 function closeMoviesPopup() {
     movieVideoFrame.src = "";
     moviesOverlay.style.display = "none";
     document.body.style.overflow = "";
 }
 
-// ======================
-// WEBSITE LAUNCH
-// ======================
+/* WEBSITE LAUNCH POPUP - ADDED */
+/* ============================= */
+
 const siteOverlay = document.getElementById("siteOverlay");
 const siteFrame = document.getElementById("siteFrame");
 
 function openSitePopup(url) {
+
     siteFrame.src = url;
+
     siteOverlay.style.display = "flex";
+
     document.body.style.overflow = "hidden";
 }
+
 function closeSitePopup() {
+
     siteOverlay.style.display = "none";
+
     siteFrame.src = "about:blank";
+
     document.body.style.overflow = "";
 }
 </script>
