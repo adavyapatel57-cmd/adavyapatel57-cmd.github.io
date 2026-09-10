@@ -1450,12 +1450,6 @@ footer {
 /* INSTAGRAM POPUP */
 function closePopup() {
     document.getElementById("instaPopup").style.display = "none";
-
-    localStorage.setItem("instaPopupSeen", "true");
-}
-
-if (localStorage.getItem("instaPopupSeen") === "true") {
-    document.getElementById("instaPopup").style.display = "none";
 }
 
 
@@ -1619,4 +1613,3 @@ function closeSitePopup() {
 </script>
 </body>
 </html>
-
