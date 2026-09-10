@@ -989,6 +989,282 @@ footer {
     cursor: pointer;
     z-index: 2;
 }
+
+/* =========================================================
+   LIGHTWEIGHT 3D UI — PERFORMANCE FIRST
+   No WebGL / no heavy 3D libraries. Uses GPU-friendly transforms.
+========================================================= */
+
+:root {
+    --3d-rx: 0deg;
+    --3d-ry: 0deg;
+}
+
+/* Subtle depth in the whole page */
+body {
+    perspective: 1200px;
+}
+
+/* 3D floating atmosphere */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+body::before {
+    width: 280px;
+    height: 280px;
+    top: 18%;
+    left: -110px;
+    background: radial-gradient(circle, rgba(40,150,255,.14), transparent 68%);
+    animation: float3dA 10s ease-in-out infinite alternate;
+}
+
+body::after {
+    width: 340px;
+    height: 340px;
+    right: -140px;
+    bottom: 8%;
+    background: radial-gradient(circle, rgba(0,210,255,.10), transparent 68%);
+    animation: float3dB 13s ease-in-out infinite alternate;
+}
+
+@keyframes float3dA {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(45px, 35px, 0); }
+}
+
+@keyframes float3dB {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-40px, -30px, 0); }
+}
+
+/* Navbar: subtle raised 3D surface */
+.navbar {
+    transform: translateZ(12px);
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.22),
+        0 2px 0 rgba(255,255,255,.04) inset;
+}
+
+/* Hero depth */
+.hero {
+    transform-style: preserve-3d;
+}
+
+.welcome {
+    transform: translateZ(35px);
+    will-change: transform;
+    text-shadow:
+        0 8px 0 rgba(0,70,150,.22),
+        0 18px 38px rgba(0,100,255,.20);
+}
+
+.hero p {
+    transform: translateZ(18px);
+}
+
+/* Raised 3D search field */
+.search-box {
+    transform: translateZ(8px);
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.20),
+        0 3px 0 rgba(255,255,255,.035) inset,
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* 3D filter buttons */
+.filter {
+    transform: translateZ(0);
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.16),
+        0 1px 0 rgba(255,255,255,.08) inset;
+}
+
+.filter:hover {
+    transform: translateY(-3px) translateZ(6px);
+}
+
+.filter:active {
+    transform: translateY(1px) translateZ(0);
+}
+
+/* Main 3D cards */
+.resource-grid {
+    perspective: 1400px;
+}
+
+.card {
+    transform-style: preserve-3d;
+    transform:
+        perspective(1000px)
+        rotateX(var(--3d-rx))
+        rotateY(var(--3d-ry))
+        translateY(0);
+    will-change: transform;
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.28),
+        0 7px 0 rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.card-image {
+    transform: translateZ(18px);
+    box-shadow:
+        0 10px 22px rgba(0,0,0,.15),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    will-change: transform;
+}
+
+.card h2 {
+    transform: translateZ(16px);
+}
+
+.card p {
+    transform: translateZ(10px);
+}
+
+.launch {
+    position: relative;
+    z-index: 3;
+    transform: translateZ(20px);
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.16),
+        0 1px 0 rgba(255,255,255,.10) inset;
+    will-change: transform;
+}
+
+.launch:hover {
+    transform: translateY(-3px) translateZ(24px);
+}
+
+.launch:active {
+    transform: translateY(1px) translateZ(16px);
+}
+
+/* 3D glass panels */
+.important,
+.video-section {
+    transform: translateZ(7px);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.24),
+        0 5px 0 rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* Back-to-top raised button */
+.top-btn {
+    transform: translateZ(20px);
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.30),
+        0 3px 0 rgba(0,0,0,.12);
+}
+
+.top-btn:hover {
+    transform: translateY(-4px) scale(1.04) translateZ(20px);
+}
+
+/* 3D-style popup entrance */
+.site-popup,
+.instagram-popup,
+.photo-popup-box {
+    transform-style: preserve-3d;
+}
+
+/* Keep iframe rendering stable */
+.site-frame,
+.video-container iframe {
+    transform: translateZ(0);
+}
+
+/* Desktop-only mouse depth. Mobile/tablet stays simple and smooth. */
+@media (min-width: 851px) and (hover: hover) and (pointer: fine) {
+    .card {
+        transition:
+            transform .16s ease-out,
+            box-shadow .28s ease,
+            border-color .28s ease;
+    }
+
+    .card:hover {
+        transform:
+            perspective(1000px)
+            rotateX(var(--3d-rx))
+            rotateY(var(--3d-ry))
+            translateY(-9px);
+    }
+
+    .hero .welcome {
+        transition: transform .12s ease-out;
+    }
+}
+
+/* Phones: remove tilt/depth calculations and keep everything light. */
+@media (max-width: 850px) {
+    body {
+        perspective: none;
+    }
+
+    body::before,
+    body::after {
+        animation: none;
+        opacity: .65;
+    }
+
+    .card {
+        transform: translateZ(0);
+        will-change: auto;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+    }
+
+    .card-image,
+    .card h2,
+    .card p,
+    .launch,
+    .important,
+    .video-section {
+        transform: none;
+    }
+
+    .welcome,
+    .hero p {
+        transform: none;
+    }
+}
+
+/* Accessibility + low-power mode */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .card {
+        transform: none !important;
+    }
+}
+
 </style>
 </head>
 
@@ -1667,6 +1943,59 @@ window.addEventListener("load", function () {
         openPhotoPopup();
     }, 500);
 });
+
+/* =========================================================
+   LIGHTWEIGHT 3D MOUSE DEPTH
+   Only runs on desktop with a real mouse.
+========================================================= */
+(function () {
+    const canTilt =
+        window.matchMedia("(min-width: 851px) and (hover: hover) and (pointer: fine)").matches &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!canTilt) return;
+
+    const cardElements = document.querySelectorAll(".card");
+    const heroWelcome = document.querySelector(".hero .welcome");
+
+    cardElements.forEach(card => {
+        card.addEventListener("pointermove", function (e) {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+
+            const rotateY = (x - 0.5) * 8;
+            const rotateX = (0.5 - y) * 8;
+
+            card.style.setProperty("--3d-rx", rotateX.toFixed(2) + "deg");
+            card.style.setProperty("--3d-ry", rotateY.toFixed(2) + "deg");
+        }, { passive: true });
+
+        card.addEventListener("pointerleave", function () {
+            card.style.setProperty("--3d-rx", "0deg");
+            card.style.setProperty("--3d-ry", "0deg");
+        }, { passive: true });
+    });
+
+    if (heroWelcome) {
+        const hero = document.querySelector(".hero");
+
+        hero.addEventListener("pointermove", function (e) {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            heroWelcome.style.transform =
+                "translate3d(" + (x * 10).toFixed(1) + "px," +
+                (y * 7).toFixed(1) + "px,35px)";
+        }, { passive: true });
+
+        hero.addEventListener("pointerleave", function () {
+            heroWelcome.style.transform = "translateZ(35px)";
+        }, { passive: true });
+    }
+})();
+
 </script>
 <!-- WELCOME PHOTO POPUP -->
 <div class="photo-popup" id="photoPopup">
