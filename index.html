@@ -26,10 +26,8 @@ body {
     background:
         radial-gradient(circle at 15% 10%, rgba(0, 140, 255, .35), transparent 28%),
         radial-gradient(circle at 85% 25%, rgba(0, 90, 255, .28), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(0, 180, 255, .18), transparent 35%),
         linear-gradient(135deg, #020817, #061a3a 45%, #03122b 100%);
 
-    background-attachment: fixed;
     overflow-x: hidden;
 }
 
@@ -45,9 +43,9 @@ body {
     width: 100%;
     padding: 15px 6%;
 
-    background: rgba(2, 12, 30, .78);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(2, 12, 30, .88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     border-bottom: 1px solid rgba(255,255,255,.12);
     box-shadow: 0 8px 30px rgba(0,0,0,.18);
@@ -112,18 +110,22 @@ body {
     background-clip: text;
     color: transparent;
 
-    text-shadow: 0 10px 35px rgba(0,120,255,.22);
+    text-shadow:
+        0 10px 35px rgba(0,120,255,.22),
+        0 0 25px rgba(0,150,255,.25);
 
-    animation: welcomeGlow 3s ease-in-out infinite alternate;
+    animation: welcomeGlow 1.4s ease-out;
 }
 
 @keyframes welcomeGlow {
     from {
-        filter: drop-shadow(0 0 5px rgba(0,150,255,.15));
+        opacity: 0;
+        transform: translateY(8px);
     }
 
     to {
-        filter: drop-shadow(0 0 20px rgba(0,150,255,.35));
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -152,9 +154,9 @@ body {
 
     outline: none;
 
-    background: rgba(255,255,255,.09);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255,255,255,.10);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
     color: white;
     font-size: 16px;
@@ -197,8 +199,8 @@ body {
 .filter {
     border: 1px solid rgba(255,255,255,.16);
 
-    background: rgba(255,255,255,.07);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(5px);
 
     color: rgba(255,255,255,.88);
 
@@ -282,16 +284,15 @@ body {
     content: "";
 
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
 
-    top: -90px;
-    right: -70px;
+    top: -100px;
+    right: -80px;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,.12);
-    filter: blur(5px);
+    background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%);
 
     pointer-events: none;
 }
@@ -304,7 +305,7 @@ body {
     position: absolute;
 
     top: -120%;
-    left: -100%;
+    left: -35%;
 
     width: 65%;
     height: 350%;
@@ -316,25 +317,27 @@ body {
         transparent
     );
 
-    transform: rotate(25deg);
+    transform: rotate(25deg) translateX(-160%);
 
-    transition: left .65s ease;
+    transition: transform .65s ease;
 
     pointer-events: none;
+    will-change: transform;
 }
 
 .card:hover::before {
-    left: 145%;
+    transform: rotate(25deg) translateX(160%);
 }
 
 .card:hover {
     transform: translateY(-9px);
 
     box-shadow:
-        0 25px 55px rgba(0,0,0,.35),
-        0 0 25px rgba(0,130,255,.10);
+        0 18px 34px rgba(0,0,0,.32),
+        0 0 18px rgba(0,130,255,.10);
 
     border-color: rgba(255,255,255,.28);
+    will-change: transform;
 }
 
 /* =========================
@@ -485,15 +488,15 @@ body {
 
     border-radius: 24px;
 
-    background: rgba(255,255,255,.075);
+    background: rgba(255,255,255,.09);
 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
     border: 1px solid rgba(255,255,255,.14);
 
     box-shadow:
-        0 18px 45px rgba(0,0,0,.20),
+        0 18px 35px rgba(0,0,0,.20),
         inset 0 1px 0 rgba(255,255,255,.08);
 }
 
@@ -517,10 +520,10 @@ body {
 
     padding: 22px;
 
-    background: rgba(255,255,255,.075);
+    background: rgba(255,255,255,.09);
 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
     border: 1px solid rgba(255,255,255,.14);
 
@@ -935,336 +938,6 @@ footer {
         font-size: 21px;
     }
 }
-    .photo-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-}
-
-.photo-popup.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.photo-popup-box {
-    position: relative;
-    width: min(90%, 700px);
-    transform: translateX(-120vw);
-    transition: transform 0.8s cubic-bezier(.22, 1, .36, 1);
-}
-
-.photo-popup.show .photo-popup-box {
-    transform: translateX(0);
-}
-
-.photo-popup-box img {
-    width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    display: block;
-    border-radius: 18px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-}
-
-.photo-popup-close {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 50%;
-    background: #fff;
-    color: #111;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 2;
-}
-
-/* =========================================================
-   LIGHTWEIGHT 3D UI — PERFORMANCE FIRST
-   No WebGL / no heavy 3D libraries. Uses GPU-friendly transforms.
-========================================================= */
-
-:root {
-    --3d-rx: 0deg;
-    --3d-ry: 0deg;
-}
-
-/* Subtle depth in the whole page */
-body {
-    perspective: 1200px;
-}
-
-/* 3D floating atmosphere */
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    pointer-events: none;
-    z-index: -1;
-    border-radius: 50%;
-    transform: translateZ(0);
-    will-change: transform;
-}
-
-body::before {
-    width: 280px;
-    height: 280px;
-    top: 18%;
-    left: -110px;
-    background: radial-gradient(circle, rgba(40,150,255,.14), transparent 68%);
-    animation: float3dA 10s ease-in-out infinite alternate;
-}
-
-body::after {
-    width: 340px;
-    height: 340px;
-    right: -140px;
-    bottom: 8%;
-    background: radial-gradient(circle, rgba(0,210,255,.10), transparent 68%);
-    animation: float3dB 13s ease-in-out infinite alternate;
-}
-
-@keyframes float3dA {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(45px, 35px, 0); }
-}
-
-@keyframes float3dB {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(-40px, -30px, 0); }
-}
-
-/* Navbar: subtle raised 3D surface */
-.navbar {
-    transform: translateZ(12px);
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.22),
-        0 2px 0 rgba(255,255,255,.04) inset;
-}
-
-/* Hero depth */
-.hero {
-    transform-style: preserve-3d;
-}
-
-.welcome {
-    transform: translateZ(35px);
-    will-change: transform;
-    text-shadow:
-        0 8px 0 rgba(0,70,150,.22),
-        0 18px 38px rgba(0,100,255,.20);
-}
-
-.hero p {
-    transform: translateZ(18px);
-}
-
-/* Raised 3D search field */
-.search-box {
-    transform: translateZ(8px);
-    box-shadow:
-        0 14px 35px rgba(0,0,0,.20),
-        0 3px 0 rgba(255,255,255,.035) inset,
-        inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-/* 3D filter buttons */
-.filter {
-    transform: translateZ(0);
-    box-shadow:
-        0 5px 14px rgba(0,0,0,.16),
-        0 1px 0 rgba(255,255,255,.08) inset;
-}
-
-.filter:hover {
-    transform: translateY(-3px) translateZ(6px);
-}
-
-.filter:active {
-    transform: translateY(1px) translateZ(0);
-}
-
-/* Main 3D cards */
-.resource-grid {
-    perspective: 1400px;
-}
-
-.card {
-    transform-style: preserve-3d;
-    transform:
-        perspective(1000px)
-        rotateX(var(--3d-rx))
-        rotateY(var(--3d-ry))
-        translateY(0);
-    will-change: transform;
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.28),
-        0 7px 0 rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.card > * {
-    position: relative;
-    z-index: 2;
-}
-
-.card-image {
-    transform: translateZ(18px);
-    box-shadow:
-        0 10px 22px rgba(0,0,0,.15),
-        inset 0 1px 0 rgba(255,255,255,.08);
-    will-change: transform;
-}
-
-.card h2 {
-    transform: translateZ(16px);
-}
-
-.card p {
-    transform: translateZ(10px);
-}
-
-.launch {
-    position: relative;
-    z-index: 3;
-    transform: translateZ(20px);
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.16),
-        0 1px 0 rgba(255,255,255,.10) inset;
-    will-change: transform;
-}
-
-.launch:hover {
-    transform: translateY(-3px) translateZ(24px);
-}
-
-.launch:active {
-    transform: translateY(1px) translateZ(16px);
-}
-
-/* 3D glass panels */
-.important,
-.video-section {
-    transform: translateZ(7px);
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.24),
-        0 5px 0 rgba(0,0,0,.08),
-        inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-/* Back-to-top raised button */
-.top-btn {
-    transform: translateZ(20px);
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.30),
-        0 3px 0 rgba(0,0,0,.12);
-}
-
-.top-btn:hover {
-    transform: translateY(-4px) scale(1.04) translateZ(20px);
-}
-
-/* 3D-style popup entrance */
-.site-popup,
-.instagram-popup,
-.photo-popup-box {
-    transform-style: preserve-3d;
-}
-
-/* Keep iframe rendering stable */
-.site-frame,
-.video-container iframe {
-    transform: translateZ(0);
-}
-
-/* Desktop-only mouse depth. Mobile/tablet stays simple and smooth. */
-@media (min-width: 851px) and (hover: hover) and (pointer: fine) {
-    .card {
-        transition:
-            transform .16s ease-out,
-            box-shadow .28s ease,
-            border-color .28s ease;
-    }
-
-    .card:hover {
-        transform:
-            perspective(1000px)
-            rotateX(var(--3d-rx))
-            rotateY(var(--3d-ry))
-            translateY(-9px);
-    }
-
-    .hero .welcome {
-        transition: transform .12s ease-out;
-    }
-}
-
-/* Phones: remove tilt/depth calculations and keep everything light. */
-@media (max-width: 850px) {
-    body {
-        perspective: none;
-    }
-
-    body::before,
-    body::after {
-        animation: none;
-        opacity: .65;
-    }
-
-    .card {
-        transform: translateZ(0);
-        will-change: auto;
-    }
-
-    .card:hover {
-        transform: translateY(-6px);
-    }
-
-    .card-image,
-    .card h2,
-    .card p,
-    .launch,
-    .important,
-    .video-section {
-        transform: none;
-    }
-
-    .welcome,
-    .hero p {
-        transform: none;
-    }
-}
-
-/* Accessibility + low-power mode */
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-
-    .card {
-        transform: none !important;
-    }
-}
-
 </style>
 </head>
 
@@ -1392,6 +1065,8 @@ body::after {
             <img
                 src="nexttoppers.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="Next Toppers"
             >
 
@@ -1416,6 +1091,8 @@ body::after {
             <img
                 src="nexttoppers.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="Next Toppers"
             >
 
@@ -1440,6 +1117,8 @@ body::after {
             <img
                 src="mission jeet.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="Mission Jeet"
             >
 
@@ -1464,6 +1143,8 @@ body::after {
             <img
                 src="pw.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="PW"
             >
 
@@ -1488,6 +1169,8 @@ body::after {
             <img
                 src="pw.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="PW"
             >
 
@@ -1512,6 +1195,8 @@ body::after {
             <img
                 src="piott.png"
                 class="card-image"
+                loading="lazy"
+                decoding="async"
                 alt="PI OTT"
             >
 
@@ -1823,17 +1508,20 @@ function filterCards(category, button) {
 
 
 /* BACK TO TOP */
+const topBtn = document.getElementById("topBtn");
+let scrollTicking = false;
+
 window.addEventListener("scroll", function () {
 
-    const btn = document.getElementById("topBtn");
-
-    if (window.scrollY > 400) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
+    if (!scrollTicking) {
+        requestAnimationFrame(function () {
+            topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+            scrollTicking = false;
+        });
+        scrollTicking = true;
     }
 
-});
+}, { passive: true });
 
 
 /* LATENT EXCLUSIVE FOLDER */
@@ -1928,95 +1616,7 @@ function closeSitePopup() {
 
     document.body.style.overflow = "";
 }
-function openPhotoPopup() {
-    document.getElementById("photoPopup").classList.add("show");
-    document.body.style.overflow = "hidden";
-}
-
-function closePhotoPopup() {
-    document.getElementById("photoPopup").classList.remove("show");
-    document.body.style.overflow = "";
-}
-
-window.addEventListener("load", function () {
-    setTimeout(function () {
-        openPhotoPopup();
-    }, 500);
-});
-
-/* =========================================================
-   LIGHTWEIGHT 3D MOUSE DEPTH
-   Only runs on desktop with a real mouse.
-========================================================= */
-(function () {
-    const canTilt =
-        window.matchMedia("(min-width: 851px) and (hover: hover) and (pointer: fine)").matches &&
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!canTilt) return;
-
-    const cardElements = document.querySelectorAll(".card");
-    const heroWelcome = document.querySelector(".hero .welcome");
-
-    cardElements.forEach(card => {
-        card.addEventListener("pointermove", function (e) {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width;
-            const y = (e.clientY - rect.top) / rect.height;
-
-            const rotateY = (x - 0.5) * 8;
-            const rotateX = (0.5 - y) * 8;
-
-            card.style.setProperty("--3d-rx", rotateX.toFixed(2) + "deg");
-            card.style.setProperty("--3d-ry", rotateY.toFixed(2) + "deg");
-        }, { passive: true });
-
-        card.addEventListener("pointerleave", function () {
-            card.style.setProperty("--3d-rx", "0deg");
-            card.style.setProperty("--3d-ry", "0deg");
-        }, { passive: true });
-    });
-
-    if (heroWelcome) {
-        const hero = document.querySelector(".hero");
-
-        hero.addEventListener("pointermove", function (e) {
-            const rect = hero.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-            heroWelcome.style.transform =
-                "translate3d(" + (x * 10).toFixed(1) + "px," +
-                (y * 7).toFixed(1) + "px,35px)";
-        }, { passive: true });
-
-        hero.addEventListener("pointerleave", function () {
-            heroWelcome.style.transform = "translateZ(35px)";
-        }, { passive: true });
-    }
-})();
-
 </script>
-<!-- WELCOME PHOTO POPUP -->
-<div class="photo-popup" id="photoPopup">
-
-    <div class="photo-popup-box">
-
-        <button
-            class="photo-popup-close"
-            onclick="closePhotoPopup()"
-            aria-label="Close"
-        >
-            ×
-        </button>
-
-        <img
-            src="aeroplane.png"
-            alt="Welcome"
-        >
-
-    </div>
-
-</div>
 </body>
 </html>
+
