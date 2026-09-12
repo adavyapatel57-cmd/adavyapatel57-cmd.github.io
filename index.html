@@ -1525,15 +1525,6 @@ function loginWithGoogle() {
 }
 document.getElementById("loginBtn").addEventListener("click", loginWithGoogle);
 auth.getRedirectResult()
-    auth.onAuthStateChanged(function(user) {
-    const loginBtn = document.getElementById("loginBtn");
-
-    if (user) {
-        loginBtn.textContent = user.displayName || "Logged In";
-    } else {
-        loginBtn.textContent = "Login / Sign Up";
-    }
-});
     .then((result) => {
         if (result.user) {
             console.log("Login successful:", result.user.displayName);
@@ -1543,6 +1534,16 @@ auth.getRedirectResult()
         console.error("Google Login Error:", error);
         alert("Login failed: " + error.code);
     });
+
+auth.onAuthStateChanged(function(user) {
+    const loginBtn = document.getElementById("loginBtn");
+
+    if (user) {
+        loginBtn.textContent = user.displayName || "Logged In";
+    } else {
+        loginBtn.textContent = "Login / Sign Up";
+    }
+});
     function refreshSiteFrame() {
     const frame = document.getElementById("siteFrame");
 
