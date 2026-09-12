@@ -1502,9 +1502,22 @@ footer {
 
 </div>
 
-
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
 <script>
 function refreshSiteFrame() {
+    const firebaseConfig = {
+    apiKey: "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
+    authDomain: "adavya-study-hub.firebaseapp.com",
+    projectId: "adavya-study-hub",
+    storageBucket: "adavya-study-hub.firebasestorage.app",
+    messagingSenderId: "1087086249986",
+    appId: "1:1087086249986:web:41ec61723171aa165abf1b"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
     const frame = document.getElementById("siteFrame");
 
     if (frame) {
