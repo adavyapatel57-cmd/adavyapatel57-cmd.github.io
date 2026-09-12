@@ -1506,214 +1506,733 @@ footer {
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
 <script>
 
+    /* =========================
+       FIREBASE LOGIN SYSTEM
+    ========================= */
+
     const firebaseConfig = {
-    apiKey: "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
-    authDomain: "adavya-study-hub.firebaseapp.com",
-    projectId: "adavya-study-hub",
-    storageBucket: "adavya-study-hub.firebasestorage.app",
-    messagingSenderId: "1087086249986",
-    appId: "1:1087086249986:web:41ec61723171aa165abf1b"
-};
+        apiKey: "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
+        authDomain: "adavya-study-hub.firebaseapp.com",
+        projectId: "adavya-study-hub",
+        storageBucket: "adavya-study-hub.firebasestorage.app",
+        messagingSenderId: "1087086249986",
+        appId: "1:1087086249986:web:41ec61723171aa165abf1b"
+    };
 
-firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
-   const googleProvider = new firebase.auth.GoogleAuthProvider();
+    const auth = firebase.auth();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-function loginWithGoogle() {
-    auth.signInWithRedirect(googleProvider);
-}
-document.getElementById("loginBtn").addEventListener("click", loginWithGoogle);
-auth.getRedirectResult()
-    .then((result) => {
-        if (result.user) {
-            console.log("Login successful:", result.user.displayName);
-        }
-    })
-    .catch((error) => {
-        console.error("Google Login Error:", error);
-        alert("Login failed: " + error.code);
-    });
-
-auth.onAuthStateChanged(function(user) {
     const loginBtn = document.getElementById("loginBtn");
 
-    if (user) {
-        loginBtn.textContent = user.displayName || "Logged In";
-    } else {
-        loginBtn.textContent = "Login / Sign Up";
+
+    /* =========================
+       AUTH ICONS
+    ========================= */
+
+    const userIcon = `
+        <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="vertical-align:-3px; margin-right:6px;"
+        >
+            <path d="M20 21a8 8 0 0 0-16 0"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+    `;
+
+    const logoutIcon = `
+        <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="vertical-align:-3px; margin-right:6px;"
+        >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+    `;
+
+
+    /* =========================
+       GOOGLE LOGIN
+    ========================= */
+
+    function loginWithGoogle() {
+
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+
+                auth.signInWithRedirect(googleProvider);
+
+            })
+            .catch((error) => {
+
+                console.error("Login Error:", error);
+
+                alert("Login failed: " + error.code);
+
+            });
     }
-});
-    function refreshSiteFrame() {
-    const frame = document.getElementById("siteFrame");
-
-    if (frame) {
-        frame.contentWindow.location.reload();
-    }
-}
-/* INSTAGRAM POPUP */
-function closePopup() {
-    document.getElementById("instaPopup").style.display = "none";
-}
 
 
-/* SEARCH */
-const searchBox = document.getElementById("search");
-const cards = document.querySelectorAll(".card");
+    /* =========================
+       REDIRECT RESULT
+    ========================= */
 
-searchBox.addEventListener("input", function () {
+    auth.getRedirectResult()
+        .then((result) => {
 
-    const query = this.value.toLowerCase().trim();
+            if (result.user) {
 
-    cards.forEach(card => {
+                console.log(
+                    "Login successful:",
+                    result.user.displayName
+                );
 
-        const text = card.innerText.toLowerCase();
+            }
 
-        card.style.display =
-            text.includes(query) ? "" : "none";
+        })
+        .catch((error) => {
 
-    });
+            console.error(
+                "Google Login Error:",
+                error
+            );
 
-});
+            alert(
+                "Login failed: " + error.code
+            );
 
-
-/* FILTER */
-function filterCards(category, button) {
-
-    document.querySelectorAll(".filter").forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-    cards.forEach(card => {
-
-        if (category === "all") {
-            card.style.display = "";
-        }
-
-        else if (card.dataset.category === category) {
-            card.style.display = "";
-        }
-
-        else {
-            card.style.display = "none";
-        }
-
-    });
-
-}
-
-
-/* BACK TO TOP */
-const topBtn = document.getElementById("topBtn");
-let scrollTicking = false;
-
-window.addEventListener("scroll", function () {
-
-    if (!scrollTicking) {
-        requestAnimationFrame(function () {
-            topBtn.style.display = window.scrollY > 400 ? "block" : "none";
-            scrollTicking = false;
         });
-        scrollTicking = true;
+
+
+    /* =========================
+       LOGIN / LOGOUT BUTTON
+    ========================= */
+
+    loginBtn.addEventListener("click", function () {
+
+        if (auth.currentUser) {
+
+            auth.signOut()
+                .then(() => {
+
+                    loginBtn.innerHTML =
+                        "Login / Sign Up";
+
+                })
+                .catch((error) => {
+
+                    console.error(
+                        "Logout Error:",
+                        error
+                    );
+
+                });
+
+        } else {
+
+            loginWithGoogle();
+
+        }
+
+    });
+
+
+    /* =========================
+       AUTH STATE
+    ========================= */
+
+    auth.onAuthStateChanged(function (user) {
+
+        if (user) {
+
+            const name =
+                user.displayName ||
+                user.email ||
+                "Account";
+
+            loginBtn.innerHTML =
+                userIcon +
+                name +
+                " • " +
+                logoutIcon +
+                "Logout";
+
+
+            /* =========================
+               OPEN PENDING CONTENT
+            ========================= */
+
+            const pendingAction =
+                sessionStorage.getItem(
+                    "pendingAction"
+                );
+
+            if (pendingAction) {
+
+                sessionStorage.removeItem(
+                    "pendingAction"
+                );
+
+                let action;
+
+                try {
+
+                    action =
+                        JSON.parse(pendingAction);
+
+                } catch (error) {
+
+                    console.error(
+                        "Pending action error:",
+                        error
+                    );
+
+                    return;
+
+                }
+
+
+                setTimeout(function () {
+
+                    /* EXTERNAL WEBSITE */
+                    if (
+                        action.type ===
+                        "site"
+                    ) {
+
+                        openSitePopup(
+                            action.url
+                        );
+
+                    }
+
+
+                    /* LATENT */
+                    else if (
+                        action.type ===
+                        "latent"
+                    ) {
+
+                        openLatentPopup();
+
+                    }
+
+
+                    /* MOVIES */
+                    else if (
+                        action.type ===
+                        "movies"
+                    ) {
+
+                        openMoviesPopup();
+
+                    }
+
+                }, 400);
+
+            }
+
+        } else {
+
+            loginBtn.innerHTML =
+                "Login / Sign Up";
+
+        }
+
+    });
+
+
+    /* =========================
+       REFRESH SITE FRAME
+       DON'T REMOVE
+    ========================= */
+
+    function refreshSiteFrame() {
+
+        const frame =
+            document.getElementById(
+                "siteFrame"
+            );
+
+        if (frame) {
+
+            frame.contentWindow.location.reload();
+
+        }
+
     }
 
-}, { passive: true });
+
+    /* =========================
+       INSTAGRAM POPUP
+    ========================= */
+
+    function closePopup() {
+
+        document.getElementById(
+            "instaPopup"
+        ).style.display = "none";
+
+    }
 
 
-/* LATENT EXCLUSIVE FOLDER */
-const latentOverlay = document.getElementById("latentOverlay");
-const latentFolderView = document.getElementById("latentFolderView");
-const latentVideoView = document.getElementById("latentVideoView");
-const latentVideoFrame = document.getElementById("latentVideoFrame");
-const latentVideoTitle = document.getElementById("latentVideoTitle");
+    /* =========================
+       SEARCH
+    ========================= */
 
-function openLatentPopup() {
-    latentOverlay.style.display = "flex";
-    latentFolderView.style.display = "flex";
-    latentVideoView.style.display = "none";
-    latentVideoFrame.src = "";
-    document.body.style.overflow = "hidden";
-}
+    const searchBox =
+        document.getElementById("search");
 
-function openLatentVideo(title, url) {
-    latentVideoTitle.textContent = title;
-    latentVideoFrame.src = url;
-    latentFolderView.style.display = "none";
-    latentVideoView.style.display = "flex";
-}
+    const cards =
+        document.querySelectorAll(".card");
 
-function backToLatentFolder() {
-    latentVideoFrame.src = "";
-    latentVideoView.style.display = "none";
-    latentFolderView.style.display = "flex";
-}
 
-function closeLatentPopup() {
-    latentVideoFrame.src = "";
-    latentOverlay.style.display = "none";
-    document.body.style.overflow = "";
-}
+    searchBox.addEventListener(
+        "input",
+        function () {
 
-/* ============================= */
-/* EXCLUSIVE MOVIES FOLDER */
-const moviesOverlay = document.getElementById("moviesOverlay");
-const moviesFolderView = document.getElementById("moviesFolderView");
-const movieVideoView = document.getElementById("movieVideoView");
-const movieVideoFrame = document.getElementById("movieVideoFrame");
-const movieVideoTitle = document.getElementById("movieVideoTitle");
+            const query =
+                this.value
+                    .toLowerCase()
+                    .trim();
 
-function openMoviesPopup() {
-    moviesOverlay.style.display = "flex";
-    moviesFolderView.style.display = "flex";
-    movieVideoView.style.display = "none";
-    movieVideoFrame.src = "";
-    document.body.style.overflow = "hidden";
-}
+            cards.forEach(function (card) {
 
-function openMovieVideo(title, url) {
-    movieVideoTitle.textContent = title;
-    movieVideoFrame.src = url;
-    moviesFolderView.style.display = "none";
-    movieVideoView.style.display = "flex";
-}
+                const text =
+                    card.innerText
+                        .toLowerCase();
 
-function backToMoviesFolder() {
-    movieVideoFrame.src = "";
-    movieVideoView.style.display = "none";
-    moviesFolderView.style.display = "flex";
-}
+                card.style.display =
+                    text.includes(query)
+                        ? ""
+                        : "none";
 
-function closeMoviesPopup() {
-    movieVideoFrame.src = "";
-    moviesOverlay.style.display = "none";
-    document.body.style.overflow = "";
-}
+            });
 
-/* WEBSITE LAUNCH POPUP - ADDED */
-/* ============================= */
+        }
+    );
 
-const siteOverlay = document.getElementById("siteOverlay");
-const siteFrame = document.getElementById("siteFrame");
 
-function openSitePopup(url) {
+    /* =========================
+       FILTER
+    ========================= */
 
-    siteFrame.src = url;
+    function filterCards(
+        category,
+        button
+    ) {
 
-    siteOverlay.style.display = "flex";
+        document
+            .querySelectorAll(".filter")
+            .forEach(function (btn) {
 
-    document.body.style.overflow = "hidden";
-}
+                btn.classList.remove(
+                    "active"
+                );
 
-function closeSitePopup() {
+            });
 
-    siteOverlay.style.display = "none";
 
-    siteFrame.src = "about:blank";
+        button.classList.add(
+            "active"
+        );
 
-    document.body.style.overflow = "";
-}
+
+        cards.forEach(function (card) {
+
+            if (
+                category === "all"
+            ) {
+
+                card.style.display =
+                    "";
+
+            }
+
+            else if (
+                card.dataset.category ===
+                category
+            ) {
+
+                card.style.display =
+                    "";
+
+            }
+
+            else {
+
+                card.style.display =
+                    "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================
+       BACK TO TOP
+    ========================= */
+
+    const topBtn =
+        document.getElementById(
+            "topBtn"
+        );
+
+    let scrollTicking = false;
+
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (!scrollTicking) {
+
+                requestAnimationFrame(
+                    function () {
+
+                        topBtn.style.display =
+                            window.scrollY > 400
+                                ? "block"
+                                : "none";
+
+                        scrollTicking = false;
+
+                    }
+                );
+
+                scrollTicking = true;
+
+            }
+
+        },
+        { passive: true }
+    );
+
+
+    /* =========================
+       LOGIN PROTECTION HELPER
+    ========================= */
+
+    function requireLogin(action) {
+
+        /* ALREADY LOGGED IN */
+        if (auth.currentUser) {
+
+            return true;
+
+        }
+
+
+        /* SAVE REQUESTED ACTION */
+        sessionStorage.setItem(
+            "pendingAction",
+            JSON.stringify(action)
+        );
+
+
+        /* OPEN GOOGLE LOGIN */
+        loginWithGoogle();
+
+
+        return false;
+
+    }
+
+
+    /* =========================
+       LATENT EXCLUSIVE FOLDER
+    ========================= */
+
+    const latentOverlay =
+        document.getElementById(
+            "latentOverlay"
+        );
+
+    const latentFolderView =
+        document.getElementById(
+            "latentFolderView"
+        );
+
+    const latentVideoView =
+        document.getElementById(
+            "latentVideoView"
+        );
+
+    const latentVideoFrame =
+        document.getElementById(
+            "latentVideoFrame"
+        );
+
+    const latentVideoTitle =
+        document.getElementById(
+            "latentVideoTitle"
+        );
+
+
+    function openLatentPopup() {
+
+        if (
+            !requireLogin({
+                type: "latent"
+            })
+        ) {
+
+            return;
+
+        }
+
+
+        latentOverlay.style.display =
+            "flex";
+
+        latentFolderView.style.display =
+            "flex";
+
+        latentVideoView.style.display =
+            "none";
+
+        latentVideoFrame.src =
+            "";
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function openLatentVideo(
+        title,
+        url
+    ) {
+
+        latentVideoTitle.textContent =
+            title;
+
+        latentVideoFrame.src =
+            url;
+
+        latentFolderView.style.display =
+            "none";
+
+        latentVideoView.style.display =
+            "flex";
+
+    }
+
+
+    function backToLatentFolder() {
+
+        latentVideoFrame.src =
+            "";
+
+        latentVideoView.style.display =
+            "none";
+
+        latentFolderView.style.display =
+            "flex";
+
+    }
+
+
+    function closeLatentPopup() {
+
+        latentVideoFrame.src =
+            "";
+
+        latentOverlay.style.display =
+            "none";
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =========================
+       EXCLUSIVE MOVIES
+    ========================= */
+
+    const moviesOverlay =
+        document.getElementById(
+            "moviesOverlay"
+        );
+
+    const moviesFolderView =
+        document.getElementById(
+            "moviesFolderView"
+        );
+
+    const movieVideoView =
+        document.getElementById(
+            "movieVideoView"
+        );
+
+    const movieVideoFrame =
+        document.getElementById(
+            "movieVideoFrame"
+        );
+
+    const movieVideoTitle =
+        document.getElementById(
+            "movieVideoTitle"
+        );
+
+
+    function openMoviesPopup() {
+
+        if (
+            !requireLogin({
+                type: "movies"
+            })
+        ) {
+
+            return;
+
+        }
+
+
+        moviesOverlay.style.display =
+            "flex";
+
+        moviesFolderView.style.display =
+            "flex";
+
+        movieVideoView.style.display =
+            "none";
+
+        movieVideoFrame.src =
+            "";
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function openMovieVideo(
+        title,
+        url
+    ) {
+
+        movieVideoTitle.textContent =
+            title;
+
+        movieVideoFrame.src =
+            url;
+
+        moviesFolderView.style.display =
+            "none";
+
+        movieVideoView.style.display =
+            "flex";
+
+    }
+
+
+    function backToMoviesFolder() {
+
+        movieVideoFrame.src =
+            "";
+
+        movieVideoView.style.display =
+            "none";
+
+        moviesFolderView.style.display =
+            "flex";
+
+    }
+
+
+    function closeMoviesPopup() {
+
+        movieVideoFrame.src =
+            "";
+
+        moviesOverlay.style.display =
+            "none";
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =========================
+       WEBSITE LAUNCH POPUP
+    ========================= */
+
+    const siteOverlay =
+        document.getElementById(
+            "siteOverlay"
+        );
+
+    const siteFrame =
+        document.getElementById(
+            "siteFrame"
+        );
+
+
+    function openSitePopup(url) {
+
+        /* LOGIN REQUIRED */
+
+        if (
+            !requireLogin({
+                type: "site",
+                url: url
+            })
+        ) {
+
+            return;
+
+        }
+
+
+        /* OPEN WEBSITE */
+
+        siteFrame.src =
+            url;
+
+        siteOverlay.style.display =
+            "flex";
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function closeSitePopup() {
+
+        siteOverlay.style.display =
+            "none";
+
+        siteFrame.src =
+            "about:blank";
+
+        document.body.style.overflow =
+            "";
+
+    }
+
 </script>
 </body>
 </html>
