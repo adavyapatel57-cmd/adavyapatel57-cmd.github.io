@@ -1658,104 +1658,459 @@ footer {
     ========================= */
 
     auth.onAuthStateChanged(function (user) {
+function refreshSiteFrame() {
 
-        if (user) {
+    const frame =
+        document.getElementById("siteFrame");
 
-            const name =
-                user.displayName ||
-                user.email ||
-                "Account";
+    if (frame) {
+        frame.contentWindow.location.reload();
+    }
 
-            loginBtn.innerHTML =
-                userIcon +
-                name +
-                " • " +
-                logoutIcon +
-                "Logout";
+}
 
 
-            /* =========================
-               OPEN PENDING CONTENT
-            ========================= */
+/* =========================
+   INSTAGRAM POPUP
+========================= */
 
-            const pendingAction =
-                sessionStorage.getItem(
-                    "pendingAction"
-                );
+function closePopup() {
 
-            if (pendingAction) {
+    document.getElementById(
+        "instaPopup"
+    ).style.display = "none";
 
-                sessionStorage.removeItem(
-                    "pendingAction"
-                );
-
-                let action;
-
-                try {
-
-                    action =
-                        JSON.parse(pendingAction);
-
-                } catch (error) {
-
-                    console.error(
-                        "Pending action error:",
-                        error
-                    );
-
-                    return;
-
-                }
+}
 
 
-                setTimeout(function () {
+/* =========================
+   SEARCH
+========================= */
 
-                    /* EXTERNAL WEBSITE */
-                    if (
-                        action.type ===
-                        "site"
-                    ) {
+const searchBox =
+    document.getElementById("search");
 
-                        openSitePopup(
-                            action.url
-                        );
+const cards =
+    document.querySelectorAll(".card");
 
-                    }
+searchBox.addEventListener(
+    "input",
+    function () {
+
+        const query =
+            this.value
+                .toLowerCase()
+                .trim();
+
+        cards.forEach(function (card) {
+
+            const text =
+                card.innerText.toLowerCase();
+
+            card.style.display =
+                text.includes(query)
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+);
 
 
-                    /* LATENT */
-                    else if (
-                        action.type ===
-                        "latent"
-                    ) {
+/* =========================
+   FILTER
+========================= */
 
-                        openLatentPopup();
+function filterCards(
+    category,
+    button
+) {
 
-                    }
+    document
+        .querySelectorAll(".filter")
+        .forEach(function (btn) {
 
+            btn.classList.remove("active");
 
-                    /* MOVIES */
-                    else if (
-                        action.type ===
-                        "movies"
-                    ) {
+        });
 
-                        openMoviesPopup();
+    button.classList.add("active");
 
-                    }
+    cards.forEach(function (card) {
 
-                }, 400);
+        if (category === "all") {
 
-            }
+            card.style.display = "";
 
-        } else {
+        }
 
-            loginBtn.innerHTML =
-                "Login / Sign Up";
+        else if (
+            card.dataset.category === category
+        ) {
+
+            card.style.display = "";
+
+        }
+
+        else {
+
+            card.style.display = "none";
 
         }
 
     });
+
+}
+
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+const topBtn =
+    document.getElementById("topBtn");
+
+let scrollTicking = false;
+
+window.addEventListener(
+    "scroll",
+    function () {
+
+        if (!scrollTicking) {
+
+            requestAnimationFrame(
+                function () {
+
+                    topBtn.style.display =
+                        window.scrollY > 400
+                            ? "block"
+                            : "none";
+
+                    scrollTicking = false;
+
+                }
+            );
+
+            scrollTicking = true;
+
+        }
+
+    },
+    { passive: true }
+);
+
+
+/* =========================
+   LATENT EXCLUSIVE FOLDER
+========================= */
+
+const latentOverlay =
+    document.getElementById("latentOverlay");
+
+const latentFolderView =
+    document.getElementById("latentFolderView");
+
+const latentVideoView =
+    document.getElementById("latentVideoView");
+
+const latentVideoFrame =
+    document.getElementById("latentVideoFrame");
+
+const latentVideoTitle =
+    document.getElementById("latentVideoTitle");
+
+
+function openLatentPopup() {
+
+    if (
+        !requireLogin({
+            type: "latent"
+        })
+    ) {
+        return;
+    }
+
+    latentOverlay.style.display = "flex";
+
+    latentFolderView.style.display = "flex";
+
+    latentVideoView.style.display = "none";
+
+    latentVideoFrame.src = "";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function openLatentVideo(
+    title,
+    url
+) {
+
+    latentVideoTitle.textContent = title;
+
+    latentVideoFrame.src = url;
+
+    latentFolderView.style.display = "none";
+
+    latentVideoView.style.display = "flex";
+
+}
+
+
+function backToLatentFolder() {
+
+    latentVideoFrame.src = "";
+
+    latentVideoView.style.display = "none";
+
+    latentFolderView.style.display = "flex";
+
+}
+
+
+function closeLatentPopup() {
+
+    latentVideoFrame.src = "";
+
+    latentOverlay.style.display = "none";
+
+    document.body.style.overflow = "";
+
+}
+
+
+/* =========================
+   EXCLUSIVE MOVIES
+========================= */
+
+const moviesOverlay =
+    document.getElementById("moviesOverlay");
+
+const moviesFolderView =
+    document.getElementById("moviesFolderView");
+
+const movieVideoView =
+    document.getElementById("movieVideoView");
+
+const movieVideoFrame =
+    document.getElementById("movieVideoFrame");
+
+const movieVideoTitle =
+    document.getElementById("movieVideoTitle");
+
+
+function openMoviesPopup() {
+
+    if (
+        !requireLogin({
+            type: "movies"
+        })
+    ) {
+        return;
+    }
+
+    moviesOverlay.style.display = "flex";
+
+    moviesFolderView.style.display = "flex";
+
+    movieVideoView.style.display = "none";
+
+    movieVideoFrame.src = "";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function openMovieVideo(
+    title,
+    url
+) {
+
+    movieVideoTitle.textContent = title;
+
+    movieVideoFrame.src = url;
+
+    moviesFolderView.style.display = "none";
+
+    movieVideoView.style.display = "flex";
+
+}
+
+
+function backToMoviesFolder() {
+
+    movieVideoFrame.src = "";
+
+    movieVideoView.style.display = "none";
+
+    moviesFolderView.style.display = "flex";
+
+}
+
+
+function closeMoviesPopup() {
+
+    movieVideoFrame.src = "";
+
+    moviesOverlay.style.display = "none";
+
+    document.body.style.overflow = "";
+
+}
+
+
+/* =========================
+   WEBSITE LAUNCH POPUP
+========================= */
+
+const siteOverlay =
+    document.getElementById("siteOverlay");
+
+const siteFrame =
+    document.getElementById("siteFrame");
+
+
+function openSitePopup(url) {
+
+    if (
+        !requireLogin({
+            type: "site",
+            url: url
+        })
+    ) {
+        return;
+    }
+
+    siteFrame.src = url;
+
+    siteOverlay.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function closeSitePopup() {
+
+    siteOverlay.style.display = "none";
+
+    siteFrame.src = "about:blank";
+
+    document.body.style.overflow = "";
+
+}
+    firebaseAuthReady = true;
+
+    if (user) {
+
+        const name =
+            user.displayName ||
+            user.email ||
+            "Account";
+
+        loginBtn.innerHTML =
+            userIcon +
+            name +
+            " • " +
+            logoutIcon +
+            "Logout";
+
+        let pendingAction =
+            pendingLoginAction;
+
+        pendingLoginAction = null;
+
+        if (!pendingAction) {
+
+            const savedAction =
+                sessionStorage.getItem(
+                    "pendingAction"
+                );
+
+            if (savedAction) {
+
+                try {
+                    pendingAction =
+                        JSON.parse(savedAction);
+                } catch (error) {
+                    console.error(
+                        "Pending action error:",
+                        error
+                    );
+                }
+
+            }
+
+        }
+
+        if (pendingAction) {
+
+            sessionStorage.removeItem(
+                "pendingAction"
+            );
+
+            setTimeout(function () {
+
+                if (
+                    pendingAction.type ===
+                    "site"
+                ) {
+
+                    openSitePopup(
+                        pendingAction.url
+                    );
+
+                }
+
+                else if (
+                    pendingAction.type ===
+                    "latent"
+                ) {
+
+                    openLatentPopup();
+
+                }
+
+                else if (
+                    pendingAction.type ===
+                    "movies"
+                ) {
+
+                    openMoviesPopup();
+
+                }
+
+            }, 500);
+
+        }
+
+    } else {
+
+        loginBtn.innerHTML =
+            "Login / Sign Up";
+
+        if (pendingLoginAction) {
+
+            sessionStorage.setItem(
+                "pendingAction",
+                JSON.stringify(
+                    pendingLoginAction
+                )
+            );
+
+            pendingLoginAction = null;
+
+            loginWithGoogle();
+
+        }
+
+    }
+
+});
 
 
     /* =========================
@@ -1930,308 +2285,28 @@ footer {
     /* =========================
        LOGIN PROTECTION HELPER
     ========================= */
+let firebaseAuthReady = false;
+let pendingLoginAction = null;
 
-    function requireLogin(action) {
-
-        /* ALREADY LOGGED IN */
-        if (auth.currentUser) {
-
-            return true;
-
-        }
-
-
-        /* SAVE REQUESTED ACTION */
-        sessionStorage.setItem(
-            "pendingAction",
-            JSON.stringify(action)
-        );
-
-
-        /* OPEN GOOGLE LOGIN */
-        loginWithGoogle();
-
-
+function requireLogin(action) {
+    if (!firebaseAuthReady) {
+        pendingLoginAction = action;
         return false;
-
     }
 
-
-    /* =========================
-       LATENT EXCLUSIVE FOLDER
-    ========================= */
-
-    const latentOverlay =
-        document.getElementById(
-            "latentOverlay"
-        );
-
-    const latentFolderView =
-        document.getElementById(
-            "latentFolderView"
-        );
-
-    const latentVideoView =
-        document.getElementById(
-            "latentVideoView"
-        );
-
-    const latentVideoFrame =
-        document.getElementById(
-            "latentVideoFrame"
-        );
-
-    const latentVideoTitle =
-        document.getElementById(
-            "latentVideoTitle"
-        );
-
-
-    function openLatentPopup() {
-
-        if (
-            !requireLogin({
-                type: "latent"
-            })
-        ) {
-
-            return;
-
-        }
-
-
-        latentOverlay.style.display =
-            "flex";
-
-        latentFolderView.style.display =
-            "flex";
-
-        latentVideoView.style.display =
-            "none";
-
-        latentVideoFrame.src =
-            "";
-
-        document.body.style.overflow =
-            "hidden";
-
+    if (auth.currentUser) {
+        return true;
     }
 
-
-    function openLatentVideo(
-        title,
-        url
-    ) {
-
-        latentVideoTitle.textContent =
-            title;
-
-        latentVideoFrame.src =
-            url;
-
-        latentFolderView.style.display =
-            "none";
-
-        latentVideoView.style.display =
-            "flex";
-
-    }
-
-
-    function backToLatentFolder() {
-
-        latentVideoFrame.src =
-            "";
-
-        latentVideoView.style.display =
-            "none";
-
-        latentFolderView.style.display =
-            "flex";
-
-    }
-
-
-    function closeLatentPopup() {
-
-        latentVideoFrame.src =
-            "";
-
-        latentOverlay.style.display =
-            "none";
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-
-    /* =========================
-       EXCLUSIVE MOVIES
-    ========================= */
-
-    const moviesOverlay =
-        document.getElementById(
-            "moviesOverlay"
-        );
-
-    const moviesFolderView =
-        document.getElementById(
-            "moviesFolderView"
-        );
-
-    const movieVideoView =
-        document.getElementById(
-            "movieVideoView"
-        );
-
-    const movieVideoFrame =
-        document.getElementById(
-            "movieVideoFrame"
-        );
-
-    const movieVideoTitle =
-        document.getElementById(
-            "movieVideoTitle"
-        );
-
-
-    function openMoviesPopup() {
-
-        if (
-            !requireLogin({
-                type: "movies"
-            })
-        ) {
-
-            return;
-
-        }
-
-
-        moviesOverlay.style.display =
-            "flex";
-
-        moviesFolderView.style.display =
-            "flex";
-
-        movieVideoView.style.display =
-            "none";
-
-        movieVideoFrame.src =
-            "";
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-
-    function openMovieVideo(
-        title,
-        url
-    ) {
-
-        movieVideoTitle.textContent =
-            title;
-
-        movieVideoFrame.src =
-            url;
-
-        moviesFolderView.style.display =
-            "none";
-
-        movieVideoView.style.display =
-            "flex";
-
-    }
-
-
-    function backToMoviesFolder() {
-
-        movieVideoFrame.src =
-            "";
-
-        movieVideoView.style.display =
-            "none";
-
-        moviesFolderView.style.display =
-            "flex";
-
-    }
-
-
-    function closeMoviesPopup() {
-
-        movieVideoFrame.src =
-            "";
-
-        moviesOverlay.style.display =
-            "none";
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-
-    /* =========================
-       WEBSITE LAUNCH POPUP
-    ========================= */
-
-    const siteOverlay =
-        document.getElementById(
-            "siteOverlay"
-        );
-
-    const siteFrame =
-        document.getElementById(
-            "siteFrame"
-        );
-
-
-    function openSitePopup(url) {
-
-        /* LOGIN REQUIRED */
-
-        if (
-            !requireLogin({
-                type: "site",
-                url: url
-            })
-        ) {
-
-            return;
-
-        }
-
-
-        /* OPEN WEBSITE */
-
-        siteFrame.src =
-            url;
-
-        siteOverlay.style.display =
-            "flex";
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-
-    function closeSitePopup() {
-
-        siteOverlay.style.display =
-            "none";
-
-        siteFrame.src =
-            "about:blank";
-
-        document.body.style.overflow =
-            "";
-
-    }
+    sessionStorage.setItem(
+        "pendingAction",
+        JSON.stringify(action)
+    );
+
+    loginWithGoogle();
+    return false;
+}
+    
 
 </script>
 </body>
