@@ -1518,20 +1518,22 @@ footer {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
+   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 function loginWithGoogle() {
-    auth.signInWithPopup(googleProvider)
-        .then((result) => {
-            console.log("Login successful:", result.user.displayName);
-        })
-        .catch((error) => {
-            console.error("Login error:", error);
-            alert("Login failed. Please try again.");
-        });
+    auth.signInWithRedirect(googleProvider);
 }
 
-document.getElementById("loginBtn").addEventListener("click", loginWithGoogle);
+auth.getRedirectResult()
+    .then((result) => {
+        if (result.user) {
+            console.log("Login successful:", result.user.displayName);
+        }
+    })
+    .catch((error) => {
+        console.error("Google Login Error:", error);
+        alert("Login failed: " + error.code);
+    });
     function refreshSiteFrame() {
     const frame = document.getElementById("siteFrame");
 
