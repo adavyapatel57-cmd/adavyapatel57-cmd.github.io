@@ -925,7 +925,20 @@ footer {
     .site-overlay {
         padding: 7px;
     }
-
+.site-refresh {
+    position: absolute;
+    top: 5px;
+    right: 55px;
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
     .site-popup {
         width: 100%;
         height: 94vh;
@@ -1469,7 +1482,7 @@ footer {
 <div class="site-overlay" id="siteOverlay">
 
     <div class="site-popup">
-
+<button class="site-refresh" onclick="refreshSiteFrame()">↻ Refresh Frame</button>
         <button
             class="site-close"
             onclick="closeSitePopup()"
@@ -1491,7 +1504,13 @@ footer {
 
 
 <script>
+function refreshSiteFrame() {
+    const frame = document.getElementById("siteFrame");
 
+    if (frame) {
+        frame.contentWindow.location.reload();
+    }
+}
 /* INSTAGRAM POPUP */
 function closePopup() {
     document.getElementById("instaPopup").style.display = "none";
