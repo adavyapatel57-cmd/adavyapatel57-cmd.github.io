@@ -1505,7 +1505,7 @@ footer {
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
 <script>
-function refreshSiteFrame() {
+
     const firebaseConfig = {
     apiKey: "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
     authDomain: "adavya-study-hub.firebaseapp.com",
@@ -1518,6 +1518,21 @@ function refreshSiteFrame() {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+function loginWithGoogle() {
+    auth.signInWithPopup(googleProvider)
+        .then((result) => {
+            console.log("Login successful:", result.user.displayName);
+        })
+        .catch((error) => {
+            console.error("Login error:", error);
+            alert("Login failed. Please try again.");
+        });
+}
+
+document.getElementById("loginBtn").addEventListener("click", loginWithGoogle);
+    function refreshSiteFrame() {
     const frame = document.getElementById("siteFrame");
 
     if (frame) {
