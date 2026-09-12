@@ -6,1368 +6,1224 @@
 
 <title>Adavya's Study Hub</title>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
-
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    min-height:100vh;
-    color:#fff;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #fff;
 
+    /* PREMIUM ENERGETIC BLUE */
     background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(0,140,255,.35),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 25%,
-            rgba(0,90,255,.28),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #020817,
-            #061a3a 45%,
-            #03122b 100%
-        );
+        radial-gradient(circle at 15% 10%, rgba(0, 140, 255, .35), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(0, 90, 255, .28), transparent 30%),
+        linear-gradient(135deg, #020817, #061a3a 45%, #03122b 100%);
 
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
-
 
 /* =========================
    NAVBAR
 ========================= */
 
-.navbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    width: 100%;
+    padding: 15px 6%;
 
-    background:rgba(2,10,25,.75);
+    background: rgba(2, 12, 30, .88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
-    border-bottom:
-        1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 8px 30px rgba(0,0,0,.18);
 }
 
-.nav-content{
-    max-width:1200px;
-    margin:auto;
+.nav-content {
+    max-width: 1200px;
+    margin: auto;
 
-    min-height:70px;
-
-    padding:10px 20px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.logo{
-    font-size:21px;
-    font-weight:bold;
-    white-space:nowrap;
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: .4px;
 }
 
-.nav-links{
-    display:flex;
-    gap:25px;
+.nav-links {
+    display: flex;
+    gap: 26px;
 }
 
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    font-size:15px;
-    transition:.25s;
+.nav-links a {
+    color: rgba(255,255,255,.88);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: .2s ease;
 }
 
-.nav-links a:hover{
-    color:#4db8ff;
+.nav-links a:hover {
+    color: #fff;
+    transform: translateY(-1px);
 }
-
-#loginBtn{
-    border:none;
-    outline:none;
-
-    padding:11px 16px;
-
-    border-radius:12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #087cff,
-            #00aaff
-        );
-
-    color:white;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 8px 25px rgba(0,130,255,.25);
-
-    transition:.25s;
-}
-
-#loginBtn:hover{
-    transform:translateY(-2px);
-    box-shadow:
-        0 12px 30px rgba(0,150,255,.4);
-}
-
 
 /* =========================
    HERO
 ========================= */
 
-.hero{
-    max-width:1200px;
-    margin:auto;
-
-    padding:90px 20px 55px;
-
-    text-align:center;
+.hero {
+    text-align: center;
+    padding: 78px 20px 38px;
 }
 
-.hero h1{
-    font-size:clamp(38px,7vw,70px);
-    line-height:1.05;
+.welcome {
+    font-size: clamp(45px, 9vw, 82px);
+    font-weight: 950;
+    letter-spacing: 4px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #72c8ff,
-            #fff
-        );
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #66bfff,
+        #ffffff
+    );
 
-    -webkit-background-clip:text;
-    background-clip:text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 
-    color:transparent;
+    text-shadow:
+        0 10px 35px rgba(0,120,255,.22),
+        0 0 25px rgba(0,150,255,.25);
+
+    animation: welcomeGlow 1.4s ease-out;
 }
 
-.hero h1 span{
-    color:#ff4d8d;
-    -webkit-text-fill-color:#ff4d8d;
-}
-
-.hero p{
-    margin-top:18px;
-
-    color:#cbd9ec;
-
-    font-size:17px;
-}
-
-.hero-heart{
-    display:inline-block;
-    animation:heartBeat 1.5s infinite;
-}
-
-@keyframes heartBeat{
-    0%,100%{
-        transform:scale(1);
+@keyframes welcomeGlow {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
-    50%{
-        transform:scale(1.15);
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+.hero p {
+    margin-top: 14px;
+    font-size: 17px;
+    opacity: .82;
+}
 
 /* =========================
    SEARCH
 ========================= */
 
-.search-wrap{
-    max-width:700px;
-    margin:25px auto 0;
+.search-area {
+    max-width: 780px;
+    margin: 15px auto 32px;
+    padding: 0 20px;
 }
 
-#search{
-    width:100%;
+.search-box {
+    width: 100%;
+    padding: 17px 22px;
 
-    padding:16px 20px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px;
 
-    border-radius:16px;
+    outline: none;
 
-    border:
-        1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.10);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
-    outline:none;
+    color: white;
+    font-size: 16px;
 
-    color:white;
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.08);
 
-    background:
-        rgba(255,255,255,.07);
-
-    backdrop-filter:blur(12px);
-
-    font-size:16px;
+    transition: .25s ease;
 }
 
-#search::placeholder{
-    color:#9db0c8;
+.search-box:focus {
+    border-color: rgba(70,170,255,.65);
+
+    background: rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 0 4px rgba(0,130,255,.10),
+        0 15px 40px rgba(0,0,0,.25);
 }
 
+.search-box::placeholder {
+    color: rgba(255,255,255,.65);
+}
 
 /* =========================
    FILTERS
 ========================= */
 
-.filters{
-    max-width:1200px;
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 
-    margin:0 auto 35px;
-
-    padding:0 20px;
-
-    display:flex;
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
+    margin: 0 auto 38px;
+    padding: 0 20px;
 }
 
-.filter{
-    border:1px solid rgba(255,255,255,.12);
+.filter {
+    border: 1px solid rgba(255,255,255,.16);
 
-    background:rgba(255,255,255,.06);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(5px);
 
-    color:white;
+    color: rgba(255,255,255,.88);
 
-    padding:9px 16px;
+    padding: 10px 18px;
+    border-radius: 50px;
 
-    border-radius:20px;
+    cursor: pointer;
 
-    cursor:pointer;
+    font-weight: 700;
+    font-size: 13px;
 
-    transition:.25s;
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
-.filter:hover,
-.filter.active{
-    background:#087cff;
-    border-color:#087cff;
+.filter:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.13);
 }
 
+.filter.active {
+    background: #fff;
+    color: #075bd8;
+
+    box-shadow: 0 8px 25px rgba(0,100,255,.22);
+}
 
 /* =========================
-   SECTION
+   CONTAINER
 ========================= */
 
-.section{
-    max-width:1200px;
-
-    margin:0 auto;
-
-    padding:30px 20px 70px;
+.container {
+    width: min(1200px, 92%);
+    margin: auto;
 }
 
-.section-title{
-    font-size:30px;
-    margin-bottom:25px;
-}
+/* =========================
+   GRID
+========================= */
 
-.section-title span{
-    color:#48b7ff;
-}
+.resource-grid {
+    display: grid;
 
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+
+    padding-bottom: 55px;
+}
 
 /* =========================
    CARDS
 ========================= */
 
-.resource-grid{
-    display:grid;
+.card {
+    position: relative;
+    overflow: hidden;
 
-    grid-template-columns:
-        repeat(3,1fr);
+    border-radius: 26px;
+    padding: 20px;
 
-    gap:22px;
-}
+    min-height: 315px;
 
-.card{
-    position:relative;
-
-    overflow:hidden;
-
-    min-height:300px;
-
-    padding:22px;
-
-    border-radius:22px;
-
-    border:
-        1px solid rgba(255,255,255,.11);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.11),
-            rgba(255,255,255,.035)
-        );
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    border: 1px solid rgba(255,255,255,.16);
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.25);
+        0 18px 45px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.10);
 
     transition:
-        transform .3s,
-        box-shadow .3s;
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
 }
 
-.card::before{
-    content:"";
+/* CARD LIGHT EFFECT */
 
-    position:absolute;
+.card::after {
+    content: "";
 
-    top:-100%;
-    left:-100%;
+    position: absolute;
+    width: 200px;
+    height: 200px;
 
-    width:50%;
-    height:300%;
+    top: -100px;
+    right: -80px;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.12),
-            transparent
-        );
+    border-radius: 50%;
 
-    transform:rotate(25deg);
+    background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%);
 
-    transition:.7s;
+    pointer-events: none;
 }
 
-.card:hover::before{
-    left:150%;
+/* REFLECTION */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -120%;
+    left: -35%;
+
+    width: 65%;
+    height: 350%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+    );
+
+    transform: rotate(25deg) translateX(-160%);
+
+    transition: transform .65s ease;
+
+    pointer-events: none;
+    will-change: transform;
 }
 
-.card:hover{
-    transform:translateY(-8px);
+.card:hover::before {
+    transform: rotate(25deg) translateX(160%);
+}
+
+.card:hover {
+    transform: translateY(-9px);
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.4);
+        0 18px 34px rgba(0,0,0,.32),
+        0 0 18px rgba(0,130,255,.10);
+
+    border-color: rgba(255,255,255,.28);
+    will-change: transform;
 }
-
-.card-icon{
-    width:65px;
-    height:65px;
-
-    border-radius:18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:30px;
-
-    margin-bottom:18px;
-
-    background:rgba(255,255,255,.1);
-}
-
-.card h3{
-    font-size:22px;
-    margin-bottom:9px;
-}
-
-.card p{
-    color:#b9c9dc;
-    line-height:1.5;
-
-    min-height:65px;
-}
-
-.launch-btn{
-    margin-top:20px;
-
-    width:100%;
-
-    padding:12px;
-
-    border:none;
-    border-radius:12px;
-
-    color:white;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #087cff,
-            #00aaff
-        );
-
-    transition:.25s;
-}
-
-.launch-btn:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(0,150,255,.35);
-}
-
-
-/* CARD TYPES */
-
-.card.next{
-    border-color:rgba(0,255,120,.18);
-}
-
-.card.next .card-icon{
-    background:rgba(0,200,100,.15);
-}
-
-.card.mission{
-    border-color:rgba(255,50,50,.18);
-}
-
-.card.mission .card-icon{
-    background:rgba(255,50,50,.15);
-}
-
-.card.pw{
-    border-color:rgba(255,255,255,.16);
-}
-
-.card.piott{
-    border-color:rgba(170,100,255,.18);
-}
-
 
 /* =========================
-   IMPORTANT
+   CARD COLORS
 ========================= */
 
-.important-box{
-    padding:25px;
-
-    border-radius:22px;
-
-    border:
-        1px solid rgba(255,200,50,.2);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,180,0,.08),
-            rgba(255,255,255,.04)
-        );
-}
-
-.important-box h3{
-    margin-bottom:10px;
-    color:#ffd85a;
-}
-
-.important-box p{
-    color:#c5d3e5;
-    line-height:1.6;
-}
-
-
-/* =========================
-   SITE POPUP
-========================= */
-
-.site-overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:3000;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:25px;
-
-    background:
-        rgba(0,0,0,.78);
-
-    backdrop-filter:blur(10px);
-}
-
-.site-popup{
-    position:relative;
-
-    width:min(1200px,96vw);
-    height:min(800px,90vh);
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    background:#020817;
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.7);
-}
-
-#siteFrame{
-    width:100%;
-    height:100%;
-
-    border:none;
-
-    background:white;
-}
-
-.site-close{
-    position:absolute;
-
-    top:7px;
-    right:7px;
-
-    z-index:10;
-
-    width:40px;
-    height:40px;
-
-    border:none;
-    border-radius:10px;
-
-    background:
-        rgba(0,0,0,.7);
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-}
-
-.site-refresh{
-    position:absolute;
-
-    top:7px;
-    right:55px;
-
-    z-index:10;
-
-    width:auto;
-    height:40px;
-
-    padding:0 12px;
-
-    border:none;
-    border-radius:10px;
-
-    background:
-        rgba(255,255,255,.12);
-
-    color:white;
-
-    font-size:14px;
-
-    cursor:pointer;
-}
-
-
-/* =========================
-   LATENT / MOVIES POPUPS
-========================= */
-
-.custom-overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:2500;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(0,0,0,.82);
-
-    backdrop-filter:blur(10px);
-}
-
-.custom-popup{
-    width:min(1000px,95vw);
-    max-height:90vh;
-
-    overflow:auto;
-
-    border-radius:22px;
-
-    padding:25px;
-
+.next {
     background:
         linear-gradient(
             145deg,
-            #07172e,
-            #020817
+            rgba(0,100,35,.96),
+            rgba(5,175,65,.88)
         );
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.7);
 }
 
-.popup-head{
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:22px;
-}
-
-.popup-head h2{
-    font-size:25px;
-}
-
-.popup-close{
-    width:40px;
-    height:40px;
-
-    border:none;
-    border-radius:10px;
-
-    background:rgba(255,255,255,.1);
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-}
-
-.folder-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
-}
-
-.folder{
-    padding:22px;
-
-    border-radius:16px;
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.05);
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
-.folder:hover{
-    background:rgba(0,130,255,.16);
-    transform:translateY(-3px);
-}
-
-.folder-icon{
-    font-size:35px;
-    margin-bottom:12px;
-}
-
-.video-view{
-    display:none;
-}
-
-.video-view iframe{
-    width:100%;
-    height:500px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:black;
-}
-
-.back-btn{
-    margin-bottom:15px;
-
-    border:none;
-    border-radius:10px;
-
-    padding:10px 15px;
-
-    background:rgba(255,255,255,.1);
-
-    color:white;
-
-    cursor:pointer;
-}
-
-
-/* =========================
-   INSTAGRAM POPUP
-========================= */
-
-.overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:5000;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(0,0,0,.8);
-
-    backdrop-filter:blur(12px);
-}
-
-.instagram-popup{
-    width:min(430px,92vw);
-
-    padding:35px 25px;
-
-    text-align:center;
-
-    border-radius:25px;
-
+.mission {
     background:
         linear-gradient(
             145deg,
-            #101d35,
-            #06101f
+            rgba(135,0,0,.96),
+            rgba(235,35,35,.88)
         );
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.7);
-
-    animation:
-        popupIn .35s ease;
 }
 
-@keyframes popupIn{
-    from{
-        opacity:0;
-        transform:scale(.9);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-.insta-icon{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.instagram-popup h2{
-    margin-bottom:8px;
-}
-
-.instagram-popup p{
-    color:#aebed2;
-    margin-bottom:22px;
-}
-
-.insta-follow{
-    display:block;
-
-    padding:13px;
-
-    border-radius:12px;
-
+.pw {
     background:
         linear-gradient(
-            135deg,
-            #ff2d7a,
-            #8b3dff
+            145deg,
+            #020202,
+            #242424
         );
-
-    color:white;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-    margin-bottom:10px;
 }
 
-.skip{
-    width:100%;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.08);
-
-    color:white;
-
-    cursor:pointer;
+.piott {
+    background:
+        linear-gradient(
+            145deg,
+            #5111b5,
+            #963fff
+        );
 }
 
+/* LATENT EXCLUSIVE CARD */
+.latent {
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #343434
+        );
+}
 
 /* =========================
-   BACK TO TOP
+   CARD IMAGE
 ========================= */
 
-#topBtn{
-    position:fixed;
+.card-image {
+    width: 100%;
+    height: 145px;
 
-    right:20px;
-    bottom:20px;
+    object-fit: contain;
 
-    z-index:1500;
+    border-radius: 18px;
+    margin-bottom: 16px;
 
-    display:none;
+    background: rgba(255,255,255,.08);
 
-    width:45px;
-    height:45px;
+    border: 1px solid rgba(255,255,255,.10);
 
-    border:none;
-    border-radius:50%;
-
-    background:#087cff;
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 30px rgba(0,100,255,.35);
+    transition: transform .3s ease;
 }
 
+.card:hover .card-image {
+    transform: scale(1.025);
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+
+    font-weight: 850;
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.5;
+
+    opacity: .84;
+}
+
+/* =========================
+   LAUNCH BUTTON
+========================= */
+
+.launch {
+    display: block;
+
+    margin-top: 18px;
+    width: 100%;
+
+    padding: 13px 18px;
+
+    border-radius: 15px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: white;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    font-weight: 850;
+    letter-spacing: 1.4px;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.launch:hover {
+    background: rgba(255,255,255,.22);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 22px rgba(0,0,0,.18);
+}
+
+/* =========================
+   IMPORTANT SECTION
+========================= */
+
+.important {
+    max-width: 900px;
+    margin: 0 auto 48px;
+
+    padding: 27px 22px;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.09);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.important h2 {
+    margin-bottom: 9px;
+    font-size: 22px;
+}
+
+.important p {
+    opacity: .78;
+    line-height: 1.5;
+}
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+.video-section {
+    width: min(1000px, 92%);
+    margin: 40px auto;
+
+    padding: 22px;
+
+    background: rgba(255,255,255,.09);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.video-section h2 {
+    text-align: center;
+    margin-bottom: 19px;
+}
+
+.video-container {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: #000;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
 
 /* =========================
    FOOTER
 ========================= */
 
-footer{
-    padding:30px 20px;
+footer {
+    text-align: center;
 
-    text-align:center;
+    padding: 28px 15px;
 
-    color:#91a5bd;
+    background: rgba(1,18,55,.82);
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(255,255,255,.10);
+
+    font-size: 14px;
+
+    color: rgba(255,255,255,.82);
 }
 
+/* =========================
+   BACK TO TOP
+========================= */
+
+.top-btn {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.92);
+    color: #075bd8;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+
+    display: none;
+
+    z-index: 1500;
+
+    transition: .2s ease;
+}
+
+.top-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+}
+
+/* =========================
+   INSTAGRAM POPUP
+========================= */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,12,35,.72);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.instagram-popup {
+    width: min(400px, 100%);
+
+    padding: 32px 25px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0878ff,
+            #003cae
+        );
+
+    border: 1px solid rgba(255,255,255,.22);
+
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+
+    animation: popup .35s ease;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: scale(.88) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.insta-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.instagram-popup h2 {
+    margin-bottom: 8px;
+}
+
+.instagram-popup p {
+    opacity: .88;
+    margin-bottom: 20px;
+}
+
+.insta-follow,
+.skip {
+    display: block;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    font-weight: 850;
+
+    margin-top: 10px;
+
+    transition: .2s ease;
+}
+
+.insta-follow {
+    background: white;
+    color: #075bd8;
+}
+
+.insta-follow:hover {
+    transform: translateY(-2px);
+}
+
+.skip {
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    background: rgba(255,255,255,.10);
+
+    cursor: pointer;
+}
+
+.skip:hover {
+    background: rgba(255,255,255,.18);
+}
+
+/* =========================
+   WEBSITE LAUNCH POPUP
+========================= */
+
+.site-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 3000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,8,25,.84);
+
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+}
+
+.site-popup {
+    position: relative;
+
+    width: min(1200px, 96vw);
+    height: min(800px, 90vh);
+
+    background: white;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    box-shadow: 0 30px 90px rgba(0,0,0,.6);
+
+    animation: sitePopup .3s ease;
+}
+
+@keyframes sitePopup {
+    from {
+        opacity: 0;
+        transform: scale(.92) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.site-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 10;
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.78);
+    color: white;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+
+    transition: .2s ease;
+}
+
+.site-close:hover {
+    background: #e00000;
+    transform: rotate(4deg) scale(1.05);
+}
+
+.site-frame {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+/* =========================
+   MOBILE / TABLET
+========================= */
+
+@media (max-width: 850px) {
+
+    .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:900px){
+@media (max-width: 600px) {
 
-    .resource-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+    .navbar {
+        padding: 13px 18px;
     }
 
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 55px 18px 32px;
+    }
+
+    .welcome {
+        font-size: 48px;
+        letter-spacing: 2px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .search-area {
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        padding: 15px 18px;
+        border-radius: 16px;
+    }
+
+    .filters {
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .filter {
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .card {
+        min-height: auto;
+        padding: 18px;
+        border-radius: 23px;
+    }
+
+    .card-image {
+        height: 160px;
+        border-radius: 17px;
+    }
+
+    .important {
+        width: 92%;
+        padding: 23px 18px;
+        border-radius: 21px;
+    }
+
+    .video-section {
+        width: 92%;
+        padding: 15px;
+        border-radius: 21px;
+    }
+
+    .video-container {
+        border-radius: 15px;
+    }
+
+    .top-btn {
+        right: 17px;
+        bottom: 18px;
+        width: 45px;
+        height: 45px;
+    }
+
+    /* WEBSITE POPUP MOBILE */
+
+    .site-overlay {
+        padding: 7px;
+    }
+.site-refresh {
+    position: absolute;
+    top: 5px;
+    right: 55px;
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
 }
-
-@media(max-width:650px){
-
-    .nav-content{
-        flex-wrap:wrap;
+    .site-popup {
+        width: 100%;
+        height: 94vh;
+        border-radius: 17px;
     }
 
-    .nav-links{
-        order:3;
-
-        width:100%;
-
-        justify-content:center;
-
-        padding-bottom:8px;
+    .site-close {
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
     }
-
-    .logo{
-        font-size:18px;
-    }
-
-    #loginBtn{
-        padding:9px 12px;
-        font-size:12px;
-    }
-
-    .hero{
-        padding-top:55px;
-    }
-
-    .resource-grid{
-        grid-template-columns:1fr;
-    }
-
-    .folder-grid{
-        grid-template-columns:1fr;
-    }
-
-    .site-overlay{
-        padding:8px;
-    }
-
-    .site-popup{
-        width:100%;
-        height:92vh;
-        border-radius:12px;
-    }
-
-    .site-refresh{
-        right:52px;
-        padding:0 8px;
-        font-size:12px;
-    }
-
-    .video-view iframe{
-        height:350px;
-    }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     NAVBAR
-========================= -->
-
+<!-- NAVBAR -->
 <nav class="navbar">
-
     <div class="nav-content">
 
-        <div class="logo">
-            📚 Study Hub
-        </div>
+        <div class="logo">📚 Study Hub</div>
 
         <div class="nav-links">
-
-            <a href="#home">
-                Home
-            </a>
-
-            <a href="#resources">
-                Resources
-            </a>
-
-            <a href="#important">
-                Important
-            </a>
-
+            <a href="#home">Home</a>
+            <a href="#resources">Resources</a>
+            <a href="#important">Important</a>
         </div>
-
-        <button id="loginBtn">
-            Login / Sign Up
-        </button>
-
+<button id="loginBtn">Login / Sign Up</button>
     </div>
-
 </nav>
 
 
-
-<!-- =========================
-     HOME
-========================= -->
-
+<!-- HERO -->
 <section class="hero" id="home">
 
-    <h1>
-        Welcome <span class="hero-heart">❤️</span>
-    </h1>
+    <div class="welcome">WELCOME ❤️</div>
 
-    <p>
-        Your personal study hub for Class 10 resources,
-        notes and learning.
-    </p>
-
-    <div class="search-wrap">
-
-        <input
-            type="text"
-            id="search"
-            placeholder="🔍 Search resources..."
-        >
-
-    </div>
+    <p>Your Personal Study Hub</p>
 
 </section>
 
 
+<!-- SEARCH -->
+<div class="search-area">
 
-<!-- =========================
-     FILTERS
-========================= -->
+    <input
+        type="text"
+        id="search"
+        class="search-box"
+        placeholder="🔎 Search your resources..."
+    >
 
+</div>
+
+
+<!-- FILTERS -->
 <div class="filters">
 
-    <button
-        class="filter active"
-        onclick="filterCards('all',this)"
-    >
+    <button class="filter active" onclick="filterCards('all', this)">
         All
     </button>
 
-    <button
-        class="filter"
-        onclick="filterCards('next',this)"
-    >
+    <button class="filter" onclick="filterCards('next', this)">
         Next Toppers
     </button>
 
-    <button
-        class="filter"
-        onclick="filterCards('mission',this)"
-    >
+    <button class="filter" onclick="filterCards('mission', this)">
         Mission Jeet
     </button>
 
-    <button
-        class="filter"
-        onclick="filterCards('pw',this)"
-    >
+    <button class="filter" onclick="filterCards('pw', this)">
         PW
     </button>
 
-    <button
-        class="filter"
-        onclick="filterCards('special',this)"
-    >
-        Special
+    <button class="filter" onclick="filterCards('piott', this)">
+        PI OTT
     </button>
 
 </div>
 
 
+<!-- RESOURCES -->
+<section class="container" id="resources">
 
-<!-- =========================
-     RESOURCES
-========================= -->
-
-<section class="section" id="resources">
-
-    <h2 class="section-title">
-        📚 <span>Resources</span>
-    </h2>
-
-    <div class="resource-grid">
+    <div class="resource-grid" id="resourceGrid">
 
 
-        <!-- LATENT -->
 
-        <div
-            class="card"
-            data-category="special"
-        >
+        <!-- LATENT EXCLUSIVE -->
+        <div class="card latent" data-category="latent">
 
-            <div class="card-icon">
-                🎯
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
+                📁
             </div>
 
-            <h3>
-                Latent Exclusive
-            </h3>
+            <h2>Latent Exclusive</h2>
 
-            <p>
-                Exclusive study content
-                available inside Study Hub.
-            </p>
+            <p>Exclusive study video resource.</p>
 
-            <button
-                class="launch-btn"
+            <a
+                href="javascript:void(0)"
                 onclick="openLatentPopup()"
+                class="launch"
             >
-                🚀 Launch
-            </button>
+                OPEN →
+            </a>
 
         </div>
 
 
+        <!-- EXCLUSIVE MOVIES -->
+        <div class="card latent" data-category="movies">
 
-        <!-- MOVIES -->
-
-        <div
-            class="card"
-            data-category="special"
-        >
-
-            <div class="card-icon">
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">
                 🎬
             </div>
 
-            <h3>
-                Exclusive Movies
-            </h3>
+            <h2>Exclusive Movies🐱‍🏍</h2>
 
-            <p>
-                Exclusive educational and
-                entertainment collection.
-            </p>
+            <p>Your exclusive movie collection.</p>
 
-            <button
-                class="launch-btn"
+            <a
+                href="javascript:void(0)"
                 onclick="openMoviesPopup()"
+                class="launch"
             >
-                🚀 Launch
-            </button>
+                OPEN →
+            </a>
 
         </div>
-
 
 
         <!-- NEXT TOPPERS 1 -->
+        <div class="card next" data-category="next">
 
-        <div
-            class="card next"
-            data-category="next"
-        >
-
-            <div class="card-icon">
-                📗
-            </div>
-
-            <h3>
-                Next Toppers 1
-            </h3>
-
-            <p>
-                Next Toppers study resources
-                and learning material.
-            </p>
-
-            <button
-                class="launch-btn"
-                onclick="openSitePopup(
-                    'https://nexttoppers.therankforge.site/pages/key-success'
-                )"
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Next Toppers"
             >
-                🚀 Launch
-            </button>
+
+            <h2>Next Toppers 1</h2>
+
+            <p>Access your Next Toppers study resources.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexttoppers.therankforge.site/pages/key-success')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
 
         </div>
-
 
 
         <!-- NEXT TOPPERS 2 -->
+        <div class="card next" data-category="next">
 
-        <div
-            class="card next"
-            data-category="next"
-        >
-
-            <div class="card-icon">
-                📘
-            </div>
-
-            <h3>
-                Next Toppers 2
-            </h3>
-
-            <p>
-                More Next Toppers resources
-                for your preparation.
-            </p>
-
-            <button
-                class="launch-btn"
-                onclick="openSitePopup(
-                    'https://nexthope.pages.dev/nt/'
-                )"
+            <img
+                src="nexttoppers.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Next Toppers"
             >
-                🚀 Launch
-            </button>
+
+            <h2>Next Toppers 2</h2>
+
+            <p>Explore another Next Toppers resource.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/nt/')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
 
         </div>
-
 
 
         <!-- MISSION JEET -->
+        <div class="card mission" data-category="mission">
 
-        <div
-            class="card mission"
-            data-category="mission"
-        >
-
-            <div class="card-icon">
-                🔥
-            </div>
-
-            <h3>
-                Mission Jeet
-            </h3>
-
-            <p>
-                Mission Jeet resources and
-                preparation material.
-            </p>
-
-            <button
-                class="launch-btn"
-                onclick="openSitePopup(
-                    'https://nexthope.pages.dev/mj/'
-                )"
+            <img
+                src="mission jeet.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="Mission Jeet"
             >
-                🚀 Launch
-            </button>
+
+            <h2>Mission Jeet</h2>
+
+            <p>Continue your Mission Jeet preparation.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://nexthope.pages.dev/mj/')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
 
         </div>
-
 
 
         <!-- PW 1 -->
+        <div class="card pw" data-category="pw">
 
-        <div
-            class="card pw"
-            data-category="pw"
-        >
-
-            <div class="card-icon">
-                ⚡
-            </div>
-
-            <h3>
-                PW 1
-            </h3>
-
-            <p>
-                Physics Wallah resources
-                for your studies.
-            </p>
-
-            <button
-                class="launch-btn"
-                onclick="openSitePopup(
-                    'https://pwspidey.live'
-                )"
+            <img
+                src="pw.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PW"
             >
-                🚀 Launch
-            </button>
+
+            <h2>PW 1</h2>
+
+            <p>Physics Wallah study resources.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('https://pwspidey.live')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
 
         </div>
-
 
 
         <!-- PW 2 -->
+        <div class="card pw" data-category="pw">
 
-        <div
-            class="card pw"
-            data-category="pw"
-        >
-
-            <div class="card-icon">
-                ⚡
-            </div>
-
-            <h3>
-                PW 2
-            </h3>
-
-            <p>
-                This resource will be
-                available soon.
-            </p>
-
-            <button
-                class="launch-btn"
-                onclick="openSitePopup('')"
+            <img
+                src="pw.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PW"
             >
-                🚀 Launch
-            </button>
+
+            <h2>PW 2</h2>
+
+            <p>More PW learning resources.</p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSitePopup('')"
+                class="launch"
+            >
+                LAUNCH →
+            </a>
 
         </div>
-
 
 
         <!-- PI OTT -->
+        <div class="card piott" data-category="piott">
 
-        <div
-            class="card piott"
-            data-category="special"
-        >
+            <img
+                src="piott.png"
+                class="card-image"
+                loading="lazy"
+                decoding="async"
+                alt="PI OTT"
+            >
 
-            <div class="card-icon">
-                🎓
-            </div>
+            <h2>PI OTT</h2>
 
-            <h3>
-                PI OTT
-            </h3>
+            <p>Open your PI OTT study resource.</p>
 
-            <p>
-                Additional learning resources
-                for students.
-            </p>
-
-            <button
-                class="launch-btn"
+            <a
+                href="javascript:void(0)"
                 onclick="openSitePopup('')"
+                class="launch"
             >
-                🚀 Launch
-            </button>
+                LAUNCH →
+            </a>
 
         </div>
 
@@ -1377,342 +1233,41 @@ footer{
 </section>
 
 
+<!-- IMPORTANT -->
+<section class="important" id="important">
 
-<!-- =========================
-     IMPORTANT
-========================= -->
+    <h2>⭐ Important Resources</h2>
 
-<section
-    class="section"
-    id="important"
->
-
-    <h2 class="section-title">
-        ⭐ <span>Important</span>
-    </h2>
-
-    <div class="important-box">
-
-        <h3>
-            📢 Study Hub
-        </h3>
-
-        <p>
-            Use the resources regularly and keep
-            your preparation consistent. New
-            resources can be added here whenever
-            they become available.
-        </p>
-
-    </div>
+    <p>
+        Keep your most useful study resources close and start learning faster.
+    </p>
 
 </section>
 
 
 
-<!-- =========================
-     WEBSITE POPUP
-========================= -->
+<!-- FOOTER -->
+<footer>
+    Made by Adavya with ♥
+</footer>
 
-<div
-    class="site-overlay"
-    id="siteOverlay"
->
 
-    <div class="site-popup">
+<!-- BACK TO TOP -->
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    ↑
+</button>
 
-        <button
-            class="site-refresh"
-            onclick="refreshSiteFrame()"
-        >
-            ↻ Refresh Frame
-        </button>
 
-        <button
-            class="site-close"
-            onclick="closeSitePopup()"
-        >
-            ✕
-        </button>
-
-        <iframe
-            id="siteFrame"
-            src="about:blank"
-            allow="fullscreen"
-        ></iframe>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     LATENT POPUP
-========================= -->
-
-<div
-    class="custom-overlay"
-    id="latentOverlay"
->
-
-    <div class="custom-popup">
-
-        <div class="popup-head">
-
-            <h2>
-                🎯 Latent Exclusive
-            </h2>
-
-            <button
-                class="popup-close"
-                onclick="closeLatentPopup()"
-            >
-                ✕
-            </button>
-
-        </div>
-
-
-        <div
-            id="latentFolderView"
-        >
-
-            <div class="folder-grid">
-
-                <div
-                    class="folder"
-                    onclick="openLatentVideo(
-                        'Latent Video 1',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        📁
-                    </div>
-
-                    <b>
-                        Video 1
-                    </b>
-
-                </div>
-
-                <div
-                    class="folder"
-                    onclick="openLatentVideo(
-                        'Latent Video 2',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        📁
-                    </div>
-
-                    <b>
-                        Video 2
-                    </b>
-
-                </div>
-
-                <div
-                    class="folder"
-                    onclick="openLatentVideo(
-                        'Latent Video 3',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        📁
-                    </div>
-
-                    <b>
-                        Video 3
-                    </b>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="video-view"
-            id="latentVideoView"
-        >
-
-            <button
-                class="back-btn"
-                onclick="backToLatentFolder()"
-            >
-                ← Back
-            </button>
-
-            <h3
-                id="latentVideoTitle"
-                style="margin-bottom:15px;"
-            ></h3>
-
-            <iframe
-                id="latentVideoFrame"
-                allowfullscreen
-            ></iframe>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     MOVIES POPUP
-========================= -->
-
-<div
-    class="custom-overlay"
-    id="moviesOverlay"
->
-
-    <div class="custom-popup">
-
-        <div class="popup-head">
-
-            <h2>
-                🎬 Exclusive Movies
-            </h2>
-
-            <button
-                class="popup-close"
-                onclick="closeMoviesPopup()"
-            >
-                ✕
-            </button>
-
-        </div>
-
-
-        <div
-            id="moviesFolderView"
-        >
-
-            <div class="folder-grid">
-
-                <div
-                    class="folder"
-                    onclick="openMovieVideo(
-                        'Movie 1',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        🎬
-                    </div>
-
-                    <b>
-                        Movie 1
-                    </b>
-
-                </div>
-
-                <div
-                    class="folder"
-                    onclick="openMovieVideo(
-                        'Movie 2',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        🎬
-                    </div>
-
-                    <b>
-                        Movie 2
-                    </b>
-
-                </div>
-
-                <div
-                    class="folder"
-                    onclick="openMovieVideo(
-                        'Movie 3',
-                        ''
-                    )"
-                >
-
-                    <div class="folder-icon">
-                        🎬
-                    </div>
-
-                    <b>
-                        Movie 3
-                    </b>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="video-view"
-            id="movieVideoView"
-        >
-
-            <button
-                class="back-btn"
-                onclick="backToMoviesFolder()"
-            >
-                ← Back
-            </button>
-
-            <h3
-                id="movieVideoTitle"
-                style="margin-bottom:15px;"
-            ></h3>
-
-            <iframe
-                id="movieVideoFrame"
-                allowfullscreen
-            ></iframe>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     INSTAGRAM POPUP
-========================= -->
-
-<div
-    class="overlay"
-    id="instaPopup"
->
+<!-- INSTAGRAM POPUP -->
+<div class="overlay" id="instaPopup">
 
     <div class="instagram-popup">
 
-        <div class="insta-icon">
-            📸
-        </div>
+        <div class="insta-icon">📸</div>
 
-        <h2>
-            Follow on Instagram
-        </h2>
+        <h2>Follow on Instagram</h2>
 
-        <p>
-            @adavyapatel
-        </p>
+        <p>@adavyapatel</p>
 
         <a
             href="https://www.instagram.com/adavyapatel?stkn=ZDNlZDc0MzIxNw=="
@@ -1735,907 +1290,430 @@ footer{
 
 
 
-<!-- =========================
-     BACK TO TOP
-========================= -->
+<!-- LATENT EXCLUSIVE FOLDER POPUP -->
+<div class="site-overlay" id="latentOverlay">
+    <div class="site-popup">
+        <button
+            class="site-close"
+            onclick="closeLatentPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
 
+        <!-- FOLDER VIEW -->
+        <div id="latentFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
+            <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                📁 Latent Exclusive
+            </div>
+
+            <div style="padding:22px; overflow:auto;">
+                <!-- FILE 1 -->
+                <button
+                    type="button"
+                    onclick="openLatentVideo('🎬 ', '/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Latent Netflix Episode 6</strong>
+                        <small style="opacity:.65;">Video</small>
+                    </span>
+                </button>
+                 <button
+                    type="button"
+                    onclick="openLatentVideo('🎬 Latent Netflix Episode 6', 'https://drive.google.com/file/d/1CdytmExiBoAECGlrkii40nAiSqHUpAj_/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Latent Netflix Episode 6</strong>
+                        <small style="opacity:.65;">Video</small>
+                    </span>
+                </button>
+                <button
+                    type="button"
+                    onclick="openLatentVideo('🎬 Netflix Indias.Got.Latent S02E02.1080p', 'https://drive.google.com/file/d/136ekowO1yCwYMaJkCeViQRuXr-Ix9GML/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Latent Netflix Episode 2</strong>
+                        <small style="opacity:.65;">Video</small>
+                    </span>
+                </button>
+                <!-- FUTURE FILES: Copy the FILE 1 button above and change its title + Google Drive preview link. -->
+            </div>
+        </div>
+
+        <!-- VIDEO VIEW -->
+        <div id="latentVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
+            <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                <button
+                    type="button"
+                    onclick="backToLatentFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
+                <span id="latentVideoTitle">🎬 Latent Netflix Episode 6</span>
+            </div>
+
+            <iframe
+                id="latentVideoFrame"
+                class="site-frame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+
+<!-- EXCLUSIVE MOVIES FOLDER POPUP -->
+<div class="site-overlay" id="moviesOverlay" style="display:none;">
+    <div class="site-popup">
+        <button
+            class="site-close"
+            onclick="closeMoviesPopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+        <div id="moviesFolderView" style="height:100%; display:flex; flex-direction:column; background:#fff; color:#111;">
+            <div style="padding:18px 60px 18px 20px; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                🎬 Mirzapur The Movie(2026)s
+            </div>
+
+            <div style="padding:22px; overflow:auto;">
+                <!-- MOVIE 1 -->
+                <button
+                    type="button"
+                    onclick="openMovieVideo('🎬 Mirzapur The Movie(2026)', 'https://drive.google.com/file/d/15cS2mNaTob409Z6WXx2xa4UyBkmPccDy/preview')"
+                    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; border:1px solid #ddd; border-radius:14px; background:#f7f7f7; color:#111; text-align:left; cursor:pointer; font:inherit;"
+                >
+                    <span style="font-size:34px;">🎬</span>
+                    <span style="display:flex; flex-direction:column; gap:4px;">
+                        <strong>Mirzapur The Movie(2026)</strong>
+                        <small style="opacity:.65;">Movie</small>
+                    </span>
+                </button>
+<!-- MOVIE 2 -->
 <button
-    id="topBtn"
-    onclick="window.scrollTo({
-        top:0,
-        behavior:'smooth'
-    })"
+    type="button"
+    onclick="openMovieVideo('🎬 TOXiC (2026)', 'https://drive.google.com/file/d/1W1-ivjBOSOzf3skgGk3c36Waiw4cfmQE/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
 >
-    ↑
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>TOXiC (2026)</strong>
+        <small style="opacity:.65;">Movie</small>
+    </span>
 </button>
+                <button
+                type="button"
+    onclick="openMovieVideo('🎬 Brand New Day Spiderman (2026)', 'https://drive.google.com/file/d/1xc9RW-w5JxXohb0GkSCtKhmEEJUrHt8W/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
+>
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>Brand New Day Spiderman (2026)</strong>
+        <small style="opacity:.65;">Movie</small>
+    </span>
+</button>
+                <button
+                type="button"
+    onclick="openMovieVideo('🎬 Moana(2026)', 'https://drive.google.com/file/d/15xNgq2nJmFfLafhZva399x6GhdtSghIf/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
+>
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>Moana(2026)</strong>
+        <small style="opacity:.65;">Movie</small>
+    </span>
+</button>
+                 <button
+                type="button"
+    onclick="openMovieVideo('🎬 PAW.Patrol-The.Dino.Movie.2026.1080p.10Bit.Hindi-English', 'https://drive.google.com/file/d/1S2Zc_HmkvtJq9JZEA4AzTVWXmPxm548I/preview')"
+    style="width:100%; display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px; background:#fff; border:1px solid #ddd; border-radius:14px;"
+>
+    <span style="font-size:34px;">🎬</span>
+
+    <span style="display:flex; flex-direction:column; gap:4px;">
+        <strong>PAW.Patrol-The.Dino.Movie.2026.1080p.10Bit.Hindi-English</strong>
+        <small style="opacity:.65;">Movie</small>
+    </span>
+</button>
+          
+            </div>
+        </div>
+
+        <!-- MOVIE VIEW -->
+        <div id="movieVideoView" style="height:100%; display:none; flex-direction:column; background:#fff;">
+            <div style="display:flex; align-items:center; gap:12px; padding:18px 60px 18px 20px; color:#111; font-size:20px; font-weight:850; border-bottom:1px solid #ddd;">
+                <button
+                    type="button"
+                    onclick="backToMoviesFolder()"
+                    style="border:1px solid #ccc; border-radius:10px; background:#f5f5f5; color:#111; padding:8px 12px; cursor:pointer; font-weight:700;"
+                >
+                    ← Back
+                </button>
+                <span id="movieVideoTitle">🎬 Mirzapur The Movie(2026)</span>
+            </div>
+
+            <iframe
+                id="movieVideoFrame"
+                class="site-frame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
 
 
+<!-- WEBSITE LAUNCH POPUP -->
+<div class="site-overlay" id="siteOverlay">
 
-<!-- =========================
-     FOOTER
-========================= -->
+    <div class="site-popup">
+<button class="site-refresh" onclick="refreshSiteFrame()">↻ Refresh Frame</button>
+        <button
+            class="site-close"
+            onclick="closeSitePopup()"
+            aria-label="Close"
+        >
+            ✕
+        </button>
 
-<footer>
-    Made by Adavya with ❤️
-</footer>
+        <iframe
+            id="siteFrame"
+            class="site-frame"
+            src="about:blank"
+            allowfullscreen>
+        </iframe>
 
+    </div>
 
+</div>
 
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
 <script>
 
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
-
-    authDomain:
-        "adavya-study-hub.firebaseapp.com",
-
-    projectId:
-        "adavya-study-hub",
-
-    storageBucket:
-        "adavya-study-hub.firebasestorage.app",
-
-    messagingSenderId:
-        "1087086249986",
-
-    appId:
-        "1:1087086249986:web:41ec61723171aa165abf1b"
-
+    const firebaseConfig = {
+    apiKey: "AIzaSyAlQy1g9Y_Mm9QY-q6MF1oK53rKEn1tKKU",
+    authDomain: "adavya-study-hub.firebaseapp.com",
+    projectId: "adavya-study-hub",
+    storageBucket: "adavya-study-hub.firebasestorage.app",
+    messagingSenderId: "1087086249986",
+    appId: "1:1087086249986:web:41ec61723171aa165abf1b"
 };
-
-
-/* =====================================================
-   FIREBASE INITIALIZATION
-===================================================== */
 
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-const googleProvider =
-    new firebase.auth.GoogleAuthProvider();
-
-
-/* =====================================================
-   LOGIN VARIABLES
-===================================================== */
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-let firebaseAuthReady = false;
-
-let pendingLoginAction = null;
-
-
-/* =====================================================
-   LOGIN ICON
-===================================================== */
-
-const userIcon = `
-<svg
-    width="17"
-    height="17"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    style="vertical-align:-3px;margin-right:6px;"
->
-    <circle
-        cx="12"
-        cy="7"
-        r="4"
-    ></circle>
-
-    <path
-        d="M4 21a8 8 0 0 1 16 0"
-    ></path>
-</svg>
-`;
-
-
-/* =====================================================
-   LOGIN FUNCTION
-===================================================== */
-
-function loginWithGoogle(){
-
-    auth.setPersistence(
-        firebase.auth.Auth.Persistence.LOCAL
-    )
-    .then(function(){
-
-        return auth.signInWithRedirect(
-            googleProvider
-        );
-
+function loginWithGoogle() {
+    auth.signInWithRedirect(googleProvider);
+}
+document.getElementById("loginBtn").addEventListener("click", loginWithGoogle);
+auth.getRedirectResult()
+    .then((result) => {
+        if (result.user) {
+            console.log("Login successful:", result.user.displayName);
+        }
     })
-    .catch(function(error){
+    .catch((error) => {
+        console.error("Google Login Error:", error);
+        alert("Login failed: " + error.code);
+    });
 
-        console.error(
-            "Login Error:",
-            error
-        );
+auth.onAuthStateChanged(function(user) {
+    const loginBtn = document.getElementById("loginBtn");
 
-        alert(
-            "Login failed: " +
-            error.message
-        );
+    if (user) {
+        loginBtn.textContent = user.displayName || "Logged In";
+    } else {
+        loginBtn.textContent = "Login / Sign Up";
+    }
+});
+    function refreshSiteFrame() {
+    const frame = document.getElementById("siteFrame");
+
+    if (frame) {
+        frame.contentWindow.location.reload();
+    }
+}
+/* INSTAGRAM POPUP */
+function closePopup() {
+    document.getElementById("instaPopup").style.display = "none";
+}
+
+
+/* SEARCH */
+const searchBox = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+
+searchBox.addEventListener("input", function () {
+
+    const query = this.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        card.style.display =
+            text.includes(query) ? "" : "none";
+
+    });
+
+});
+
+
+/* FILTER */
+function filterCards(category, button) {
+
+    document.querySelectorAll(".filter").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    cards.forEach(card => {
+
+        if (category === "all") {
+            card.style.display = "";
+        }
+
+        else if (card.dataset.category === category) {
+            card.style.display = "";
+        }
+
+        else {
+            card.style.display = "none";
+        }
 
     });
 
 }
 
 
-/* =====================================================
-   REDIRECT RESULT
-===================================================== */
+/* BACK TO TOP */
+const topBtn = document.getElementById("topBtn");
+let scrollTicking = false;
 
-auth.getRedirectResult()
+window.addEventListener("scroll", function () {
 
-.then(function(result){
-
-    if(result.user){
-
-        console.log(
-            "Google Login Successful",
-            result.user.displayName
-        );
-
+    if (!scrollTicking) {
+        requestAnimationFrame(function () {
+            topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+            scrollTicking = false;
+        });
+        scrollTicking = true;
     }
 
-})
-
-.catch(function(error){
-
-    console.error(
-        "Google Login Error:",
-        error
-    );
-
-});
+}, { passive: true });
 
 
-/* =====================================================
-   LOGIN BUTTON
-===================================================== */
+/* LATENT EXCLUSIVE FOLDER */
+const latentOverlay = document.getElementById("latentOverlay");
+const latentFolderView = document.getElementById("latentFolderView");
+const latentVideoView = document.getElementById("latentVideoView");
+const latentVideoFrame = document.getElementById("latentVideoFrame");
+const latentVideoTitle = document.getElementById("latentVideoTitle");
 
-loginBtn.addEventListener(
-    "click",
-    function(){
-
-        if(auth.currentUser){
-
-            auth.signOut()
-
-            .then(function(){
-
-                loginBtn.innerHTML =
-                    "Login / Sign Up";
-
-            })
-
-            .catch(function(error){
-
-                console.error(
-                    "Logout Error:",
-                    error
-                );
-
-            });
-
-        }else{
-
-            loginWithGoogle();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   REQUIRE LOGIN
-===================================================== */
-
-function requireLogin(action){
-
-    if(!firebaseAuthReady){
-
-        pendingLoginAction =
-            action;
-
-        return false;
-
-    }
-
-
-    if(auth.currentUser){
-
-        return true;
-
-    }
-
-
-    sessionStorage.setItem(
-        "pendingAction",
-        JSON.stringify(action)
-    );
-
-
-    loginWithGoogle();
-
-    return false;
-
+function openLatentPopup() {
+    latentOverlay.style.display = "flex";
+    latentFolderView.style.display = "flex";
+    latentVideoView.style.display = "none";
+    latentVideoFrame.src = "";
+    document.body.style.overflow = "hidden";
 }
 
+function openLatentVideo(title, url) {
+    latentVideoTitle.textContent = title;
+    latentVideoFrame.src = url;
+    latentFolderView.style.display = "none";
+    latentVideoView.style.display = "flex";
+}
 
-/* =====================================================
-   AUTH STATE
-===================================================== */
+function backToLatentFolder() {
+    latentVideoFrame.src = "";
+    latentVideoView.style.display = "none";
+    latentFolderView.style.display = "flex";
+}
 
-auth.onAuthStateChanged(
-    function(user){
+function closeLatentPopup() {
+    latentVideoFrame.src = "";
+    latentOverlay.style.display = "none";
+    document.body.style.overflow = "";
+}
 
-        firebaseAuthReady = true;
+/* ============================= */
+/* EXCLUSIVE MOVIES FOLDER */
+const moviesOverlay = document.getElementById("moviesOverlay");
+const moviesFolderView = document.getElementById("moviesFolderView");
+const movieVideoView = document.getElementById("movieVideoView");
+const movieVideoFrame = document.getElementById("movieVideoFrame");
+const movieVideoTitle = document.getElementById("movieVideoTitle");
 
+function openMoviesPopup() {
+    moviesOverlay.style.display = "flex";
+    moviesFolderView.style.display = "flex";
+    movieVideoView.style.display = "none";
+    movieVideoFrame.src = "";
+    document.body.style.overflow = "hidden";
+}
 
-        /* =========================
-           LOGGED IN
-        ========================= */
+function openMovieVideo(title, url) {
+    movieVideoTitle.textContent = title;
+    movieVideoFrame.src = url;
+    moviesFolderView.style.display = "none";
+    movieVideoView.style.display = "flex";
+}
 
-        if(user){
+function backToMoviesFolder() {
+    movieVideoFrame.src = "";
+    movieVideoView.style.display = "none";
+    moviesFolderView.style.display = "flex";
+}
 
-            const name =
-                user.displayName ||
-                user.email ||
-                "Account";
+function closeMoviesPopup() {
+    movieVideoFrame.src = "";
+    moviesOverlay.style.display = "none";
+    document.body.style.overflow = "";
+}
 
+/* WEBSITE LAUNCH POPUP - ADDED */
+/* ============================= */
 
-            loginBtn.innerHTML =
-                userIcon +
-                name +
-                " • Logout";
+const siteOverlay = document.getElementById("siteOverlay");
+const siteFrame = document.getElementById("siteFrame");
 
-
-            let action =
-                pendingLoginAction;
-
-
-            pendingLoginAction =
-                null;
-
-
-            if(!action){
-
-                const saved =
-                    sessionStorage.getItem(
-                        "pendingAction"
-                    );
-
-
-                if(saved){
-
-                    try{
-
-                        action =
-                            JSON.parse(saved);
-
-                    }catch(error){
-
-                        console.error(
-                            "Pending action error:",
-                            error
-                        );
-
-                    }
-
-                }
-
-            }
-
-
-            if(action){
-
-                sessionStorage.removeItem(
-                    "pendingAction"
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        if(
-                            action.type ===
-                            "site"
-                        ){
-
-                            openSitePopup(
-                                action.url
-                            );
-
-                        }
-
-                        else if(
-                            action.type ===
-                            "latent"
-                        ){
-
-                            openLatentPopup();
-
-                        }
-
-                        else if(
-                            action.type ===
-                            "movies"
-                        ){
-
-                            openMoviesPopup();
-
-                        }
-
-                    },
-                    500
-                );
-
-            }
-
-        }
-
-
-        /* =========================
-           LOGGED OUT
-        ========================= */
-
-        else{
-
-            loginBtn.innerHTML =
-                "Login / Sign Up";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   WEBSITE POPUP
-===================================================== */
-
-const siteOverlay =
-    document.getElementById(
-        "siteOverlay"
-    );
-
-const siteFrame =
-    document.getElementById(
-        "siteFrame"
-    );
-
-
-function openSitePopup(url){
-
-    if(!url){
-
-        alert(
-            "This resource is not available yet."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !requireLogin({
-            type:"site",
-            url:url
-        })
-    ){
-
-        return;
-
-    }
-
+function openSitePopup(url) {
 
     siteFrame.src = url;
 
-    siteOverlay.style.display =
-        "flex";
+    siteOverlay.style.display = "flex";
 
-    document.body.style.overflow =
-        "hidden";
-
+    document.body.style.overflow = "hidden";
 }
 
+function closeSitePopup() {
 
-function closeSitePopup(){
+    siteOverlay.style.display = "none";
 
-    siteOverlay.style.display =
-        "none";
+    siteFrame.src = "about:blank";
 
-    siteFrame.src =
-        "about:blank";
-
-    document.body.style.overflow =
-        "";
-
+    document.body.style.overflow = "";
 }
-
-
-function refreshSiteFrame(){
-
-    const frame =
-        document.getElementById(
-            "siteFrame"
-        );
-
-
-    if(frame){
-
-        try{
-
-            frame.contentWindow.location.reload();
-
-        }catch(error){
-
-            frame.src =
-                frame.src;
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-   LATENT
-===================================================== */
-
-const latentOverlay =
-    document.getElementById(
-        "latentOverlay"
-    );
-
-const latentFolderView =
-    document.getElementById(
-        "latentFolderView"
-    );
-
-const latentVideoView =
-    document.getElementById(
-        "latentVideoView"
-    );
-
-const latentVideoFrame =
-    document.getElementById(
-        "latentVideoFrame"
-    );
-
-const latentVideoTitle =
-    document.getElementById(
-        "latentVideoTitle"
-    );
-
-
-function openLatentPopup(){
-
-    if(
-        !requireLogin({
-            type:"latent"
-        })
-    ){
-
-        return;
-
-    }
-
-
-    latentOverlay.style.display =
-        "flex";
-
-    latentFolderView.style.display =
-        "block";
-
-    latentVideoView.style.display =
-        "none";
-
-    latentVideoFrame.src =
-        "";
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-function openLatentVideo(
-    title,
-    url
-){
-
-    if(!url){
-
-        alert(
-            "This video is not available yet."
-        );
-
-        return;
-
-    }
-
-
-    latentVideoTitle.textContent =
-        title;
-
-    latentVideoFrame.src =
-        url;
-
-    latentFolderView.style.display =
-        "none";
-
-    latentVideoView.style.display =
-        "block";
-
-}
-
-
-function backToLatentFolder(){
-
-    latentVideoFrame.src =
-        "";
-
-    latentVideoView.style.display =
-        "none";
-
-    latentFolderView.style.display =
-        "block";
-
-}
-
-
-function closeLatentPopup(){
-
-    latentVideoFrame.src =
-        "";
-
-    latentOverlay.style.display =
-        "none";
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =====================================================
-   MOVIES
-===================================================== */
-
-const moviesOverlay =
-    document.getElementById(
-        "moviesOverlay"
-    );
-
-const moviesFolderView =
-    document.getElementById(
-        "moviesFolderView"
-    );
-
-const movieVideoView =
-    document.getElementById(
-        "movieVideoView"
-    );
-
-const movieVideoFrame =
-    document.getElementById(
-        "movieVideoFrame"
-    );
-
-const movieVideoTitle =
-    document.getElementById(
-        "movieVideoTitle"
-    );
-
-
-function openMoviesPopup(){
-
-    if(
-        !requireLogin({
-            type:"movies"
-        })
-    ){
-
-        return;
-
-    }
-
-
-    moviesOverlay.style.display =
-        "flex";
-
-    moviesFolderView.style.display =
-        "block";
-
-    movieVideoView.style.display =
-        "none";
-
-    movieVideoFrame.src =
-        "";
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-function openMovieVideo(
-    title,
-    url
-){
-
-    if(!url){
-
-        alert(
-            "This movie is not available yet."
-        );
-
-        return;
-
-    }
-
-
-    movieVideoTitle.textContent =
-        title;
-
-    movieVideoFrame.src =
-        url;
-
-    moviesFolderView.style.display =
-        "none";
-
-    movieVideoView.style.display =
-        "block";
-
-}
-
-
-function backToMoviesFolder(){
-
-    movieVideoFrame.src =
-        "";
-
-    movieVideoView.style.display =
-        "none";
-
-    moviesFolderView.style.display =
-        "block";
-
-}
-
-
-function closeMoviesPopup(){
-
-    movieVideoFrame.src =
-        "";
-
-    moviesOverlay.style.display =
-        "none";
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-const searchBox =
-    document.getElementById(
-        "search"
-    );
-
-const cards =
-    document.querySelectorAll(
-        ".card"
-    );
-
-
-searchBox.addEventListener(
-    "input",
-    function(){
-
-        const query =
-            this.value
-                .toLowerCase()
-                .trim();
-
-
-        cards.forEach(
-            function(card){
-
-                const text =
-                    card.innerText
-                        .toLowerCase();
-
-
-                card.style.display =
-                    text.includes(query)
-                        ? ""
-                        : "none";
-
-            }
-        );
-
-    }
-);
-
-
-/* =====================================================
-   FILTERS
-===================================================== */
-
-function filterCards(
-    category,
-    button
-){
-
-    document
-        .querySelectorAll(
-            ".filter"
-        )
-        .forEach(
-            function(btn){
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    button.classList.add(
-        "active"
-    );
-
-
-    cards.forEach(
-        function(card){
-
-            if(category === "all"){
-
-                card.style.display =
-                    "";
-
-            }
-
-            else if(
-                card.dataset.category ===
-                category
-            ){
-
-                card.style.display =
-                    "";
-
-            }
-
-            else{
-
-                card.style.display =
-                    "none";
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   BACK TO TOP
-===================================================== */
-
-const topBtn =
-    document.getElementById(
-        "topBtn"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        topBtn.style.display =
-            window.scrollY > 400
-                ? "block"
-                : "none";
-
-    }
-);
-
-
-/* =====================================================
-   INSTAGRAM POPUP
-===================================================== */
-
-function closePopup(){
-
-    document.getElementById(
-        "instaPopup"
-    ).style.display =
-        "none";
-
-}
-
-
-/* =====================================================
-   OPTIONAL INSTAGRAM POPUP
-===================================================== */
-
-window.addEventListener(
-    "load",
-    function(){
-
-        const alreadySeen =
-            localStorage.getItem(
-                "instaPopupSeen"
-            );
-
-
-        if(!alreadySeen){
-
-            setTimeout(
-                function(){
-
-                    document.getElementById(
-                        "instaPopup"
-                    ).style.display =
-                        "flex";
-
-                },
-                1200
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SAVE INSTAGRAM POPUP STATE
-===================================================== */
-
-document
-    .querySelector(".skip")
-    .addEventListener(
-        "click",
-        function(){
-
-            localStorage.setItem(
-                "instaPopupSeen",
-                "true"
-            );
-
-        }
-    );
-
 </script>
-
-
 </body>
 </html>
