@@ -1547,55 +1547,13 @@ body {
 
     <div class="resource-grid" id="resourceGrid">
 
-        <!-- LATENT EXCLUSIVE -->
-        <div class="card latent" data-category="latent">
-
-            <div
-                class="card-image"
-                style="display:flex; align-items:center; justify-content:center; font-size:64px;"
-            >
-                📁
-            </div>
-
-            <h2>Latent Exclusive</h2>
-
-            <p>Exclusive study video resource.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openLatentPopup()"
-                class="launch"
-            >
-                OPEN →
-            </a>
-
+        <!-- MOVIES + LATENT COMBINED CARD -->
+        <div class="card latent" data-category="movies latent">
+            <div class="card-image" style="display:flex; align-items:center; justify-content:center; font-size:64px;">🎬</div>
+            <h2>Movies, Latent 🎬</h2>
+            <p>Movies and Latent episodes in one place.</p>
+            <button type="button" class="launch" onclick="openEntertainmentPopup()" style="cursor:pointer;">OPEN →</button>
         </div>
-
-
-        <!-- EXCLUSIVE MOVIES -->
-        <div class="card latent" data-category="movies">
-
-            <div
-                class="card-image"
-                style="display:flex; align-items:center; justify-content:center; font-size:64px;"
-            >
-                🎬
-            </div>
-
-            <h2>Exclusive Movies🐱‍🏍</h2>
-
-            <p>Your exclusive movie collection.</p>
-
-            <a
-                href="javascript:void(0)"
-                onclick="openMoviesPopup()"
-                class="launch"
-            >
-                OPEN →
-            </a>
-
-        </div>
-
 
         <!-- NEXT TOPPERS 1 -->
         <div class="card next" data-category="next">
@@ -1921,6 +1879,22 @@ body {
 </div>
 
 
+<!-- COMBINED MOVIES + LATENT MENU -->
+<div class="site-overlay" id="entertainmentOverlay" style="display:none;">
+  <div class="site-popup" style="background:#071426; color:white;">
+    <button class="site-close" onclick="closeEntertainmentPopup()" aria-label="Close">✕</button>
+    <div style="padding:28px 22px;">
+      <h2 style="margin-bottom:25px;">🎬 Movies, Latent</h2>
+      <button class="entertainment-choice" onclick="showEntertainmentSection('movies')">🎥 Movies →</button>
+      <button class="entertainment-choice" onclick="showEntertainmentSection('latent')">📁 Latent Exclusive →</button>
+    </div>
+  </div>
+</div>
+<style>
+.entertainment-choice {display:block;width:100%;padding:20px;margin:14px 0;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(255,255,255,.10);color:white;font-size:19px;font-weight:750;text-align:left;cursor:pointer;transition:.2s}
+.entertainment-choice:hover {background:rgba(255,255,255,.19);transform:translateY(-2px)}
+</style>
+
 <!-- =========================
      LATENT EXCLUSIVE
 ========================= -->
@@ -2146,6 +2120,9 @@ body {
 
                 </button>
 
+                <button type="button" onclick="openMovieVideo('🎬 Vvaan (2026)', 'https://drive.google.com/file/d/1gRWWuNL5IReX2bX5WN57AMWQLQNO_TTd/preview')" style="width:100%;display:flex;align-items:center;gap:16px;padding:16px;margin-bottom:12px;border:1px solid #ddd;border-radius:14px;background:#f7f7f7;color:#111;text-align:left;cursor:pointer;font:inherit;">
+                    <span style="font-size:34px;">🎬</span><span><strong>Vvaan (2026)</strong><br><small style="opacity:.65;">Movie</small></span>
+                </button>
             </div>
         </div>
 
@@ -2811,9 +2788,24 @@ function closeLatentPopup() {
 
     latentOverlay.style.display = "none";
 
-    document.body.style.overflow = "";
+    openEntertainmentPopup();
 }
 
+
+/* Combined card: reuse the existing Movies and Latent viewers */
+function openEntertainmentPopup() {
+    document.getElementById('entertainmentOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeEntertainmentPopup() {
+    document.getElementById('entertainmentOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+}
+function showEntertainmentSection(section) {
+    document.getElementById('entertainmentOverlay').style.display = 'none';
+    if (section === 'movies') openMoviesPopup();
+    else openLatentPopup();
+}
 
 /* =====================================================
    MOVIES
@@ -2877,7 +2869,7 @@ function closeMoviesPopup() {
 
     moviesOverlay.style.display = "none";
 
-    document.body.style.overflow = "";
+    openEntertainmentPopup();
 }
 
 
